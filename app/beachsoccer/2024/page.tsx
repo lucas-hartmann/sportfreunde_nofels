@@ -72,7 +72,9 @@ export default function BeachsoccerReview() {
                 {photos.map((src, idx) => (
                     <div
                         key={`photo-${idx}`}
-                        ref={(el) => (refs.current[idx] = el)}
+                        ref={(el) => {
+                            refs.current[idx] = el;
+                        }}
                         className={`overflow-hidden rounded-lg shadow-lg transform transition duration-700 ease-in-out cursor-pointer ${
                             visibleIndexes.includes(idx)
                                 ? 'opacity-100 translate-y-0'
