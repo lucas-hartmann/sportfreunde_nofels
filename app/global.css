@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-secondary text-black font-sans;
+}
+
+a {
+    @apply text-primary hover:underline;
+}
