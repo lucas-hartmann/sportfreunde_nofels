@@ -4,9 +4,10 @@ import Link from "next/link";
 export default function Footer() {
     return (
         <footer className="bg-primary text-white py-8 mt-12 border-t border-white/20">
-            <div className="max-w-screen-xl mx-auto px-4 text-center">
-                <p className="text-sm mb-4">&copy; {new Date().getFullYear()} Sportfreunde Nofels</p>
-                <div className="flex justify-center space-x-6 text-2xl">
+            <div className="max-w-screen-xl mx-auto px-4 flex flex-col items-center text-center space-y-4 sm:space-y-6">
+                <p className="text-sm">&copy; {new Date().getFullYear()} Sportfreunde Nofels</p>
+
+                <div className="flex flex-wrap justify-center gap-6 text-2xl">
                     <Link href="https://www.instagram.com/sportfreunde_nofels" target="_blank" aria-label="Instagram">
                         <FaInstagram className="hover:text-pink-400 transition-colors" />
                     </Link>
@@ -21,3 +22,4 @@ export default function Footer() {
         </footer>
     );
 }
+

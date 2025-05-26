@@ -1,10 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import matchdaysData from "../../../data/spielplan2025.json";
 
-// Hilfsfunktion zum Vergleichen mit aktuellem Datum
 function isPast(matchDate: string, matchTime: string): boolean {
     const [day, month, year] = matchDate.split(".");
     const [hour, minute] = matchTime.split(":");
@@ -33,7 +31,7 @@ export default function Spielplan() {
 
             {/* Tabs & Toggle */}
             <div className="container mx-auto px-4 py-6 space-y-6">
-                <div className="flex gap-4">
+                <div className="flex flex-wrap gap-4">
                     <button
                         onClick={() => setActiveTab("all")}
                         className={`px-5 py-2 rounded-full font-medium transition ${
@@ -77,7 +75,7 @@ export default function Spielplan() {
                                     {matchday.name}
                                 </h2>
                                 <div className="overflow-x-auto bg-white rounded-xl shadow-md">
-                                    <table className="w-full table-fixed text-sm">
+                                    <table className="min-w-[640px] w-full table-fixed text-sm">
                                         <thead className="text-left text-gray-600 border-b">
                                         <tr>
                                             <th className="px-4 py-3 w-[16%]">Heim</th>
@@ -91,12 +89,12 @@ export default function Spielplan() {
                                         <tbody>
                                         {filteredMatches.map((match, idx) => (
                                             <tr key={idx} className="even:bg-gray-50 border-b last:border-none">
-                                                <td className="px-4 py-3 font-semibold w-[16%]">{match.home}</td>
-                                                <td className="px-4 py-3 font-semibold w-[16%]">{match.away}</td>
-                                                <td className="px-4 py-3 w-[20%]">{match.day}, {match.date}</td>
-                                                <td className="px-4 py-3 w-[12%]">{match.time}</td>
-                                                <td className="px-4 py-3 w-[20%]">{match.location}</td>
-                                                <td className="px-4 py-3 text-gray-500 w-[16%]">{match.note}</td>
+                                                <td className="px-4 py-3 font-semibold">{match.home}</td>
+                                                <td className="px-4 py-3 font-semibold">{match.away}</td>
+                                                <td className="px-4 py-3">{match.day}, {match.date}</td>
+                                                <td className="px-4 py-3">{match.time}</td>
+                                                <td className="px-4 py-3">{match.location}</td>
+                                                <td className="px-4 py-3 text-gray-500">{match.note}</td>
                                             </tr>
                                         ))}
                                         </tbody>
@@ -107,7 +105,7 @@ export default function Spielplan() {
                     })
                 ) : (
                     <div className="overflow-x-auto bg-white rounded-xl shadow-md">
-                        <table className="w-full table-auto text-sm">
+                        <table className="min-w-[720px] w-full table-auto text-sm">
                             <thead className="text-left text-gray-600 border-b">
                             <tr>
                                 <th className="px-4 py-3">Spieltag</th>
@@ -123,10 +121,7 @@ export default function Spielplan() {
                             {sfNofelsMatches
                                 .filter(match => showPast || !isPast(match.date, match.time))
                                 .map((match, index) => (
-                                    <tr
-                                        key={index}
-                                        className="even:bg-gray-50 border-b last:border-none"
-                                    >
+                                    <tr key={index} className="even:bg-gray-50 border-b last:border-none">
                                         <td className="px-4 py-3 font-semibold">{match.matchdayName}</td>
                                         <td className={`px-4 py-3 font-semibold ${match.home === "SF Nofels" ? "text-red-600" : ""}`}>
                                             {match.home}

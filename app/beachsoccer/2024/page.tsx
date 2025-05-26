@@ -13,28 +13,29 @@ const textBlocks = [
     "Ein riesiges Dankeschön an alle, die dieses Event möglich gemacht haben: an die freiwilligen Helfer:innen, die Organisator:innen, Sponsoren, Teams und natürlich das fantastische Publikum. Gemeinsam haben wir gezeigt, was in Nofels steckt. Wir freuen uns jetzt schon auf den BeachsoccerCup 2025 – noch größer, noch lauter, noch legendärer!"
 ];
 
-
 function useFadeOnScroll() {
     const [visibleIndexes, setVisibleIndexes] = useState<number[]>([]);
     const refs = useRef<(HTMLDivElement | null)[]>([]);
 
     useEffect(() => {
-        function onScroll() {
-            refs.current.forEach((ref, idx) => {
-                if (ref) {
-                    const rect = ref.getBoundingClientRect();
-                    if (rect.top < window.innerHeight * 0.9) {
-                        setVisibleIndexes((prev) =>
-                            prev.includes(idx) ? prev : [...prev, idx]
-                        );
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        const index = refs.current.indexOf(entry.target as HTMLDivElement);
+                        if (!visibleIndexes.includes(index)) {
+                            setVisibleIndexes((prev) => [...prev, index]);
+                        }
                     }
-                }
-            });
-        }
-        window.addEventListener('scroll', onScroll);
-        onScroll();
-        return () => window.removeEventListener('scroll', onScroll);
-    }, []);
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        refs.current.forEach((el) => el && observer.observe(el));
+
+        return () => observer.disconnect();
+    }, [visibleIndexes]);
 
     return { refs, visibleIndexes };
 }
@@ -46,8 +47,8 @@ export default function BeachsoccerReview() {
     const handleClose = () => setSelectedImage(null);
 
     return (
-        <main className="text-gray-800 max-w-7xl mx-auto px-6 py-12 relative">
-            <h1 className="text-4xl font-extrabold mb-12 text-primary text-center">
+        <main className="text-gray-800 max-w-7xl mx-auto px-4 sm:px-6 py-12 relative">
+            <h1 className="text-3xl sm:text-4xl font-extrabold mb-10 text-primary text-center">
                 BeachsoccerCup 2024 – Rückblick
             </h1>
 
@@ -56,15 +57,15 @@ export default function BeachsoccerReview() {
                 {textBlocks.map((text, i) => (
                     <section
                         key={`text-${i}`}
-                        className="max-w-3xl col-span-full mx-auto px-6 py-4 text-center" // <— hier py-4 statt py-12
+                        className="col-span-full mx-auto px-2 sm:px-6 py-6 text-center"
                         style={{ order: (i + 1) * 6 + 0.5 }}
                     >
                         {i === 2 ? (
-                            <blockquote className="border-l-8 border-primary pl-6 italic text-primary font-semibold text-xl">
+                            <blockquote className="border-l-4 sm:border-l-8 border-primary pl-4 sm:pl-6 italic text-primary font-semibold text-lg sm:text-xl">
                                 {text}
                             </blockquote>
                         ) : (
-                            <p className="text-lg leading-relaxed">{text}</p>
+                            <p className="text-base sm:text-lg leading-relaxed">{text}</p>
                         )}
                     </section>
                 ))}
@@ -103,7 +104,7 @@ export default function BeachsoccerReview() {
                     <div className="relative w-full max-w-5xl aspect-[4/3] mx-4 sm:mx-12">
                         <Image
                             src={selectedImage}
-                            alt="Full Size"
+                            alt="Großansicht"
                             fill
                             className="object-contain"
                         />
