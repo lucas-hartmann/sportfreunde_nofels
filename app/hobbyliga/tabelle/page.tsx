@@ -5,10 +5,10 @@ import Image from "next/image";
 const leagueData = [
     { platz: 1, club: "SF Nofels", spiele: 4, tore: 17, gegentore: 4, diff: 13, punkte: 12 },
     { platz: 2, club: "FC Viktorsberg", spiele: 4, tore: 21, gegentore: 13, diff: 8, punkte: 7 },
-    { platz: 3, club: "FC Weiler", spiele: 3, tore: 11, gegentore: 12, diff: -1, punkte: 4 },
-    { platz: 4, club: "FC Fraxern", spiele: 3, tore: 6, gegentore: 13, diff: -7, punkte: 3 },
-    { platz: 5, club: "RW Rankweil", spiele: 3, tore: 9, gegentore: 15, diff: -6, punkte: 1 },
-    { platz: 6, club: "FC Übersaxen", spiele: 3, tore: 7, gegentore: 14, diff: -7, punkte: 1 },
+    { platz: 3, club: "FC Weiler", spiele: 4, tore: 15, gegentore: 13, diff: 2, punkte: 7 },
+    { platz: 4, club: "RW Rankweil", spiele: 4, tore: 14, gegentore: 15, diff: -1, punkte: 4 },
+    { platz: 5, club: "FC Fraxern", spiele: 4, tore: 7, gegentore: 17, diff: -10, punkte: 3 },
+    { platz: 6, club: "FC Übersaxen", spiele: 4, tore: 7, gegentore: 19, diff: -12, punkte: 1 },
 ];
 
 export default function Tabelle() {
