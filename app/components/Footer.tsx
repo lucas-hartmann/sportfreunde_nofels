@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
     return (
-        <footer className="bg-primary text-white py-8 mt-12 border-t border-white/20">
+        <footer className="bg-primary text-white py-8 border-t border-white/20">
             <div className="max-w-screen-xl mx-auto px-4 flex flex-col items-center text-center space-y-4 sm:space-y-6">
                 <p className="text-sm">&copy; {new Date().getFullYear()} Sportfreunde Nofels</p>
 

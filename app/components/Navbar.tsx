@@ -102,24 +102,26 @@ export default function Navbar() {
                 {/* Desktop nav */}
                 <div className="hidden md:flex items-center space-x-6">
                     <Dropdown
-                        title="BeachsoccerCup"
+                        title="Beachsoccer Cup"
                         items={[
+                            { name: "Anmeldung 2026", href: "/beachsoccer/2026" },
                             { name: "2025", href: "/beachsoccer/2025" },
                             { name: "2024", href: "/beachsoccer/2024" },
                         ]}
                     />
                     <Dropdown
-                        title="Mannschaft"
+                        title="Verein"
                         items={[
-                            { name: "Geschichte", href: "/mannschaft/geschichte" },
-                            { name: "Spieler", href: "/mannschaft/spieler" },
-                            { name: "Altherren", href: "/mannschaft/altherren" },
-                            { name: "Sportplatz", href: "/mannschaft/sportplatz" },
+                            { name: "Geschichte", href: "/verein/geschichte" },
+                            { name: "Spieler", href: "/verein/spieler" },
+                            { name: "Altherren", href: "/verein/altherren" },
+                            { name: "Sportplatz", href: "/verein/sportplatz" },
                         ]}
                     />
                     <Dropdown
                         title="Hobbyliga"
                         items={[
+                            { name: "Mannschaften", href: "/hobbyliga/mannschaften" },
                             { name: "Tabelle", href: "/hobbyliga/tabelle" },
                             { name: "Spielplan", href: "/hobbyliga/spielplan" },
                         ]}

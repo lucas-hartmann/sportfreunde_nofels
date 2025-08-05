@@ -1,17 +1,14 @@
 // pages/Ort.tsx
 import React from "react";
 import { MapPin } from "lucide-react";
+import Header from "../../components/Header";
 
 const Ort: React.FC = () => {
     return (
+        <span>
+        {/* Header */}
+        <Header title="UNSER STANDORT" />
         <div className="max-w-5xl mx-auto px-4 py-12 space-y-12">
-            {/* Header */}
-            <div className="bg-white border-b shadow-md">
-                <div className="container mx-auto px-4 py-6 flex items-center gap-4">
-                    <h1 className="text-3xl font-extrabold text-gray-800">UNSER STANDORT</h1>
-                </div>
-            </div>
-
             {/* Trainingsplatz */}
             <section className="bg-white rounded-2xl shadow p-6 space-y-4">
                 <h2 className="text-2xl font-semibold">Trainingsplatz - Äuele Nofels</h2>
@@ -67,6 +64,7 @@ const Ort: React.FC = () => {
                 <p className="text-sm text-gray-500">Parkplätze und Umkleiden sind vorhanden.</p>
             </footer>
         </div>
+        </span>
     );
 };
 
