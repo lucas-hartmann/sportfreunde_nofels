@@ -5,7 +5,12 @@ import { MapPin } from "lucide-react";
 const Ort: React.FC = () => {
     return (
         <div className="max-w-5xl mx-auto px-4 py-12 space-y-12">
-            <h1 className="text-4xl font-bold text-center">Unser Standort</h1>
+            {/* Header */}
+            <div className="bg-white border-b shadow-md">
+                <div className="container mx-auto px-4 py-6 flex items-center gap-4">
+                    <h1 className="text-3xl font-extrabold text-gray-800">UNSER STANDORT</h1>
+                </div>
+            </div>
 
             {/* Trainingsplatz */}
             <section className="bg-white rounded-2xl shadow p-6 space-y-4">

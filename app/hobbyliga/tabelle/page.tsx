@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Header from "../../components/Header";
+
 
 const leagueData = [
     { platz: 1, club: "SF Nofels", spiele: 4, tore: 17, gegentore: 4, diff: 13, punkte: 12 },
@@ -15,11 +17,7 @@ export default function Tabelle() {
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Header */}
-            <div className="bg-white border-b shadow-md">
-                <div className="container mx-auto px-4 py-6 flex items-center gap-4">
-                    <h1 className="text-3xl font-extrabold text-gray-800">HOBBYLIGA TABELLE 2025</h1>
-                </div>
-            </div>
+            <Header title="HOBBYLIGA TABELLE 2025" />
 
             {/* Tabelle */}
             <div className="container mx-auto px-4 py-8">

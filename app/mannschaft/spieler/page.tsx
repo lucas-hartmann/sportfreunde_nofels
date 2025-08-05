@@ -3,7 +3,6 @@
 import Image from "next/image";
 import playersData from "../../../data/spieler.json";
 
-
 type Player = {
     name: string;
     number: number;

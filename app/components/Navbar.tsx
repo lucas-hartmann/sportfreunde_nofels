@@ -90,7 +90,7 @@ export default function Navbar() {
             <div className="flex items-center justify-between">
                 <Link href="/" className="flex items-center space-x-3">
                     <Image
-                        src="/logos/sfn.png"
+                        src="/logos/sfn_logo.webp"
                         alt="Sportfreunde Nofels Logo"
                         width={40}
                         height={40}

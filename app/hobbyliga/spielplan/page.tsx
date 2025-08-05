@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import matchdaysData from "../../../data/spielplan2025.json";
+import Header from "../../components/Header";
 
 function isPast(matchDate: string, matchTime: string): boolean {
     const [day, month, year] = matchDate.split(".");
@@ -23,11 +24,7 @@ export default function Spielplan() {
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Header */}
-            <div className="bg-white border-b shadow-md">
-                <div className="container mx-auto px-4 py-6 flex items-center gap-4">
-                    <h1 className="text-3xl font-extrabold text-gray-800">HOBBYLIGA SPIELPLAN 2025</h1>
-                </div>
-            </div>
+            <Header title="HOBBYLIGA SPIELPLAN 2025" />
 
             {/* Tabs & Toggle */}
             <div className="container mx-auto px-4 py-6 space-y-6">
@@ -83,7 +80,7 @@ export default function Spielplan() {
                                             <th className="px-4 py-3 w-[20%]">Datum</th>
                                             <th className="px-4 py-3 w-[12%]">Uhrzeit</th>
                                             <th className="px-4 py-3 w-[20%]">Ort</th>
-                                            <th className="px-4 py-3 w-[16%]">Bemerkung</th>
+                                            <th className="px-4 py-3 w-[16%]">Ergebnis</th>
                                         </tr>
                                         </thead>
                                         <tbody>
