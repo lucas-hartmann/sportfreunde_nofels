@@ -21,8 +21,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-    return (
-      <html lang="de" className="bg-primary">
+  return (
+    <html lang="de" className="bg-primary">
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
