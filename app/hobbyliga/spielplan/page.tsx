@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import matchdaysData from "../../../data/spielplan2025";
 import Header from "../../components/Header";
+import { matchdays } from "@/data/spielplan2025";
 
 function isPast(matchDate: string, matchTime: string): boolean {
   const [day, month, year] = matchDate.split(".");
@@ -21,7 +21,7 @@ export default function Spielplan() {
   const [activeTab, setActiveTab] = useState("all");
   const [showPast, setShowPast] = useState(false);
 
-  const sfNofelsMatches = matchdaysData.matchdays.flatMap((matchday) =>
+  const sfNofelsMatches = matchdays.flatMap((matchday) =>
     matchday.matches
       .filter(
         (match) => match.home === "SF Nofels" || match.away === "SF Nofels"
@@ -73,7 +73,7 @@ export default function Spielplan() {
 
         {/* Matches */}
         {activeTab === "all" ? (
-          matchdaysData.matchdays.map((matchday) => {
+          matchdays.map((matchday) => {
             const filteredMatches = matchday.matches.filter(
               (match) => showPast || !isPast(match.date, match.time)
             );
