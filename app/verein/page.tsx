@@ -1,8 +1,21 @@
-export default function Mannschaft() {
+import NavCardGrid from "../components/NavCardGrid";
+import Header from "../components/Header";
+
+export default function Verein() {
+  const navItems = [
+    { title: "Geschichte", href: "/verein/geschichte"},
+    { title: "Spieler", href: "/verein/spieler"},
+    { title: "Altherren", href: "/verein/altherren"},
+    { title: "Sportplatz", href: "/verein/sportplatz"},
+  ];
+
   return (
-    <main className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Unsere Mannschaft</h1>
-      <p>Hier stellen wir dir unsere Vereinsgeschichte, unsere Spieler, den Sportplatz und das Altherren-Team vor.</p>
+    <span>
+    {/* Header */}
+    <Header title="VEREIN" />
+    <main className="container mx-auto px-4 py-8">
+      <NavCardGrid title="Navigation" items={navItems} />
     </main>
+    </span>
   );
 }
