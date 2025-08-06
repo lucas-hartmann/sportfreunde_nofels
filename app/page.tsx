@@ -18,13 +18,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="flex flex-col items-center my-30 space-y-6">
+      <section className="flex flex-col items-center my-30 space-y-6 text-center">
         <div className="border border-gray-400 rounded-full py-1 px-2 text-primary text-sm font-semibold">
           Nächstes Heimspiel
         </div>
 
-        <h2 className="text-4xl font-bold">Nächstes Heimspiel</h2>
-        <p className="text-gray-700">Unterstütze unsere Mannschaft beim nächsten Heimspiel</p>
+        <h2 className="text-4xl md:text-6xl font-bold">
+          Komm vorbei und
+          <span className="block text-primary">feier mit uns! 🎊</span>
+        </h2>
+        <p className="text-gray-600 text-xl">
+          Gute Stimmung, kalte Getränke und hoffentlich ein paar Tore - was will
+          man mehr?
+        </p>
       </section>
     </main>
   );
