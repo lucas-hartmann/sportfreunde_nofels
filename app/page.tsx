@@ -1,5 +1,7 @@
 import Image from "next/image";
-import NextMatch from "./components/NextMatch";
+import QuoteSection from "./components/QuoteSection";
+import NextMatchSection from "./components/NextMatchSection";
+import SponsorsSection from "./components/SponsorsSection";
 
 export default function Home() {
   return (
@@ -26,7 +28,11 @@ export default function Home() {
         </div>
       </section>
 
-      <NextMatch />
+      <NextMatchSection />
+
+      <QuoteSection />
+
+      <SponsorsSection />
     </main>
   );
 }

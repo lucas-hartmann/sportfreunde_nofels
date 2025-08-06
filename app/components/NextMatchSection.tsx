@@ -29,7 +29,7 @@ function getClubLogo(teamName: string): string {
   return club ? club.logo : "/logos/default_logo.webp";
 }
 
-export default function NextMatch() {
+export default function NextMatchSection() {
   const nextMatch = getNextMatch();
 
   if (!nextMatch) return null;
@@ -41,13 +41,13 @@ export default function NextMatch() {
       </div>
 
       <h2 className="text-4xl md:text-6xl font-bold">
-        Komm vorbei und
-        <span className="block text-primary">feier mit uns! 🎊</span>
+        Nächstes Spiel der
+        <span className="block text-primary">Sportsfreunde Nofels</span>
       </h2>
 
       <p className="text-gray-600 text-xl">
-        Gute Stimmung, kalte Getränke und hoffentlich ein paar Tore - was will
-        man mehr?
+        Unterstütze unsere Mannschaft beim nächsten Heimspiel und erlebe
+        Fußball-Emotion pur
       </p>
 
       <div className="bg-white w-full max-w-2xl py-10 rounded-xl shadow-2xl px-10 md:px-20 mt-6">
