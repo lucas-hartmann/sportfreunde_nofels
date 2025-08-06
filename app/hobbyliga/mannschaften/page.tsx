@@ -26,9 +26,9 @@ export default function ClubsPage() {
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {clubList.map((club) => {
                 const CardInner = (
-                    <div className="group block rounded-2xl bg-white shadow-sm hover:shadow-lg transition-shadow border border-neutral-100 overflow-hidden">
+                    <div className="group block rounded-2xl bg-white shadow-xs hover:shadow-lg transition-shadow border border-neutral-100 overflow-hidden">
                         <div className="flex items-center gap-4 p-4">
-                            <div className="flex-shrink-0">
+                            <div className="shrink-0">
                                 <div className="relative w-20 h-20 rounded-xl overflow-hidden bg-neutral-100 flex items-center justify-center">
                                     <Image
                                         src={club.logo}

@@ -65,7 +65,7 @@ const Dropdown = ({
                 {title}
             </button>
             {open && (
-                <div className="absolute left-0 mt-1 bg-white border rounded-md shadow-lg z-50 min-w-[10rem]">
+                <div className="absolute left-0 mt-1 bg-white border rounded-md shadow-lg z-50 min-w-40">
                     {items.map((item) => (
                         <Link
                             key={item.name}

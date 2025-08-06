@@ -10,7 +10,7 @@ const Ort: React.FC = () => {
         <Header title="UNSER STANDORT" />
         <div className="max-w-5xl mx-auto px-4 py-12 space-y-12">
             {/* Trainingsplatz */}
-            <section className="bg-white rounded-2xl shadow p-6 space-y-4">
+            <section className="bg-white rounded-2xl shadow-sm p-6 space-y-4">
                 <h2 className="text-2xl font-semibold">Trainingsplatz - Äuele Nofels</h2>
                 <p className="text-gray-700">
                     Das Äuele – unser Herzensplatz – wird in ganz Nofels von Jung und Alt geschätzt. Ob ein lockerer Kick nach der Schule oder Champions-League-Feeling am Donnerstagabend mit der Kampfmannschaft – hier ist immer was los.
@@ -35,7 +35,7 @@ const Ort: React.FC = () => {
             </section>
 
             {/* Heimspielplatz */}
-            <section className="bg-white rounded-2xl shadow p-6 space-y-4">
+            <section className="bg-white rounded-2xl shadow-sm p-6 space-y-4">
                 <h2 className="text-2xl font-semibold">Heimspielplatz - Gisingen 2er Platz</h2>
                 <p className="text-gray-700">
                     Wenn’s ernst wird, wird hier gespielt: Auf unserem Heimspielplatz finden die offiziellen Ligaspiele statt – unter perfekten Bedingungen.

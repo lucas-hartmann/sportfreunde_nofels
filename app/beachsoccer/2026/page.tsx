@@ -24,7 +24,7 @@ const BeachsoccerCup = () => {
                 <h1 className="relative z-10 text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg max-w-4xl leading-tight">
                     Beachsoccer Cup 2025
                 </h1>
-                <p className="relative z-10 mt-4 max-w-2xl text-lg md:text-xl text-white font-semibold drop-shadow">
+                <p className="relative z-10 mt-4 max-w-2xl text-lg md:text-xl text-white font-semibold drop-shadow-sm">
                     Sonne, Sand und spannende Matches – das größte Beachsoccer-Turnier in Vorarlberg wartet auf dich!
                 </p>
                 <a
@@ -52,7 +52,7 @@ const BeachsoccerCup = () => {
                     <a
                         href="/bsc/A4_Turnierausschreibung_2025.pdf"
                         download
-                        className="inline-block bg-[#781c12] text-white px-6 py-3 rounded-md shadow hover:bg-[#a62c1a] transition"
+                        className="inline-block bg-[#781c12] text-white px-6 py-3 rounded-md shadow-sm hover:bg-[#a62c1a] transition"
                     >
                         Turnierregeln herunterladen
                     </a>
@@ -135,7 +135,7 @@ const BeachsoccerCup = () => {
                                 type={type}
                                 placeholder={placeholder}
                                 required
-                                className="w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#781c12]"
+                                className="w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-hidden focus:ring-2 focus:ring-[#781c12]"
                             />
                         </div>
                     ))}
@@ -148,7 +148,7 @@ const BeachsoccerCup = () => {
                             id="message"
                             name="message"
                             placeholder="Was du uns noch sagen möchtest..."
-                            className="w-full rounded-md border border-gray-300 px-4 py-3 h-32 resize-none focus:outline-none focus:ring-2 focus:ring-[#781c12]"
+                            className="w-full rounded-md border border-gray-300 px-4 py-3 h-32 resize-none focus:outline-hidden focus:ring-2 focus:ring-[#781c12]"
                         />
                     </div>
 
