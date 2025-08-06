@@ -23,10 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" className="bg-white">
+    <html>
       <body className={font.className}>
         <NavbarNew />
-
         <main className="flex-1 mt-16">{children}</main>
         <Footer />
       </body>
