@@ -3,18 +3,10 @@
 import React from "react";
 import Image from "next/image";
 import Header from "../../components/Header";
-import clubs from "../../../data/mannschaften.json";
-
-type Club = {
-  id: string;
-  name: string;
-  logo: string;
-  description: string;
-  website: string;
-};
+import { Club, mannschaften } from "@/data/mannschaften";
 
 export default function ClubsPage() {
-  const clubList: Club[] = clubs as unknown as Club[];
+  const clubList: Club[] = mannschaften;
 
   return (
     <span>

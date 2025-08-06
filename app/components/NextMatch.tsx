@@ -1,17 +1,21 @@
 import Image from "next/image";
-import matchdays from "../../data/spielplan2025.json";
 import { CalendarIcon, ClockIcon, MapPinIcon } from "lucide-react";
+import { matchdays } from "@/data/spielplan2025";
+import { mannschaften } from "@/data/mannschaften";
 
 function getNextMatch() {
   const now = new Date();
 
-  for (const matchday of matchdays.matchdays) {
+  for (const matchday of matchdays) {
     for (const match of matchday.matches) {
       const [day, month, year] = match.date.split(".");
       const [hours, minutes] = match.time.split(":");
       const matchDate = new Date(`${year}-${month}-${day}T${hours}:${minutes}`);
 
-      if (matchDate > now) {
+      const isNofelsPlaying =
+        match.home === "SF Nofels" || match.away === "SF Nofels";
+
+      if (matchDate > now && isNofelsPlaying) {
         return { ...match, datetime: matchDate };
       }
     }
@@ -20,13 +24,18 @@ function getNextMatch() {
   return null;
 }
 
+function getClubLogo(teamName: string): string {
+  const club = mannschaften.find((club) => club.name === teamName);
+  return club ? club.logo : "/logos/default_logo.webp";
+}
+
 export default function NextMatch() {
   const nextMatch = getNextMatch();
 
   if (!nextMatch) return null;
 
   return (
-    <section className="flex flex-col items-center my-30 space-y-6 text-center">
+    <section className="flex flex-col items-center my-30 px-6 space-y-6 text-center">
       <div className="border border-gray-400 rounded-full py-1 px-2 text-primary text-sm font-semibold">
         Nächstes Spiel
       </div>
@@ -41,17 +50,29 @@ export default function NextMatch() {
         man mehr?
       </p>
 
-      <div className="bg-white w-full max-w-2xl py-10 rounded-xl shadow-2xl px-20 mt-6">
-        <div className="flex justify-between">
+      <div className="bg-white w-full max-w-2xl py-10 rounded-xl shadow-2xl px-10 md:px-20 mt-6">
+        <div className="flex justify-between items-center">
           <div className="flex flex-col items-center">
-            <Image src="/logos/sfn_logo.webp" width={60} height={60} alt="" />
+            <Image
+              src={getClubLogo(nextMatch.home)}
+              width={80}
+              height={80}
+              className="w-20 h-20"
+              alt={nextMatch.home}
+            />{" "}
             <span className="font-bold mt-3">{nextMatch.home}</span>
           </div>
 
           <span className="text-primary text-4xl font-black">VS</span>
 
           <div className="flex flex-col items-center">
-            <Image src="/logos/sfn_logo.webp" width={60} height={60} alt="" />
+            <Image
+              src={getClubLogo(nextMatch.away)}
+              width={80}
+              height={80}
+              className="w-20 h-20"
+              alt={nextMatch.away}
+            />{" "}
             <span className="font-bold mt-3">{nextMatch.away}</span>
           </div>
         </div>
