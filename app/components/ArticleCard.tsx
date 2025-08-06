@@ -1,88 +1,116 @@
 // components/ArticleCard.tsx
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 
+export type GalleryImage = { src: string; alt?: string };
 export type Article = {
   id: string | number;
   title?: string;
   subtitle?: string;
   excerpt?: string;
-  images?: { src: string; alt?: string }[];
+  images?: GalleryImage[];
   date?: string;
-  className?: string;
+  href?: string;
 };
 
 type Props = {
   article: Article;
   defaultTitle?: string;
+  imageSide?: "left" | "right"; // gallery on left or right on wide screens
 };
 
-export default function ArticleCard({ article, defaultTitle = "Untitled Article" }: Props) {
-  const { title, subtitle, excerpt, images = [], date } = article;
+export default function ArticleCard({ article, defaultTitle = "Untitled", imageSide = "left" }: Props) {
+  const { title, subtitle, excerpt, images = [], date, href = "#" } = article;
+  const [active, setActive] = useState(0);
+
+  const hasImages = images.length > 0;
 
   return (
     <article
-      className={`bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden transition-shadow hover:shadow-lg ${article.className ?? ""}`}
+      className="bg-white rounded-xl border border-gray-200 shadow-md overflow-hidden"
       aria-labelledby={`article-${article.id}-title`}
     >
-      <header className="px-6 py-4">
-        <h2 id={`article-${article.id}-title`} className="text-xl md:text-2xl font-semibold leading-tight">
-          {title ?? defaultTitle}
-        </h2>
-        {subtitle && <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{subtitle}</p>}
-        {date && <time className="block mt-2 text-xs text-gray-400">{date}</time>}
-      </header>
-
-      {/* Images area */}
-      {images.length === 0 ? null : (
-        <div className="px-6 pb-6">
-          {/* 1 image: large hero; 2 images: side-by-side; 3+ images: grid responsive */}
-          {images.length === 1 && (
-            <div className="w-full rounded-xl overflow-hidden">
-              <Image src={images[0].src} alt={images[0].alt ?? ""} width={1200} height={700} className="w-full h-auto object-cover" />
+      <div
+        className={`md:flex md:items-stretch ${
+          imageSide === "right" ? "md:flex-row-reverse" : "md:flex-row"
+        }`}
+      >
+        {/* Gallery column */}
+        {hasImages && (
+          <div className="md:w-1/3 w-full bg-gray-50 p-4 flex flex-col gap-3">
+            {/* Main image */}
+            <div className="rounded-lg overflow-hidden h-48 md:h-full md:min-h-[220px] relative">
+              <Image
+                src={images[active].src}
+                alt={images[active].alt ?? ""}
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="(min-width: 768px) 33vw, 100vw"
+                className="rounded-lg"
+              />
             </div>
-          )}
 
-          {images.length === 2 && (
-            <div className="grid grid-cols-2 gap-3">
-              {images.map((img, i) => (
-                <div key={i} className="rounded-lg overflow-hidden">
-                  <Image src={img.src} alt={img.alt ?? ""} width={600} height={400} className="w-full h-48 md:h-56 object-cover" />
-                </div>
-              ))}
-            </div>
-          )}
-
-          {images.length >= 3 && (
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {/* Show first image bigger on left for medium screens */}
-              <div className="sm:col-span-2 rounded-lg overflow-hidden">
-                <Image src={images[0].src} alt={images[0].alt ?? ""} width={1000} height={700} className="w-full h-56 md:h-72 object-cover" />
-              </div>
-              <div className="grid grid-rows-2 gap-3">
-                {images.slice(1, 3).map((img, i) => (
-                  <div key={i} className="rounded-lg overflow-hidden">
-                    <Image src={img.src} alt={img.alt ?? ""} width={800} height={400} className="w-full h-28 md:h-36 object-cover" />
-                  </div>
+            {/* Thumbnails (if >1) */}
+            {images.length > 1 && (
+              <div className="grid grid-cols-4 gap-2 mt-2">
+                {images.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActive(i)}
+                    className={`rounded-md overflow-hidden border ${
+                      i === active ? "ring-2 ring-black" : "border-gray-200"
+                    }`}
+                    aria-label={`Bild ${i + 1}`}
+                  >
+                    <div className="relative w-full h-16">
+                      <Image src={img.src} alt={img.alt ?? ""} fill style={{ objectFit: "cover" }} />
+                    </div>
+                  </button>
                 ))}
               </div>
-            </div>
-          )}
-        </div>
-      )}
+            )}
+          </div>
+        )}
 
-      {/* Text content */}
-      <div className="px-6 pb-6">
-        {excerpt && <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{excerpt}</p>}
-        <div className="mt-4 flex items-center justify-between">
-          <a
-            className="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline"
-            href="#"
-            onClick={(e) => e.preventDefault()}
-          >
-            Read more →
-          </a>
-          <div className="text-xs text-gray-400">• {images.length} image{images.length !== 1 ? "s" : ""}</div>
+        {/* Text column */}
+        <div className={`p-6 ${hasImages ? "md:w-2/3" : "w-full"}`}>
+          <header className="flex items-start justify-between gap-4">
+            <div>
+              <h2 id={`article-${article.id}-title`} className="text-lg md:text-xl font-semibold text-gray-800">
+                {title ?? defaultTitle}
+              </h2>
+              {subtitle && <p className="mt-1 text-sm text-gray-500">{subtitle}</p>}
+              {date && <time className="block mt-2 text-xs text-gray-400">{date}</time>}
+            </div>
+
+            {/* optional CTA */}
+            <div className="hidden md:flex md:items-center">
+              <a
+                href={href}
+                className="px-4 py-2 rounded-full border text-sm font-medium transition hover:bg-black hover:text-white"
+                onClick={(e) => href === "#" && e.preventDefault()}
+              >
+                Mehr lesen
+              </a>
+            </div>
+          </header>
+
+          <div className="mt-4 text-gray-700 leading-relaxed">
+            {excerpt ? <p>{excerpt}</p> : <p className="text-gray-400 italic">Kein Vorspann vorhanden.</p>}
+          </div>
+
+          {/* mobile CTA under text */}
+          <div className="mt-5 md:hidden">
+            <a
+              href={href}
+              className="inline-block px-4 py-2 rounded-full border text-sm font-medium transition hover:bg-black hover:text-white"
+              onClick={(e) => href === "#" && e.preventDefault()}
+            >
+              Mehr lesen
+            </a>
+          </div>
         </div>
       </div>
     </article>
