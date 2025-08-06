@@ -18,6 +18,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
   *,
   ::after,
   ::before,
@@ -25,12 +26,16 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
+
+
+  body {
+    @apply bg-secondary text-black;
+  }
+
+  a {
+    @apply text-primary;
+  }
+
 }
 
-body {
-    @apply bg-secondary text-black font-sans;
-}
-
-a {
-    @apply text-primary hover:underline;
-}
+@layer utilities {}
