@@ -20,7 +20,10 @@ yarn-error.log*
 .env.production.local
 
 # IDEs and editors
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
 .idea/
 
 # Mac system files
