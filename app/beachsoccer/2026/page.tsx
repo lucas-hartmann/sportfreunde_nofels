@@ -4,7 +4,7 @@ import React from "react";
 
 const BeachsoccerCup = () => {
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-sans">
+    <div className="min-h-screen bg-white text-gray-900">
       {/* Hero Section */}
       <section className="relative h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden">
         <video

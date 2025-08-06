@@ -1,12 +1,20 @@
+import Image from "next/image";
+import NextMatch from "./components/NextMatch";
+
 export default function Home() {
   return (
     <main>
-      <section
-        className="h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/bsc/background.JPG')" }}
-      >
-        {" "}
-        <div className="space-y-4 flex flex-col items-center text-center">
+      <section className="h-screen flex relative items-center justify-center">
+        <Image
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/bsc/background.JPG"
+          fill
+          alt=""
+        ></Image>
+
+        <div className="absolute inset-0 bg-black opacity-60"></div>
+
+        <div className="space-y-4 flex flex-col items-center text-center z-20">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white">
             SPORTFREUNDE
             <span className="block text-primary drop-shadow-lg">NOFELS</span>
@@ -18,20 +26,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="flex flex-col items-center my-30 space-y-6 text-center">
-        <div className="border border-gray-400 rounded-full py-1 px-2 text-primary text-sm font-semibold">
-          Nächstes Heimspiel
-        </div>
-
-        <h2 className="text-4xl md:text-6xl font-bold">
-          Komm vorbei und
-          <span className="block text-primary">feier mit uns! 🎊</span>
-        </h2>
-        <p className="text-gray-600 text-xl">
-          Gute Stimmung, kalte Getränke und hoffentlich ein paar Tore - was will
-          man mehr?
-        </p>
-      </section>
+      <NextMatch />
     </main>
   );
 }

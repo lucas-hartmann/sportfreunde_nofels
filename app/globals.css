@@ -1,12 +1,10 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-primary: #dc2626;
+  --color-primary: #7b1e12;
   --color-secondary: #f9f9f9;
   --color-black: #000000;
   --color-white: #ffffff;
-
-  --font-sans: 'Open Sans', sans-serif;
 }
 
 /*
@@ -25,6 +23,10 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
+  }
+
+  ::selection {
+    @apply bg-primary text-white;
   }
 
 

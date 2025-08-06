@@ -1,5 +1,3 @@
-// data/navbarLinks.ts
-
 export const navbarLinks = [
 	{
 		title: "Beachsoccer Cup",
@@ -24,7 +22,7 @@ export const navbarLinks = [
 		title: "Hobbyliga",
 		href: "/hobbyliga",
 		submenu: [
-			{ title: "Mannschaften", href: "/hobbyliga/geschichte" },
+			{ title: "Mannschaften", href: "/hobbyliga/mannschaften" },
 			{ title: "Tabelle", href: "/hobbyliga/tabelle" },
 			{ title: "Spielplan", href: "/hobbyliga/spielplan" },
 		],
