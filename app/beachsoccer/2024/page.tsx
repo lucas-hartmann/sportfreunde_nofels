@@ -101,7 +101,7 @@ export default function BeachsoccerReview() {
                     className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 cursor-pointer"
                     onClick={handleClose}
                 >
-                    <div className="relative w-full max-w-5xl aspect-[4/3] mx-4 sm:mx-12">
+                    <div className="relative w-full max-w-5xl aspect-4/3 mx-4 sm:mx-12">
                         <Image
                             src={selectedImage}
                             alt="Großansicht"

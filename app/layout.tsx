@@ -1,20 +1,39 @@
-import './globals.css';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Head from "next/head";
+import "./globals.css";
+import Footer from "./components/Footer";
+import { Geist, Montserrat } from "next/font/google";
+import { Metadata } from "next";
+import NavbarNew from "./components/NavbarNew";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-    return (
-        <html lang="de" className="bg-primary">
-        <Head>
-            <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <body className="font-sans bg-white text-black flex flex-col min-h-screen">
-        <Navbar />
+const font = Geist({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-montserrat",
+});
+
+export const metadata: Metadata = {
+  title: "Sportfreunde Nofels",
+  description:
+    "Hier findest du alles über unseren Verein, die Hobbyliga, unsere Mannschaft und den legendären BeachsoccerCup!",
+  icons: [{ rel: "icon", url: "/favicon.ico" }],
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html>
+      <body className={`${montserrat.variable} ${font.className}`}>
+        <NavbarNew />
         <main className="flex-1">{children}</main>
         <Footer />
-        </body>
-        </html>
-    );
+      </body>
+    </html>
+  );
 }
