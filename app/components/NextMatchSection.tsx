@@ -2,6 +2,7 @@ import Image from "next/image";
 import { CalendarIcon, ClockIcon, MapPinIcon } from "lucide-react";
 import { matchdays } from "@/data/spielplan2025";
 import { mannschaften } from "@/data/mannschaften";
+import Headline from "./Headline";
 
 function getNextMatch() {
   const now = new Date();
@@ -36,19 +37,13 @@ export default function NextMatchSection() {
 
   return (
     <section className="flex flex-col items-center my-30 px-6 space-y-6 text-center">
-      <div className="border border-gray-400 rounded-full py-1 px-2 text-primary text-sm font-semibold">
-        Nächstes Spiel
-      </div>
-
-      <h2 className="text-4xl md:text-6xl font-bold">
-        Nächstes Spiel der
-        <span className="block text-primary">Sportsfreunde Nofels</span>
-      </h2>
-
-      <p className="text-gray-600 text-xl">
-        Unterstütze unsere Mannschaft beim nächsten Heimspiel und erlebe
-        Fußball-Emotion pur
-      </p>
+      <Headline
+        pill="Nächstes Spiel"
+        blackLine="Nächstes Spiel der"
+        redLine="Sportsfreunde Nofels"
+        description="Unterstütze unsere Mannschaft beim nächsten Heimspiel und erlebe
+        Fußball-Emotion pur."
+      />
 
       <div className="bg-white w-full max-w-2xl py-10 rounded-xl shadow-2xl px-10 md:px-20 mt-6">
         <div className="flex justify-between items-center">

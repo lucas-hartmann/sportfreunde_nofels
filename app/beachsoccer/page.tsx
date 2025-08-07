@@ -1,19 +1,48 @@
-import NavCardGrid from "../components/NavCardGrid";
+import NavCardGrid, { NavCard } from "../components/NavCardGrid";
 import Header from "../components/Header";
+import { CalendarIcon, NewspaperIcon } from "lucide-react";
+import Headline from "../components/Headline";
 
 export default function Beachsoccer() {
-  const navItems = [
-    { title: "Anmeldung für 2026", href: "/beachsoccer/26" },
-    { title: "Bericht 2025", href: "/beachsoccer/25" },
-    { title: "Bericht 2024", href: "/hobbyliga/24" },
+  const navItems: NavCard[] = [
+    {
+      title: "Anmeldung für 2026",
+      href: "/beachsoccer/2026",
+      image: "/bsc/background.JPG",
+      icon: CalendarIcon,
+      description: "",
+      cta: "Zur Anmeldung",
+    },
+    {
+      title: "Bericht für 2025",
+      href: "/beachsoccer/2025",
+      image: "/bsc/background.JPG",
+      icon: NewspaperIcon,
+      description: "",
+      cta: "Zum Bericht",
+    },
+    {
+      title: "Bericht für 2024",
+      href: "/beachsoccer/2024",
+      image: "/bsc/background.JPG",
+      icon: NewspaperIcon,
+      description: "",
+      cta: "Zum Bericht",
+    },
   ];
 
   return (
     <span>
-      {/* Header */}
       <Header title="BEACHSOCCER" image="/bsc/background.JPG" />
-      <main className="container mx-auto px-4 py-8">
-        <NavCardGrid title="Navigation" items={navItems} />
+      <main className="container mx-auto px-4 py-30">
+        <Headline
+          pill="Beachsoccer Übersicht"
+          blackLine="Beachsoccer bei den"
+          redLine="Sportfreunden"
+          description="Alles Wissenswerte rund um das traditionelle Beachsoccer-Turnier der Sportfreunde Nofels"
+        />
+
+        <NavCardGrid items={navItems} />
       </main>
     </span>
   );
