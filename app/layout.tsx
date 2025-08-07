@@ -1,13 +1,18 @@
 import "./globals.css";
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { Geist } from "next/font/google";
+import { Geist, Montserrat } from "next/font/google";
 import { Metadata } from "next";
 import NavbarNew from "./components/NavbarNew";
 
 const font = Geist({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-montserrat",
 });
 
 export const metadata: Metadata = {
@@ -24,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body className={font.className}>
+      <body className={`${montserrat.variable} ${font.className}`}>
         <NavbarNew />
         <main className="flex-1">{children}</main>
         <Footer />

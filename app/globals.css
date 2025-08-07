@@ -38,6 +38,11 @@
     @apply text-primary;
   }
 
+  h1,
+  h2 {
+    font-family: var(--font-montserrat);
+  }
+
 }
 
 @layer utilities {}

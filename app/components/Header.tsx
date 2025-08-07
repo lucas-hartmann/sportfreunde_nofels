@@ -13,8 +13,8 @@ const Header: React.FC<HeaderProps> = ({ title, image }) => {
         alt={title}
         className="absolute inset-0 w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-black/20 bg-opacity-40 flex items-center justify-center">
-        <h1 className="text-4xl lg:text-6xl font-extrabold text-white text-center px-4">
+      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+        <h1 className="text-4xl lg:text-7xl font-black text-white text-center px-4">
           {title}
         </h1>
       </div>
