@@ -2,13 +2,21 @@ import React from "react";
 
 type HeaderProps = {
   title: string;
+  image: string;
 };
 
-const Header: React.FC<HeaderProps> = ({ title }) => {
+const Header: React.FC<HeaderProps> = ({ title, image }) => {
   return (
-    <div className="bg-white border-b shadow-md">
-      <div className="container mx-auto px-4 py-6 flex items-center gap-4">
-        <h1 className="text-3xl font-extrabold text-gray-800">{title}</h1>
+    <div className="relative w-full h-[70vh]">
+      <img
+        src={image}
+        alt={title}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black/20 bg-opacity-40 flex items-center justify-center">
+        <h1 className="text-4xl lg:text-6xl font-extrabold text-white text-center px-4">
+          {title}
+        </h1>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ export default function NavbarNew() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-40 border-b border-white/10 bg-white/60 backdrop-blur-xl flex justify-center">
+      <header className="absolute top-0 left-0 right-0 z-40 bg-linear-to-b from-black/80 to-transparent pb-14 flex justify-center">
         <div className="container px-6 flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <Link href="/" className="flex justify-center items-center">
@@ -19,7 +19,7 @@ export default function NavbarNew() {
                 className="h-10"
                 alt="Sportfreunde Nofels Logo"
               />
-              <span className="font-bold text-xl ml-2 text-black">
+              <span className="font-bold text-xl ml-2 text-white">
                 Sportfreunde Nofels
               </span>
             </Link>
@@ -30,7 +30,7 @@ export default function NavbarNew() {
               <div key={link.title} className="relative group">
                 <Link
                   href={link.href}
-                  className="text-sm font-semibold text-black transition-colors hover:text-primary"
+                  className="text-md font-semibold text-white transition-colors hover:text-primary"
                 >
                   {link.title}
                 </Link>
@@ -60,7 +60,7 @@ export default function NavbarNew() {
               className="relative z-20"
               onClick={() => setIsOpen(!isOpen)}
             >
-              <Menu className="h-6 w-6 text-black" />
+              <Menu className="h-6 w-6 text-white" />
             </button>
           </div>
         </div>

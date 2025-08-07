@@ -64,7 +64,7 @@ export default function Tabelle() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <Header title="HOBBYLIGA TABELLE 2025" />
+      <Header title="HOBBYLIGA TABELLE 2025" image="/bsc/background.JPG" />
 
       {/* Tabelle */}
       <div className="container mx-auto px-4 py-8">
