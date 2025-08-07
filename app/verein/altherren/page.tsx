@@ -1,3 +1,9 @@
+import Header from "@/app/components/Header";
+
 export default function Altherren() {
-  return <div>siu</div>;
+  return (
+    <div>
+      <Header title="Altherren" image="/bsc/background.JPG" />
+    </div>
+  );
 }

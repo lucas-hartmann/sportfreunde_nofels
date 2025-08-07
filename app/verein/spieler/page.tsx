@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { spieler } from "@/data/spieler";
 import { useState } from "react";
+import Header from "@/app/components/Header";
 
 /* Per-player image component with its own fallback state */
 function PlayerImage({ src, alt }: { src?: string; alt: string }) {
@@ -27,14 +28,7 @@ function PlayerImage({ src, alt }: { src?: string; alt: string }) {
 export default function Spielerliste() {
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b shadow-md">
-        <div className="container mx-auto px-4 py-6 flex items-center gap-4">
-          <h1 className="text-3xl font-extrabold text-gray-800">
-            MANNSCHAFT - SF NOFELS
-          </h1>
-        </div>
-      </div>
+      <Header title="MANNSCHAFT - SF NOFELS" image="/bsc/background.JPG" />
 
       {/* Spieler Grid */}
       <div className="container mx-auto px-4 py-8">
