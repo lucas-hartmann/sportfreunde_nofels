@@ -14,7 +14,7 @@ export default function Home() {
           alt=""
         ></Image>
 
-        <div className="absolute inset-0 bg-black opacity-60"></div>
+        <div className="absolute inset-0 bg-black opacity-30"></div>
 
         <div className="space-y-4 flex flex-col items-center text-center z-20">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white">
