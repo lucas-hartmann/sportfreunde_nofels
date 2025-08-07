@@ -2,6 +2,7 @@ import Image from "next/image";
 import QuoteSection from "./components/QuoteSection";
 import NextMatchSection from "./components/NextMatchSection";
 import SponsorsSection from "./components/SponsorsSection";
+import ContactsSection from "./components/ContactsSection";
 
 export default function Home() {
   return (
@@ -14,23 +15,28 @@ export default function Home() {
           alt=""
         ></Image>
 
-        <div className="absolute inset-0 bg-black opacity-30"></div>
+        <div className="absolute inset-0 bg-black/40"></div>
 
         <div className="space-y-4 flex flex-col items-center text-center z-20">
+          <Image
+            src={"/logos/sfn_logo.webp"}
+            className="h-40 w-40"
+            width={120}
+            height={120}
+            alt="Sportfreunde Nofels Logo"
+          />
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white">
             SPORTFREUNDE
             <span className="block text-primary drop-shadow-lg">NOFELS</span>
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto font-light leading-relaxed">
-            Hier findest du alles über unseren Verein, die Hobbyliga, unsere
-            Mannschaft und den legendären BeachsoccerCup!
-          </p>
         </div>
       </section>
 
       <NextMatchSection />
 
       <QuoteSection />
+
+      <ContactsSection />
 
       <SponsorsSection />
     </main>

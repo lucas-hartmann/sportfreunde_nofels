@@ -40,7 +40,7 @@ export default function NextMatchSection() {
       <Headline
         pill="Nächstes Spiel"
         blackLine="Nächstes Spiel der"
-        redLine="Sportsfreunde Nofels"
+        redLine="Sportfreunde Nofels"
         description="Unterstütze unsere Mannschaft beim nächsten Heimspiel und erlebe
         Fußball-Emotion pur."
       />
