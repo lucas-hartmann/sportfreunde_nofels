@@ -47,13 +47,13 @@ export default function ContactsSection() {
       <h2 className="text-center font-bold text-4xl mb-6 mt-10">
         Unsere Kontakte
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {items.map((item) => (
           <div
             key={item.name}
-            className="flex flex-col rounded-2xl shadow-md bg-white border border-gray-200 hover:shadow-xl transition-shadow duration-200"
+            className="flex flex-col items-center rounded-2xl shadow-md bg-white border border-gray-200 hover:shadow-xl transition-shadow duration-200"
           >
-            <div className="w-full pt-10 px-10">
+            <div className="w-[60%] mt-[15%]">
               <div className="aspect-square relative w-full">
                 <Image
                   src={item.image}
@@ -75,7 +75,7 @@ export default function ContactsSection() {
                   size={24}
                   strokeWidth={2.2}
                 />
-                <span className="text-md font-bold text-black">
+                <span className="text-sm font-bold text-black">
                   {item.phone}
                 </span>
               </div>
@@ -86,7 +86,7 @@ export default function ContactsSection() {
                   size={24}
                   strokeWidth={2.2}
                 />
-                <span className="text-md font-bold text-black">
+                <span className="text-sm font-bold text-black">
                   {item.email}
                 </span>
               </div>

@@ -19,13 +19,13 @@ export default function Home() {
 
         <div className="space-y-4 flex flex-col items-center text-center z-20">
           <Image
-            src={"/logos/sfn_logo.webp"}
-            className="h-40 w-40"
-            width={120}
-            height={120}
+            src="/logos/sfn_logo.webp"
             alt="Sportfreunde Nofels Logo"
+            width={100}
+            height={100}
+            className="w-36 h-36 sm:w-40 sm:h-40"
           />
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white">
             SPORTFREUNDE
             <span className="block text-primary drop-shadow-lg">NOFELS</span>
           </h1>
