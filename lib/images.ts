@@ -4,6 +4,7 @@ import { S3, ListObjectsV2Command } from "@aws-sdk/client-s3";
 export interface AwsImage {
 	thumbUrl: string;
 	url: string;
+	key: string;
 }
 
 const s3 = new S3({
@@ -32,6 +33,7 @@ export async function listImages(folder: string): Promise<AwsImage[]> {
 		return {
 			url: `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${fullKey}`,
 			thumbUrl: `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${thumbKey}`,
+			key: filename,
 		};
 	});
 
