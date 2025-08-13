@@ -12,9 +12,6 @@ export default function Beachsoccer2025() {
                 image="/bsc/background.JPG"
             />
             <main className="min-h-screen bg-neutral-50 py-12 px-6">
-                <div className="max-w-6xl mx-auto">
-                    <h2 className="text-lg font-medium">Description</h2>
-                </div>
                 <ImageGallery folder="beachsoccer2025" />
             </main>
         </span>

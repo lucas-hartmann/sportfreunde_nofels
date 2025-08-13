@@ -21,8 +21,7 @@ export default function ImageGallery({ folder }: { folder: string }) {
     };
 
     const breakpointColumnsObj = {
-        default: 4,
-        1536: 4,
+        default: 3,
         1280: 3,
         640: 2,
         0: 1,

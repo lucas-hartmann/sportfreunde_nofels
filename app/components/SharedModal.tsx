@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import { AwsImage } from "@/lib/images";
+import downloadPhoto from "@/utils/downloadPhoto";
 
 export interface SharedModalProps {
   index: number;
@@ -101,7 +102,7 @@ export default function SharedModal({
                 className="absolute"
               >
                 <Image
-                  src={currentImage.thumbUrl}
+                  src={currentImage.mediumUrl}
                   width={navigation ? 1280 : 1920}
                   height={navigation ? 853 : 1280}
                   priority
@@ -140,11 +141,16 @@ export default function SharedModal({
               )}
               <div className="absolute top-0 right-0 flex items-center gap-2 p-3 text-white">
                 <button
-                  onClick={() => {}}
+                  onClick={() => {
+                    downloadPhoto(
+                      currentImage.url,
+                      currentImage.key,
+                    );
+                  }}
                   className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
                   title="Download fullsize version"
                 >
-                  down
+                  download
                 </button>
               </div>
               <div className="absolute top-0 left-0 flex items-center gap-2 p-3 text-white">
