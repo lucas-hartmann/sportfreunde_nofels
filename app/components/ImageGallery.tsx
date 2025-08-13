@@ -3,35 +3,50 @@ import { AwsImage, listImages } from "@/lib/images";
 import { url } from "inspector";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Modal from "./Modal";
+import Masonry from "react-masonry-css";
 
 export default function ImageGallery({ folder }: { folder: string }) {
     const [images, setImages] = useState<AwsImage[]>([]);
-    const searchParams = useSearchParams();
-    const photoId = searchParams.get("photoId");
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
     useEffect(() => {
         listImages(folder).then(setImages);
     }, [folder]);
 
+    const handleCloseModal = () => {
+        setSelectedIndex(null);
+    };
+
+    const breakpointColumnsObj = {
+        default: 4,
+        1536: 4,
+        1280: 3,
+        640: 2,
+        0: 1,
+    };
+
     return (
         <div>
-            {photoId && (
+            {selectedIndex !== null && (
                 <Modal
                     images={images}
-                    onClose={() => {
-                    }}
+                    index={selectedIndex}
+                    onClose={handleCloseModal}
                 />
-            )}
-            <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
-                {images.map((image: AwsImage, index: number) => (
-                    <Link
+            )}{" "}
+            <Masonry
+                breakpointCols={breakpointColumnsObj}
+                className="flex gap-4"
+                columnClassName="flex flex-col gap-4"
+            >
+                {images.map((image, index) => (
+                    <div
                         key={index}
-                        href={`?photoId=${index}`}
-                        shallow
-                        className="after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
+                        onClick={() => setSelectedIndex(index)}
+                        className="after:content group relative block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
                     >
                         <Image
                             alt="Next.js Conf photo"
@@ -45,9 +60,9 @@ export default function ImageGallery({ folder }: { folder: string }) {
                   (max-width: 1536px) 33vw,
                   25vw"
                         />
-                    </Link>
+                    </div>
                 ))}
-            </div>
+            </Masonry>
         </div>
     );
 }

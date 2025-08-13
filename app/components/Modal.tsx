@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 import { AwsImage } from "@/lib/images";
 import { Dialog } from "@headlessui/react";
@@ -7,39 +7,25 @@ import SharedModal from "./SharedModal";
 
 export default function Modal({
   images,
+  index,
   onClose,
 }: {
   images: AwsImage[];
+  index: number;
   onClose?: () => void;
 }) {
   let overlayRef = useRef(undefined);
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const photoId = searchParams.get("photoId");
-
-  let index = Number(photoId);
 
   const [direction, setDirection] = useState(0);
   const [curIndex, setCurIndex] = useState(index);
 
   function handleClose() {
-    router.push("/", undefined);
     onClose();
   }
 
   function changePhotoId(newVal: number) {
-    if (newVal > index) {
-      setDirection(1);
-    } else {
-      setDirection(-1);
-    }
+    setDirection(newVal > curIndex ? 1 : -1);
     setCurIndex(newVal);
-    /*router.push(
-      {
-        query: { photoId: newVal },
-      },
-      `/p/${newVal}`,
-    );*/
   }
 
   /*  useKeypress("ArrowRight", () => {
