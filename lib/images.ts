@@ -11,15 +11,15 @@ export interface AwsImage {
 
 const s3 = new S3({
 	credentials: {
-		accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-		secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+		accessKeyId: process.env.MY_AWS_ACCESS_KEY_ID!,
+		secretAccessKey: process.env.MY_AWS_SECRET_ACCESS_KEY!,
 	},
-	region: process.env.AWS_REGION,
+	region: process.env.MY_AWS_REGION,
 });
 
 export async function listImages(folder: string): Promise<AwsImage[]> {
 	const command = new ListObjectsV2Command({
-		Bucket: process.env.AWS_BUCKET_NAME!,
+		Bucket: process.env.MY_AWS_BUCKET_NAME!,
 		Prefix: `${folder}/`,
 	});
 
@@ -37,9 +37,9 @@ export async function listImages(folder: string): Promise<AwsImage[]> {
 		const thumbKey = `${folder}/thumbs/${filename?.replace(/\.[^/.]+$/, ".avif")}`;
 		const mediumKey = `${folder}/medium/${filename?.replace(/\.[^/.]+$/, ".avif")}`;
 		return {
-			url: `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${fullKey}`,
-			thumbUrl: `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${thumbKey}`,
-			mediumUrl: `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${mediumKey}`,
+			url: `https://${process.env.MY_AWS_BUCKET_NAME}.s3.${process.env.MY_AWS_REGION}.amazonaws.com/${fullKey}`,
+			thumbUrl: `https://${process.env.MY_AWS_BUCKET_NAME}.s3.${process.env.MY_AWS_REGION}.amazonaws.com/${thumbKey}`,
+			mediumUrl: `https://${process.env.MY_AWS_BUCKET_NAME}.s3.${process.env.MY_AWS_REGION}.amazonaws.com/${mediumKey}`,
 			key: filename,
 			id: index,
 		};
