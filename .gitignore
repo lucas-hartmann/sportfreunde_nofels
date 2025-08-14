@@ -31,3 +31,4 @@ yarn-error.log*
 
 # Windows system files
 Thumbs.db
+.env

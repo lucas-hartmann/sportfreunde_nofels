@@ -2,7 +2,7 @@ import "./globals.css";
 import Footer from "./components/Footer";
 import { Geist, Montserrat } from "next/font/google";
 import { Metadata } from "next";
-import NavbarNew from "./components/NavbarNew";
+import Navbar from "./components/Navbar";
 
 const font = Geist({
   subsets: ["latin"],
@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html>
       <body className={`${montserrat.variable} ${font.className}`}>
-        <NavbarNew />
+        <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>
