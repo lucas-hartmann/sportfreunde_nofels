@@ -53,27 +53,24 @@ export default function Footer() {
                 <li>
                   <Link
                     href="/beachsoccer/2026"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Anmeldung 2026
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/beachsoccer/2025"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Bericht 2025
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/beachsoccer/2024"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Bericht 2024
                   </Link>
                 </li>
@@ -85,36 +82,32 @@ export default function Footer() {
                 <li>
                   <Link
                     href="/verein/geschichte"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Geschichte
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/verein/spieler"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Spieler
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/verein/altherren"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Altherren
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/verein/sportplatz"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Sportplatz
                   </Link>
                 </li>
@@ -126,27 +119,24 @@ export default function Footer() {
                 <li>
                   <Link
                     href="/hobbyliga/mannschaften"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Mannschaften
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/hobbyliga/tabelle"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Tabelle
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/hobbyliga/spielplan"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Spielplan
                   </Link>
                 </li>
@@ -162,13 +152,13 @@ export default function Footer() {
           <div className="flex gap-6">
             <Link
               href="/datenschutz"
-              className="text-sm text-white hover:text-gray-400 transition-colors"
+              className="text-sm text-white hover:text-gray-300 transition-colors"
             >
               Datenschutz
             </Link>
             <Link
               href="/impressum"
-              className="text-sm text-white hover:text-gray-400 transition-colors"
+              className="text-sm text-white hover:text-gray-300 transition-colors"
             >
               Impressum
             </Link>
