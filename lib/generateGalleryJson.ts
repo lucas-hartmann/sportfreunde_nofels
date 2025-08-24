@@ -1,7 +1,7 @@
 import { S3, ListObjectsV2Command } from "@aws-sdk/client-s3";
 import "dotenv/config"; // automatically loads .env
-import path from "path";
-import fs from "fs";
+import * as path from "path";
+import * as fs from "fs";
 
 const s3 = new S3({
 	credentials: {
