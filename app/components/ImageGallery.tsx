@@ -58,6 +58,9 @@ export default function ImageGallery({ folder }: { folder: string }) {
                   (max-width: 1280px) 50vw,
                   (max-width: 1536px) 33vw,
                   25vw"
+                            onError={(e) => {
+                                console.error(image.key);
+                            }}
                         />
                     </div>
                 ))}
