@@ -7,7 +7,7 @@
 		"start": "next start",
 		"compile:generate": "npx tsc lib/generateGalleryJson.ts --outDir dist-scripts --module esnext --moduleResolution node --target es2022",
 		"generate": "node dist-scripts/generateGalleryJson.js",
-		"build": "npm run compile:generate && npm run generate && next build"
+		"build": "npm run generate && next build"
 	},
 	"dependencies": {
 		"@aws-sdk/client-s3": "^3.864.0",
