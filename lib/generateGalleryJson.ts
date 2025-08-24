@@ -44,9 +44,9 @@ async function listImages(folder: string): Promise<AwsImage[]> {
 			const thumbKey = `${folder}/thumbs/${filename?.replace(/\.[^/.]+$/, ".avif")}`;
 			const mediumKey = `${folder}/medium/${filename?.replace(/\.[^/.]+$/, ".avif")}`;
 			return {
-				url: `https://${process.env.AWS_CLOUDFRONT_DOMAIN}/${fullKey}`,
-				thumbUrl: `https://${process.env.AWS_CLOUDFRONT_DOMAIN}/${thumbKey}`,
-				mediumUrl: `https://${process.env.AWS_CLOUDFRONT_DOMAIN}/${mediumKey}`,
+				url: `https://${process.env.MY_AWS_CLOUDFRONT_DOMAIN}/${fullKey}`,
+				thumbUrl: `https://${process.env.MY_AWS_CLOUDFRONT_DOMAIN}/${thumbKey}`,
+				mediumUrl: `https://${process.env.MY_AWS_CLOUDFRONT_DOMAIN}/${mediumKey}`,
 				key: filename!,
 				id: index,
 			};
