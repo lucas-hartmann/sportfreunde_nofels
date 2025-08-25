@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
 		remotePatterns: [
 			{
 				protocol: "https",
-				hostname: "sportfreunde-nofels.s3.eu-north-1.amazonaws.com",
+				hostname: "dlxdegv87k9ck.cloudfront.net",
 				port: "",
 				pathname: "/**",
 				search: "",
