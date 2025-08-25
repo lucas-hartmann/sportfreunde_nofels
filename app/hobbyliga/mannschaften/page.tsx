@@ -12,46 +12,49 @@ export default function ClubsPage() {
     <span>
       {/* Header */}
       <Header title="HOBBYLIGA MANNSCHAFTEN" image="/bsc/background.JPG" />
+
       <main className="min-h-screen bg-neutral-50 py-12 px-6">
         <div className="max-w-6xl mx-auto">
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {clubList.map((club) => {
               const CardInner = (
-                <div className="group block rounded-2xl bg-white shadow-xs hover:shadow-lg transition-shadow border border-neutral-100 overflow-hidden">
-                  <div className="flex items-center gap-4 p-4">
-                    <div className="shrink-0">
-                      <div className="relative w-20 h-20 rounded-xl overflow-hidden bg-neutral-100 flex items-center justify-center">
-                        <Image
-                          src={club.logo}
-                          alt={`${club.name} Logo`}
-                          fill
-                          sizes="80px"
-                          style={{ objectFit: "contain" }}
-                        />
-                      </div>
+                <div className="group block rounded-2xl bg-white shadow-xs hover:shadow-lg transition-shadow border border-neutral-100 overflow-hidden flex flex-col">
+                  {/* Top section */}
+                  <div className="flex flex-col items-center p-4 gap-3">
+                    <div className="relative w-20 h-20 rounded-xl overflow-hidden bg-neutral-100 flex items-center justify-center">
+                      <Image
+                        src={club.logo}
+                        alt={`${club.name} Logo`}
+                        fill
+                        sizes="80px"
+                        style={{ objectFit: "contain" }}
+                      />
                     </div>
 
-                    <div className="flex-1">
-                      <h2 className="text-lg font-medium">{club.name}</h2>
-                      <p className="text-sm text-neutral-600 mt-1">
-                        {club.description}
-                      </p>
-                    </div>
+                    <h2 className="text-lg font-medium text-center">{club.name}</h2>
+                    <p className="text-sm text-neutral-600 text-center">{club.description}</p>
 
-                    <div className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <span className="text-sm text-primary-600">
+                    {club.website && (
+                      <span className="mt-2 text-sm text-primary-600">
                         Zur Website ↗
                       </span>
-                    </div>
+                    )}
                   </div>
 
-                  <div className="border-t border-neutral-100 px-4 py-3 text-xs text-neutral-500">
-                    Klick öffnet die Vereinsseite in einem neuen Tab
+                  {/* Hover text only for this card */}
+                  {club.text && (
+                    <div className="px-4 pb-4 text-sm text-neutral-600 transition-all duration-500 ease-in-out max-h-0 opacity-0 group-hover:max-h-[1000px] group-hover:opacity-100 overflow-hidden">
+                      {club.text}
+                    </div>
+                  )}
+
+                  {/* Footer */}
+                  <div className="border-t border-neutral-100 px-4 py-3 text-xs text-neutral-500 text-center">
+                    Klicke um die Vereinsseite in einem neuen Tab zu öffnen
                   </div>
                 </div>
               );
 
-              // Wenn website vorhanden -> <a>, sonst nur <div>
               return club.website ? (
                 <a
                   key={club.id}
