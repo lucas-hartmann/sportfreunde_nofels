@@ -1,7 +1,6 @@
 "use server";
 
-import fs from "fs";
-import path from "path";
+import galleries from "@/data/galleries.json";
 
 export interface AwsImage {
 	thumbUrl: string;
@@ -12,16 +11,8 @@ export interface AwsImage {
 }
 
 export async function listImages(folder: string): Promise<AwsImage[]> {
-	const filePath = path.resolve(process.cwd(), "public", "galleries.json");
+	const allImages = galleries[folder];
 
-	if (!fs.existsSync(filePath)) {
-		console.warn(`JSON file not found: ${filePath}`);
-		return [];
-	}
-
-	const fileContent = fs.readFileSync(filePath, "utf-8");
-	const allGalleries = JSON.parse(fileContent);
-	const allImages = allGalleries[folder];
 	// Filter images by folder if needed
 	const filteredImages = allImages.filter((image) =>
 		image.url.includes(`/${folder}/`),

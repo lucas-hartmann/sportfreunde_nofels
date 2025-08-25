@@ -57,7 +57,7 @@ async function main() {
         console.log(`Processing gallery: ${folder}`);
         result[folder] = await listImages(folder);
     }
-    const outputPath = path.join(process.cwd(), "public", "galleries.json");
+    const outputPath = path.join(process.cwd(), "data", "galleries.json");
     fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
     console.log(`Gallery JSON created at ${outputPath}`);
     console.log("hallo");
