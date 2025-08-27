@@ -1,6 +1,7 @@
 import { Github, Heart } from "lucide-react";
 import Link from "next/link";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+import Datenschutz from "../datenschutz/page";
 
 export default function Footer() {
   return (
