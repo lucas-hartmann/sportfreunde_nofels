@@ -8,7 +8,7 @@ type Sponsor = {
 
 const sponsors: Sponsor[] = [
   { name: "Schöch's Meathouse GmbH", image: "/sponsors/meathouse.webp", link: "https://meathouse.at/" },
-  { name: "Kapfgarage Lampert & Dolinar OG", image: "/sponsors/supergau.webp", link: "https://findmywerkstatt.at/Werkstatt/Kapfgarage-Lampert-Dolinar/4352" },
+  { name: "Kapfgarage Lampert & Dolinar OG", image: "/sponsors/kapfgarage.webp", link: "https://findmywerkstatt.at/Werkstatt/Kapfgarage-Lampert-Dolinar/4352" },
   { name: "Raiffeisenbank Montfort", image: "/sponsors/raiffeisen.webp", link: "https://www.raiffeisen.at/vorarlberg/raiba-montfort/de/privatkunden.html" },
   { name: "AM Physio", image: "/sponsors/amphysio.webp", link: "https://amphysio.at/" },
   { name: "SuperGau GmbH", image: "/sponsors/supergau.webp", link: "https://www.supergau.com/" },
