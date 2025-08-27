@@ -2,6 +2,7 @@
 
 import React from "react";
 import Header from "../components/Header";
+import ContactsSection from "../components/ContactsSection";
 
 export default function ImpressumPage() {
   return (
@@ -9,40 +10,24 @@ export default function ImpressumPage() {
       {/* Header */}
       <Header title="Impressum" image="/headers/datenschutz.webp" />
 
-      <main className="max-w-4xl mx-auto px-4 py-10 text-gray-800">
+      <main className="ml-16 mr-16 mx-auto px-4 py-10 text-gray-800">
         <h1 className="text-3xl font-bold mb-6">Impressum</h1>
 
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold">Vereinsangaben</h2>
           <p>
             Sportfreunde Nofels <br />
-            Nofels, Vorarlberg <br />
-            Österreich
+            6800 Feldkrich, Nofels<br />
+            Österreich, Vorarlberg
           </p>
         </section>
 
         <section className="mt-8 space-y-4">
           <h2 className="text-2xl font-semibold">Kontakt</h2>
-          <p>
-            E-Mail:{" "}
-            <a
-              href="mailto:info@sportfreunde-nofels.at"
-              className="text-blue-600 hover:underline"
-            >
-              info@sportfreunde-nofels.at
-            </a>
-            <br />
-            Telefon: +43 [Telefonnummer einfügen] 
-          </p>
-        </section>
 
-        <section className="mt-8 space-y-4">
-          <h2 className="text-2xl font-semibold">Vertretungsberechtigte Personen</h2>
-          <p>
-            Obmann: [Name einfügen] <br />
-            Schriftführer: [Name einfügen] <br />
-            Kassier: [Name einfügen]
-          </p>
+          <div className="-mt-22">
+          <ContactsSection></ContactsSection>
+          </div>
         </section>
 
         <section className="mt-8 space-y-4">
@@ -75,23 +60,7 @@ export default function ImpressumPage() {
             >
               Ghostbyte GesbR
             </a>{" "}
-            programmiert.
-          </p>
-        </section>
-
-        <section className="mt-8 space-y-4">
-          <h2 className="text-2xl font-semibold">Streitschlichtung</h2>
-          <p>
-            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
-            <br />
-            <a
-              href="https://ec.europa.eu/consumers/odr/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
-            >
-              https://ec.europa.eu/consumers/odr/
-            </a>
+            entwickelt.
           </p>
         </section>
       </main>

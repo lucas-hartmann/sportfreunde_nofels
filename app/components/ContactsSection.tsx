@@ -56,10 +56,7 @@ export default function ContactsSection() {
   };
 
   return (
-    <div className="container mx-auto px-4 mt-30">
-      <h2 className="text-center font-bold text-4xl mb-6 mt-10">
-        Unsere Kontakte
-      </h2>
+    <div className="container mx-auto px-4 mt-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {items.map((item) => (
           <div
