@@ -11,7 +11,7 @@ export default function ClubsPage() {
   return (
     <span>
       {/* Header */}
-      <Header title="HOBBYLIGA MANNSCHAFTEN" image="/bsc/background.JPG" />
+      <Header title="HOBBYLIGA MANNSCHAFTEN" image="/headers/mannschaften.webp" />
 
       <main className="min-h-screen bg-neutral-50 py-12 px-6">
         <div className="max-w-6xl mx-auto">

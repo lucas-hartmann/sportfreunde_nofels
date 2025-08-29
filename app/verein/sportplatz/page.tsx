@@ -7,7 +7,7 @@ const Ort: React.FC = () => {
   return (
     <span>
       {/* Header */}
-      <Header title="UNSER STANDORT" image="/bsc/background.JPG" />
+      <Header title="UNSER STANDORT" image="/headers/sportplatz.webp" />
       <div className="max-w-5xl mx-auto px-4 py-12 space-y-12">
         {/* Trainingsplatz */}
         <section className="bg-white rounded-2xl shadow-sm p-6 space-y-4">

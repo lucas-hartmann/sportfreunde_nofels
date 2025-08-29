@@ -13,7 +13,7 @@ const BeachsoccerCup = () => {
           loop
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
-          poster="/bsc/background.JPG"
+          poster="/headers/anmeldung.webp"
         >
           <source src="/bsc/background.MP4" type="video/mp4" />
           Dein Browser unterstützt das Video-Tag nicht.

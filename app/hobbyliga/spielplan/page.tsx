@@ -32,7 +32,7 @@ export default function Spielplan() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <Header title="HOBBYLIGA SPIELPLAN 2025" image="/bsc/background.JPG" />
+      <Header title="HOBBYLIGA SPIELPLAN 2025" image="/headers/spielplan.webp" />
 
       {/* Tabs & Toggle */}
       <div className="container mx-auto px-4 py-6 space-y-6">

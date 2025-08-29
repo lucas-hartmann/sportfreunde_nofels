@@ -8,7 +8,7 @@ export default function Verein() {
     {
       title: "Geschichte",
       href: "/verein/geschichte",
-      image: "/bsc/background.JPG",
+      image: "/headers/geschichte.webp",
       icon: CalendarCheckIcon,
       description: "",
       cta: "Zum Geschichte",
@@ -16,7 +16,7 @@ export default function Verein() {
     {
       title: "Spieler",
       href: "/verein/spieler",
-      image: "/bsc/background.JPG",
+      image: "/headers/spieler.webp",
       icon: UsersIcon,
       description: "",
       cta: "Zu den Spielern",
@@ -24,7 +24,7 @@ export default function Verein() {
     {
       title: "Altherren",
       href: "/verein/altherren",
-      image: "/bsc/background.JPG",
+      image: "/headers/altherren.webp",
       icon: UsersIcon,
       description: "",
       cta: "Zu den Altherren",
@@ -32,7 +32,7 @@ export default function Verein() {
     {
       title: "Sportplatz",
       href: "/verein/sportplatz",
-      image: "/bsc/background.JPG",
+      image: "/headers/sportplatz.webp",
       icon: MapPinIcon,
       description: "",
       cta: "Zum Sportplatz",
@@ -42,7 +42,7 @@ export default function Verein() {
   return (
     <span>
       {/* Header */}
-      <Header title="VEREIN" image="/bsc/background.JPG" />
+      <Header title="VEREIN" image="/headers/verein.webp" />
       <main className="container mx-auto px-4 py-30">
         <Headline
           pill="Verein Übersicht"
