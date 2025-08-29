@@ -45,4 +45,11 @@
 
 }
 
-@layer utilities {}
+@layer utilities {
+  .font-alfa {
+    font-family: var(--font-alfa);
+  }
+  .font-montserrat {
+    font-family: var(--font-montserrat);
+  }
+}
