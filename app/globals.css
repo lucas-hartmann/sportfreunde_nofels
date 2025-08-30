@@ -57,3 +57,12 @@
 .section-heading {
   @apply text-3xl sm:text-4xl font-extrabold text-[#781c12] border-b-4 border-[#a62c1a] inline-block pb-1 mb-12;
 }
+
+/* Smooth blend at the top of a section */
+.section-blend::before {
+  content: '';
+  display: block;
+  height: 4rem; /* height of the blend */
+  width: 100%;
+  background: linear-gradient(to top, var(--section-bg, white), var(--prev-bg, #e5e7eb));
+}

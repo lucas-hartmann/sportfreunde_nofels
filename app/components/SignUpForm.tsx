@@ -42,7 +42,7 @@ export default function SignUpForm() {
       className="max-w-4xl mx-auto py-20 px-6 bg-white rounded-xl shadow-lg text-gray-900"
     >
       <h2 className="text-4xl font-extrabold text-[#781c12] text-center">
-        Team-Anmeldung
+        Jetzt Team Anmelden!
       </h2>
       <p className="text-center mb-10 text-gray-500 text-lg transition">
         Die Anmeldung wird erst mit der Überweisung des Nenngeldes finalisiert.

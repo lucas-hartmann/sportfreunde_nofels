@@ -3,6 +3,8 @@
 import SignUpForm from "@/app/components/SignUpForm";
 import React from "react";
 import { Download } from "lucide-react";
+import HighlightSection from "@/app/components/HighlightSection";
+
 
 const BeachsoccerCup = () => {
   return (
@@ -78,7 +80,7 @@ const BeachsoccerCup = () => {
       </section>
 
       {/* Gallery Section */}
-      <section className="bg-gray-200 py-16 px-6">
+      <section className="bg-gray-200 mx-auto py-16 px-6">
         <h2 className="section-heading text-center md:text-left md:ml-12">
           Galerie
         </h2>
@@ -95,42 +97,22 @@ const BeachsoccerCup = () => {
         </div>
       </section>
 
-      {/* Highlights Section */}
-      <section className="bg-white py-16 px-6">
-        <h2 className="section-heading text-center md:text-left md:ml-12">
-          Highlights
+      {/* Highlight Section */}
+      <section className="bg-white mx-auto py-16 px-6">
+        <h2 className="section-heading text-center md:text-left md:ml-12 mb-8">
+            Highlights
         </h2>
-        <div className="max-w-4xl mx-auto space-y-6 text-base sm:text-lg text-gray-800">
-          <p>⚽ <strong>Fußballturnier im Sand:</strong> Zeige Geschick und Teamgeist – spiele um den Sieg!</p>
-          <p>🎈 <strong>Hüpfburg:</strong> Ein Paradies zum Austoben für Kinder.</p>
-          <p>🎨 <strong>Kinderschminken:</strong> Werde zum Tiger, Fee oder Superheld!</p>
-          <p>
-            🍔 <strong>Leckeres vom Grill:</strong> Genieße Spezialitäten vom{" "}
-            <a
-              className="text-[#781c12] underline"
-              href="https://meathouse.at/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Meathouse Schöch
-            </a>.
-          </p>
-          <p>🏊 <strong>Pools zum Abkühlen:</strong> Erfrischung zwischen den Spielen.</p>
-          <p>🌴 <strong>Strandliegen:</strong> Entspannen wie am brasilianischen Strand!</p>
-          <p className="mt-6 font-semibold text-[#781c12] text-xl">
-            🎁 Tolle Preise warten auf dich! Gewinne Strandzubehör, Staubsauger,
-            Restaurant-Gutscheine u. v. m.!
-          </p>
-        </div>
+        <HighlightSection/>
       </section>
 
       {/* Sign-Up Form */}
       <section id="anmeldung" className="bg-gray-200 mx-auto py-16 px-6"> 
         <h2 className="section-heading text-center md:text-left md:ml-12 mb-8">
-          Team Anmeldung
+          Anmeldung
         </h2>
         <SignUpForm />
       </section>
+      
     </div>
   );
 };
