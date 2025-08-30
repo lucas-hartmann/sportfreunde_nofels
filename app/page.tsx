@@ -7,6 +7,7 @@ import ContactsSection from "./components/ContactsSection";
 export default function Home() {
   return (
     <main>
+
       <section className="h-screen flex relative items-center justify-center">
         <Image
           className="absolute inset-0 w-full h-full object-cover"
@@ -25,7 +26,7 @@ export default function Home() {
             height={100}
             className="w-36 h-36 sm:w-40 sm:h-40"
           />
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white">
+          <h1 className=" font-alfa text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white">
             SPORTFREUNDE
             <span className="block text-primary drop-shadow-lg">NOFELS</span>
           </h1>
@@ -36,6 +37,9 @@ export default function Home() {
 
       <QuoteSection />
 
+      <h2 className="text-center font-bold text-4xl mt-20">
+        Unsere Kontakte
+      </h2>
       <ContactsSection />
 
       <SponsorsSection />

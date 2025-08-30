@@ -1,6 +1,8 @@
 "use client";
 
+import SignUpForm from "@/app/components/SignUpForm";
 import React from "react";
+import { Download } from "lucide-react";
 
 const BeachsoccerCup = () => {
   return (
@@ -13,35 +15,33 @@ const BeachsoccerCup = () => {
           loop
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
-          poster="/bsc/background.JPG"
+          poster="/headers/anmeldung.webp"
         >
           <source src="/bsc/background.MP4" type="video/mp4" />
           Dein Browser unterstützt das Video-Tag nicht.
         </video>
 
-        <div className="absolute inset-0 bg-black opacity-60"></div>
+        <div className="absolute inset-0 bg-black/60"></div>
 
-        <h1 className="relative z-10 text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg max-w-4xl leading-tight">
+        <h1 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg leading-tight max-w-4xl">
           Beachsoccer Cup 2025
         </h1>
-        <p className="relative z-10 mt-4 max-w-2xl text-lg md:text-xl text-white font-semibold drop-shadow-sm">
+        <p className="relative z-10 mt-4 max-w-2xl text-base sm:text-lg md:text-xl text-white font-semibold drop-shadow-sm">
           Sonne, Sand und spannende Matches – das größte Beachsoccer-Turnier in
           Vorarlberg wartet auf dich!
         </p>
         <a
           href="#anmeldung"
-          className="relative z-10 mt-10 inline-block border-2 border-white text-white font-semibold text-xl py-3 px-8 rounded-xl hover:bg-white hover:text-[#781c12] transition"
+          className="relative z-10 mt-10 inline-block border-2 border-white text-white font-semibold text-lg sm:text-xl py-3 px-6 sm:px-8 rounded-xl hover:bg-white hover:text-[#781c12] transition"
         >
           Jetzt Team anmelden
         </a>
       </section>
 
       {/* Info + Video Section */}
-      <section className="max-w-6xl mx-auto py-16 px-6 md:px-0 grid md:grid-cols-2 gap-12 items-center">
+      <section className="max-w-6xl mx-auto py-16 px-6 grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <h2 className="text-4xl font-extrabold text-[#781c12] mb-6 border-b-4 border-[#a62c1a] inline-block pb-1">
-            Veranstaltungsdetails
-          </h2>
+          <h2 className="section-heading">Veranstaltungsdetails</h2>
           <p className="text-lg mb-4">
             <strong>Datum:</strong> 12. Juli 2025
             <br />
@@ -50,16 +50,17 @@ const BeachsoccerCup = () => {
           </p>
           <p className="mb-6 leading-relaxed">
             Ein Tag voller Action, Sport und Spaß für alle Beachsoccer-Fans.
-            Genieße spannende Matches, coole Musik, leckeres Essen und eine
-            fantastische Atmosphäre direkt am Sand.
+            Genieße spannende Matches, gute Musik, leckeres Essen und eine
+            fantastische Atmosphäre direkt am Strand von Nofels.
           </p>
 
           <a
             href="/bsc/A4_Turnierausschreibung_2025.pdf"
             download
-            className="inline-block bg-[#781c12] text-white px-6 py-3 rounded-md shadow-sm hover:bg-[#a62c1a] transition"
+            className="inline-flex items-center gap-2 bg-[#781c12] text-white px-6 py-3 rounded-lg shadow-sm hover:bg-[#a62c1a] transition"
           >
-            Turnierregeln herunterladen
+            <span>Turnier Regeln Herunterladen</span>
+            <Download className="w-5 h-5" />
           </a>
         </div>
 
@@ -77,8 +78,8 @@ const BeachsoccerCup = () => {
       </section>
 
       {/* Gallery Section */}
-      <section className="bg-[#f9fafb] py-16 px-6">
-        <h2 className="text-4xl font-extrabold text-[#781c12] max-w-6xl ml-[25%] md:ml-[25%] mb-12 border-b-4 border-[#a62c1a] inline-block pb-1 text-left md:text-left text-center">
+      <section className="bg-gray-200 py-16 px-6">
+        <h2 className="section-heading text-center md:text-left md:ml-12">
           Galerie
         </h2>
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
@@ -87,7 +88,7 @@ const BeachsoccerCup = () => {
               <img
                 src={`/bsc/images/pic${i + 1}.jpg`}
                 alt={`Beachsoccer Bild ${i + 1}`}
-                className="w-full h-48 object-cover"
+                className="w-full h-48 object-cover hover:scale-105 transition"
               />
             </div>
           ))}
@@ -96,21 +97,13 @@ const BeachsoccerCup = () => {
 
       {/* Highlights Section */}
       <section className="bg-white py-16 px-6">
-        <h2 className="text-4xl font-extrabold text-[#781c12] max-w-6xl ml-[25%] md:ml-[25%] mb-12 border-b-4 border-[#a62c1a] inline-block pb-1 text-left md:text-left text-center">
+        <h2 className="section-heading text-center md:text-left md:ml-12">
           Highlights
         </h2>
-        <div className="max-w-4xl mx-auto space-y-6 text-lg text-gray-800">
-          <p>
-            ⚽ <strong>Fußballturnier im Sand:</strong> Zeige Geschick und
-            Teamgeist – spiele um den Sieg!
-          </p>
-          <p>
-            🎈 <strong>Hüpfburg:</strong> Ein Paradies zum Austoben für Kinder.
-          </p>
-          <p>
-            🎨 <strong>Kinderschminken:</strong> Werde zum Tiger, Fee oder
-            Superheld!
-          </p>
+        <div className="max-w-4xl mx-auto space-y-6 text-base sm:text-lg text-gray-800">
+          <p>⚽ <strong>Fußballturnier im Sand:</strong> Zeige Geschick und Teamgeist – spiele um den Sieg!</p>
+          <p>🎈 <strong>Hüpfburg:</strong> Ein Paradies zum Austoben für Kinder.</p>
+          <p>🎨 <strong>Kinderschminken:</strong> Werde zum Tiger, Fee oder Superheld!</p>
           <p>
             🍔 <strong>Leckeres vom Grill:</strong> Genieße Spezialitäten vom{" "}
             <a
@@ -120,106 +113,23 @@ const BeachsoccerCup = () => {
               rel="noopener noreferrer"
             >
               Meathouse Schöch
-            </a>
-            .
+            </a>.
           </p>
-          <p>
-            🏊 <strong>Pools zum Abkühlen:</strong> Erfrischung zwischen den
-            Spielen.
-          </p>
-          <p>
-            🌴 <strong>Strandliegen:</strong> Entspannen wie am brasilianischen
-            Strand!
-          </p>
+          <p>🏊 <strong>Pools zum Abkühlen:</strong> Erfrischung zwischen den Spielen.</p>
+          <p>🌴 <strong>Strandliegen:</strong> Entspannen wie am brasilianischen Strand!</p>
           <p className="mt-6 font-semibold text-[#781c12] text-xl">
-            Tolle Preise warten auf dich! Gewinne Strandzubehör, Staubsauger,
-            Restaurant-Gutscheine u. v. m.!
+            🎁 Tolle Preise warten auf dich! Gewinne Strandzubehör, Staubsauger,
+            Restaurant-Gutscheine u. v. m.!
           </p>
         </div>
       </section>
 
       {/* Sign-Up Form */}
-      <section
-        id="anmeldung"
-        className="max-w-4xl mx-auto py-20 px-6 bg-white rounded-xl shadow-lg text-gray-900"
-      >
-        <h2 className="text-4xl font-extrabold mb-10 text-[#781c12] text-center">
-          Team-Anmeldung
+      <section id="anmeldung" className="bg-gray-200 mx-auto py-16 px-6"> 
+        <h2 className="section-heading text-center md:text-left md:ml-12 mb-8">
+          Team Anmeldung
         </h2>
-
-        <form
-          className="space-y-8"
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert("Danke für deine Anmeldung! Wir melden uns bald bei dir.");
-          }}
-        >
-          {[
-            {
-              id: "name",
-              label: "Name",
-              type: "text",
-              placeholder: "Max Mustermann",
-            },
-            {
-              id: "email",
-              label: "E-Mail",
-              type: "email",
-              placeholder: "deine@email.com",
-            },
-            {
-              id: "phone",
-              label: "Telefonnummer",
-              type: "tel",
-              placeholder: "+43 660 1234567",
-            },
-            {
-              id: "teamName",
-              label: "Teamname",
-              type: "text",
-              placeholder: "Name deines Teams",
-            },
-          ].map(({ id, label, type, placeholder }) => (
-            <div key={id}>
-              <label
-                htmlFor={id}
-                className="block mb-2 font-semibold text-gray-800"
-              >
-                {label}
-              </label>
-              <input
-                name={id}
-                id={id}
-                type={type}
-                placeholder={placeholder}
-                required
-                className="w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-hidden focus:ring-2 focus:ring-[#781c12]"
-              />
-            </div>
-          ))}
-
-          <div>
-            <label
-              htmlFor="message"
-              className="block mb-2 font-semibold text-gray-800"
-            >
-              Nachricht
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              placeholder="Was du uns noch sagen möchtest..."
-              className="w-full rounded-md border border-gray-300 px-4 py-3 h-32 resize-none focus:outline-hidden focus:ring-2 focus:ring-[#781c12]"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-[#781c12] text-white font-extrabold py-4 rounded-xl text-xl hover:bg-[#a62c1a] transition"
-          >
-            Jetzt anmelden
-          </button>
-        </form>
+        <SignUpForm />
       </section>
     </div>
   );

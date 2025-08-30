@@ -9,7 +9,7 @@ export default function Beachsoccer2025() {
             {/* Header */}
             <Header
                 title="Beachsoccer 2025"
-                image="/bsc/background.JPG"
+                image="/headers/bsc25.webp"
             />
             <main className="min-h-screen bg-neutral-50 py-12 px-6">
                 <ImageGallery folder="beachsoccer2025" />

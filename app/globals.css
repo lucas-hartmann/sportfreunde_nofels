@@ -45,4 +45,15 @@
 
 }
 
-@layer utilities {}
+@layer utilities {
+  .font-alfa {
+    font-family: var(--font-alfa);
+  }
+  .font-montserrat {
+    font-family: var(--font-montserrat);
+  }
+}
+
+.section-heading {
+  @apply text-3xl sm:text-4xl font-extrabold text-[#781c12] border-b-4 border-[#a62c1a] inline-block pb-1 mb-12;
+}

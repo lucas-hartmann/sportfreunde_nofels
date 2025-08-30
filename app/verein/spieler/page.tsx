@@ -28,7 +28,7 @@ function PlayerImage({ src, alt }: { src?: string; alt: string }) {
 export default function Spielerliste() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header title="MANNSCHAFT - SF NOFELS" image="/bsc/background.JPG" />
+      <Header title="MANNSCHAFT - SF NOFELS" image="/headers/spieler.webp" />
 
       {/* Spieler Grid */}
       <div className="container mx-auto px-4 py-8">

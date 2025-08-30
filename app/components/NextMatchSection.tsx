@@ -36,7 +36,7 @@ export default function NextMatchSection() {
   if (!nextMatch) return null;
 
   return (
-    <section className="flex flex-col items-center my-30 px-6 space-y-6 text-center">
+    <section className="flex flex-col items-center my-20 px-6 space-y-6 text-center">
       <Headline
         pill="Nächstes Spiel"
         blackLine="Nächstes Spiel der"

@@ -16,7 +16,7 @@ export default function Hobbyliga() {
     {
       title: "Spielplan",
       href: "/hobbyliga/spielplan",
-      image: "/bsc/background.JPG",
+      image: "/headers/spielplan.webp",
       icon: CalendarCheckIcon,
       description:
         "Alle Spiele der aktuellen Saison im Überblick. Termine, Gegner und Spielorte auf einen Blick.",
@@ -25,7 +25,7 @@ export default function Hobbyliga() {
     {
       title: "Tabelle",
       href: "/hobbyliga/tabelle",
-      image: "/bsc/background.JPG",
+      image: "/headers/tabelle.webp",
       icon: BarChart3Icon,
       description:
         "Aktuelle Tabellensituation mit Punkten, Toren und Platzierungen aller Teams.",
@@ -34,7 +34,7 @@ export default function Hobbyliga() {
     {
       title: "Mannschaften",
       href: "/hobbyliga/mannschaften",
-      image: "/bsc/background.JPG",
+      image: "/headers/mannschaften.webp",
       icon: UsersIcon,
       description: "Alle teilnehmenden Teams der Hobbyliga",
       cta: "Zu den Mannschaften",
@@ -43,7 +43,7 @@ export default function Hobbyliga() {
 
   return (
     <span>
-      <Header title="HOBBYLIGA" image="/bsc/background.JPG" />
+      <Header title="HOBBYLIGA" image="/headers/hobbyliga.webp" />
       <main className="container mx-auto px-4 py-30">
         <Headline
           pill="Hobbyliga Übersicht"
