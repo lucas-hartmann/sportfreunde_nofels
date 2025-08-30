@@ -24,7 +24,7 @@ const BeachsoccerCup = () => {
         <div className="absolute inset-0 bg-black/60"></div>
 
         <h1 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg leading-tight max-w-4xl">
-          Beachsoccer Cup 2025
+          Beachsoccer Cup 2026
         </h1>
         <p className="relative z-10 mt-4 max-w-2xl text-base sm:text-lg md:text-xl text-white font-semibold drop-shadow-sm">
           Sonne, Sand und spannende Matches – das größte Beachsoccer-Turnier in
@@ -86,7 +86,7 @@ const BeachsoccerCup = () => {
           {[...Array(8)].map((_, i) => (
             <div key={i} className="rounded-lg overflow-hidden shadow-md">
               <img
-                src={`/bsc/images/pic${i + 1}.jpg`}
+                src={`/bsc/images/pic${i + 1}.webp`}
                 alt={`Beachsoccer Bild ${i + 1}`}
                 className="w-full h-48 object-cover hover:scale-105 transition"
               />
