@@ -105,6 +105,9 @@ export default function Tabelle() {
             </tbody>
           </table>
         </div>
+        <p className="mt-6 text-center mb-10 text-gray-500 text-lg transition">
+          Die Sportfreunde Nofels sind dieses Jahr nicht die Veranstalter der Hobbyliga. <br></br> Ergebnisse sind können falsch oder veraltet sein.
+        </p>
       </div>
     </div>
   );

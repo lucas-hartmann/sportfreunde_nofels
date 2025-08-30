@@ -25,7 +25,7 @@ export default function ImpressumPage() {
         <section className="mt-8 space-y-4">
           <h2 className="text-2xl font-semibold">Kontakt</h2>
 
-          <div className="-mt-22">
+          <div className="">
           <ContactsSection></ContactsSection>
           </div>
         </section>

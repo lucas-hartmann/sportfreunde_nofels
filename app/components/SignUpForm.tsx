@@ -81,10 +81,13 @@ export default function SignUpForm() {
             className="w-full rounded-md border border-gray-300 px-4 py-3 h-32 resize-none focus:outline-hidden focus:ring-2 focus:ring-[#781c12] transition"
           />
         </div>
-
+        <p className="text-center mb-10 text-gray-500 text-lg transition">
+          Es ist noch zu früh! Wir nehmen Anmeldungen erst ab April an. <br></br>Danke für euer Interesse!
+        </p>
         <button
           type="submit"
-          disabled={loading}
+          disabled={true}
+          // disabled={loading}
           className="w-full bg-[#781c12] text-white font-extrabold py-4 rounded-xl text-xl hover:bg-[#a62c1a] transition disabled:opacity-50"
         >
           {loading ? "Senden..." : "Jetzt anmelden"}
