@@ -1,4 +1,4 @@
-"use client"; // ✅ Make this a client component
+"use client";
 import { AwsImage, listImages } from "@/lib/images";
 import { url } from "inspector";
 import Image from "next/image";
