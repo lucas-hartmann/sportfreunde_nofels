@@ -66,3 +66,9 @@
   width: 100%;
   background: linear-gradient(to top, var(--section-bg, white), var(--prev-bg, #e5e7eb));
 }
+
+.vertical-timeline::before {
+  background: #7b1e12 !important; 
+  width: 4px !important;
+}
+

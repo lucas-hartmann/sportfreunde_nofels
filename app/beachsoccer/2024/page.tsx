@@ -7,6 +7,7 @@ export default function Gallery2024(){
             <Header
                 title="Beachsoccer Cup 2024"
                 image="/headers/bsc24.webp"
+                position="top"
             />
         </span>
     );

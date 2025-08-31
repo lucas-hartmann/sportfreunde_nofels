@@ -64,7 +64,7 @@ export default function Tabelle() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <Header title="HOBBYLIGA TABELLE 2025" image="/headers/tabelle.webp" />
+      <Header title="TABELLE 2025" image="/headers/tabelle.webp" position="100% 100%" />
 
       {/* Tabelle */}
       <div className="container mx-auto px-4 py-8">
@@ -106,7 +106,7 @@ export default function Tabelle() {
           </table>
         </div>
         <p className="mt-6 text-center mb-10 text-gray-500 text-lg transition">
-          Die Sportfreunde Nofels sind dieses Jahr nicht die Veranstalter der Hobbyliga. <br></br> Ergebnisse sind können falsch oder veraltet sein.
+          Die Sportfreunde Nofels sind dieses Jahr nicht die Veranstalter der Hobbyliga. <br></br> Ergebnisse können falsch oder veraltet sein.
         </p>
       </div>
     </div>
