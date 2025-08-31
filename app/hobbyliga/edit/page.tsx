@@ -1,0 +1,20 @@
+// app/hobbyliga/edit/page.tsx
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
+export default async function HobbyligaEditPage() {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/auth/signin?callbackUrl=/hobbyliga/edit");
+  }
+
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold">Hobbyliga Edit</h1>
+      <p>Only logged-in users can see this page ✅</p>
+      {/* Your edit form goes here */}
+    </div>
+  );
+}
