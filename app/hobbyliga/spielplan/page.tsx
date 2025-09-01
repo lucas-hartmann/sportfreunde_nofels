@@ -34,8 +34,9 @@ export default function Spielplan() {
       {/* Header */}
       <Header title="SPIELPLAN 2025" image="/headers/spielplan.webp" />
 
-      {/* Tabs & Toggle */}
-      <div className="container mx-auto px-4 py-6 space-y-6">
+    {/* Tabs & Toggle */}
+    <div className="container mx-auto px-4 py-6 space-y-6">
+      <div className="flex flex-wrap justify-between items-center gap-4">
         <div className="flex flex-wrap gap-4">
           <button
             onClick={() => setActiveTab("all")}
@@ -60,7 +61,7 @@ export default function Spielplan() {
         </div>
 
         {/* Toggle vergangene Spiele */}
-        <div className="text-right">
+        <div className="flex-shrink-0">
           <button
             onClick={() => setShowPast(!showPast)}
             className="text-sm font-medium text-blue-600 hover:underline"
@@ -69,6 +70,7 @@ export default function Spielplan() {
               ? "Vergangene Spiele ausblenden"
               : "Vergangene Spiele anzeigen"}
           </button>
+        </div>
         </div>
 
         {/* Matches */}
@@ -115,7 +117,7 @@ export default function Spielplan() {
                           <td className="px-4 py-3">{match.time}</td>
                           <td className="px-4 py-3">{match.location}</td>
                           <td className="px-4 py-3 text-gray-500">
-                            {match.note}
+                            {match.score ? `${match.score.home} : ${match.score.away}` : "-"}
                           </td>
                         </tr>
                       ))}
@@ -136,7 +138,7 @@ export default function Spielplan() {
                   <th className="px-4 py-3">Datum</th>
                   <th className="px-4 py-3">Uhrzeit</th>
                   <th className="px-4 py-3">Ort</th>
-                  <th className="px-4 py-3">Bemerkung</th>
+                  <th className="px-4 py-3">Ergebnis</th>
                 </tr>
               </thead>
               <tbody>
@@ -171,7 +173,9 @@ export default function Spielplan() {
                       </td>
                       <td className="px-4 py-3">{match.time}</td>
                       <td className="px-4 py-3">{match.location}</td>
-                      <td className="px-4 py-3 text-gray-500">{match.note}</td>
+                      <td className="px-4 py-3 text-gray-500">
+                        {match.score ? `${match.score.home} : ${match.score.away}` : "-"}
+                      </td>
                     </tr>
                   ))}
               </tbody>
