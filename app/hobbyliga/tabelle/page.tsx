@@ -1,66 +1,89 @@
 "use client";
 
-import Image from "next/image";
 import Header from "../../components/Header";
+import { matchdays } from "@/data/spielplan2025";
 
-const leagueData = [
-  {
-    platz: 1,
-    club: "SF Nofels",
-    spiele: 4,
-    tore: 17,
-    gegentore: 4,
-    diff: 13,
-    punkte: 12,
-  },
-  {
-    platz: 2,
-    club: "FC Viktorsberg",
-    spiele: 4,
-    tore: 21,
-    gegentore: 13,
-    diff: 8,
-    punkte: 7,
-  },
-  {
-    platz: 3,
-    club: "FC Weiler",
-    spiele: 4,
-    tore: 15,
-    gegentore: 13,
-    diff: 2,
-    punkte: 7,
-  },
-  {
-    platz: 4,
-    club: "RW Rankweil",
-    spiele: 4,
-    tore: 14,
-    gegentore: 15,
-    diff: -1,
-    punkte: 4,
-  },
-  {
-    platz: 5,
-    club: "FC Fraxern",
-    spiele: 4,
-    tore: 7,
-    gegentore: 17,
-    diff: -10,
-    punkte: 3,
-  },
-  {
-    platz: 6,
-    club: "FC Übersaxen",
-    spiele: 4,
-    tore: 7,
-    gegentore: 19,
-    diff: -12,
-    punkte: 1,
-  },
-];
+type TeamStats = {
+  club: string;
+  spiele: number;
+  siege: number;
+  unentschieden: number;
+  niederlagen: number;
+  tore: number;
+  gegentore: number;
+  diff: number;
+  punkte: number;
+};
 
 export default function Tabelle() {
+  // collect all clubs
+  const clubs = Array.from(
+    new Set(
+      matchdays.flatMap((md) =>
+        md.matches.flatMap((m) => [m.home, m.away])
+      )
+    )
+  );
+
+  // initialize stats
+  const leagueData: TeamStats[] = clubs.map((club) => ({
+    club,
+    spiele: 0,
+    siege: 0,
+    unentschieden: 0,
+    niederlagen: 0,
+    tore: 0,
+    gegentore: 0,
+    diff: 0,
+    punkte: 0,
+  }));
+
+  // fill stats based on played matches
+  matchdays.forEach((matchday) => {
+    matchday.matches.forEach((match) => {
+      // skip matches without score
+      if (!match.score || !("home" in match.score && "away" in match.score)) return;
+
+      const homeTeam = leagueData.find((t) => t.club === match.home)!;
+      const awayTeam = leagueData.find((t) => t.club === match.away)!;
+      const homeGoals = match.score.home;
+      const awayGoals = match.score.away;
+
+      // update games played
+      homeTeam.spiele += 1;
+      awayTeam.spiele += 1;
+
+      // update goals
+      homeTeam.tore += homeGoals;
+      homeTeam.gegentore += awayGoals;
+      awayTeam.tore += awayGoals;
+      awayTeam.gegentore += homeGoals;
+
+      // goal difference
+      homeTeam.diff = homeTeam.tore - homeTeam.gegentore;
+      awayTeam.diff = awayTeam.tore - awayTeam.gegentore;
+
+      // update points and W/D/L
+      if (homeGoals > awayGoals) {
+        homeTeam.siege += 1;
+        homeTeam.punkte += 3;
+        awayTeam.niederlagen += 1;
+      } else if (homeGoals < awayGoals) {
+        awayTeam.siege += 1;
+        awayTeam.punkte += 3;
+        homeTeam.niederlagen += 1;
+      } else {
+        homeTeam.unentschieden += 1;
+        awayTeam.unentschieden += 1;
+        homeTeam.punkte += 1;
+        awayTeam.punkte += 1;
+      }
+    });
+  });
+
+  // sort by points, then goal difference
+  leagueData.sort((a, b) => b.punkte - a.punkte || b.diff - a.diff);
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -75,6 +98,9 @@ export default function Tabelle() {
                 <th className="px-4 py-3 w-[10%]">Platz</th>
                 <th className="px-4 py-3 w-[30%]">Club</th>
                 <th className="px-4 py-3 w-[10%]">Sp</th>
+                <th className="px-4 py-3 w-[10%]">S</th>
+                <th className="px-4 py-3 w-[10%]">U</th>
+                <th className="px-4 py-3 w-[10%]">N</th>
                 <th className="px-4 py-3 w-[10%]">Tore</th>
                 <th className="px-4 py-3 w-[10%]">Geg</th>
                 <th className="px-4 py-3 w-[10%]">Diff</th>
@@ -84,18 +110,17 @@ export default function Tabelle() {
             <tbody>
               {leagueData.map((team, index) => (
                 <tr
-                  key={index}
+                  key={team.club}
                   className="even:bg-gray-50 border-b last:border-none"
                 >
-                  <td className="px-4 py-3 font-semibold">{team.platz}</td>
-                  <td
-                    className={`px-4 py-3 font-semibold ${
-                      team.club === "SF Nofels" ? "text-red-600" : ""
-                    }`}
-                  >
+                  <td className="px-4 py-3 font-semibold">{index + 1}</td>
+                  <td className={`px-4 py-3 font-semibold ${team.club === "SF Nofels" ? "text-primary" : ""}`}>
                     {team.club}
                   </td>
                   <td className="px-4 py-3">{team.spiele}</td>
+                  <td className="px-4 py-3">{team.siege}</td>
+                  <td className="px-4 py-3">{team.unentschieden}</td>
+                  <td className="px-4 py-3">{team.niederlagen}</td>
                   <td className="px-4 py-3">{team.tore}</td>
                   <td className="px-4 py-3">{team.gegentore}</td>
                   <td className="px-4 py-3">{team.diff}</td>
@@ -105,8 +130,9 @@ export default function Tabelle() {
             </tbody>
           </table>
         </div>
+
         <p className="mt-6 text-center mb-10 text-gray-500 text-lg transition">
-          Die Sportfreunde Nofels sind dieses Jahr nicht die Veranstalter der Hobbyliga. <br></br> Ergebnisse können falsch oder veraltet sein.
+          Die Sportfreunde Nofels sind dieses Jahr nicht die Veranstalter der Hobbyliga. <br /> Ergebnisse können falsch oder veraltet sein.
         </p>
       </div>
     </div>
