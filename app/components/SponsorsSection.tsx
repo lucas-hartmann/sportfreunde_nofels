@@ -17,7 +17,7 @@ const sponsors: Sponsor[] = [
 
 export default function SponsorsSection() {
   return (
-    <section className="my-20 bg-gray-200 py-10">
+    <section className="mt-20 bg-gray-200 py-10">
       <div className="max-w-6xl mx-auto px-6 md:px-10">
         {/* <h2 className="text-2xl font-semibold text-center mb-10">Unsere Sponsoren</h2> */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-8 place-items-center">
