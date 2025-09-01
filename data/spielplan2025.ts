@@ -38,7 +38,7 @@ export const matchdays: Matchday[] = [
         time: "18:30",
         location: "Weiler",
         note: "DO Feiertag",
-        score: null,
+        score: { home: 0, away: 7 },
       },
       {
         home: "FC Übersaxen",
@@ -48,7 +48,7 @@ export const matchdays: Matchday[] = [
         time: "19:00",
         location: "Übersaxen",
         note: "DO Feiertag",
-        score: null,
+        score: { home: 3, away: 2 },
       },
     ],
   },

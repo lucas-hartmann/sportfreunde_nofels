@@ -92,11 +92,11 @@ export default function Spielplan() {
                     <thead className="text-left text-gray-600 border-b">
                       <tr>
                         <th className="px-4 py-3 w-[16%]">Heim</th>
+                        <th className="px-4 py-3 w-[16%]">Ergebnis</th>
                         <th className="px-4 py-3 w-[16%]">Gast</th>
                         <th className="px-4 py-3 w-[20%]">Datum</th>
                         <th className="px-4 py-3 w-[12%]">Uhrzeit</th>
                         <th className="px-4 py-3 w-[20%]">Ort</th>
-                        <th className="px-4 py-3 w-[16%]">Ergebnis</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -108,6 +108,9 @@ export default function Spielplan() {
                           <td className="px-4 py-3 font-semibold">
                             {match.home}
                           </td>
+                          <td className="px-4 py-3 text-gray-500">
+                            {match.score ? `${match.score.home} : ${match.score.away}` : "-"}
+                          </td>
                           <td className="px-4 py-3 font-semibold">
                             {match.away}
                           </td>
@@ -116,9 +119,6 @@ export default function Spielplan() {
                           </td>
                           <td className="px-4 py-3">{match.time}</td>
                           <td className="px-4 py-3">{match.location}</td>
-                          <td className="px-4 py-3 text-gray-500">
-                            {match.score ? `${match.score.home} : ${match.score.away}` : "-"}
-                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -134,11 +134,11 @@ export default function Spielplan() {
                 <tr>
                   <th className="px-4 py-3">Spieltag</th>
                   <th className="px-4 py-3">Heim</th>
+                  <th className="px-4 py-3">Ergebnis</th>
                   <th className="px-4 py-3">Gast</th>
                   <th className="px-4 py-3">Datum</th>
                   <th className="px-4 py-3">Uhrzeit</th>
                   <th className="px-4 py-3">Ort</th>
-                  <th className="px-4 py-3">Ergebnis</th>
                 </tr>
               </thead>
               <tbody>
@@ -156,14 +156,17 @@ export default function Spielplan() {
                       </td>
                       <td
                         className={`px-4 py-3 font-semibold ${
-                          match.home === "SF Nofels" ? "text-red-600" : ""
+                          match.home === "SF Nofels" ? "text-primary" : ""
                         }`}
                       >
                         {match.home}
                       </td>
+                      <td className="px-4 py-3 text-gray-500">
+                        {match.score ? `${match.score.home} : ${match.score.away}` : "-"}
+                      </td>
                       <td
                         className={`px-4 py-3 font-semibold ${
-                          match.away === "SF Nofels" ? "text-red-600" : ""
+                          match.away === "SF Nofels" ? "text-primary" : ""
                         }`}
                       >
                         {match.away}
@@ -173,9 +176,6 @@ export default function Spielplan() {
                       </td>
                       <td className="px-4 py-3">{match.time}</td>
                       <td className="px-4 py-3">{match.location}</td>
-                      <td className="px-4 py-3 text-gray-500">
-                        {match.score ? `${match.score.home} : ${match.score.away}` : "-"}
-                      </td>
                     </tr>
                   ))}
               </tbody>
