@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route"; // adjust path if needed
+import { authOptions } from "@/lib/auth"; // adjust path if needed
 
 export async function GET() {
   const filePath = path.join(process.cwd(), "data", "spielplan2025.json");
