@@ -141,6 +141,14 @@ export default function Footer() {
                     Spielplan
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/auth/signin"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
+                  >
+                    Login
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>

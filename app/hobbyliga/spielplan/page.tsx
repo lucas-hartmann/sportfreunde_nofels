@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../../components/Header";
-import { matchdays } from "@/data/spielplan2025";
 
 function isPast(matchDate: string, matchTime: string): boolean {
   const [day, month, year] = matchDate.split(".");
@@ -20,15 +19,35 @@ function isPast(matchDate: string, matchTime: string): boolean {
 export default function Spielplan() {
   const [activeTab, setActiveTab] = useState("all");
   const [showPast, setShowPast] = useState(false);
+  const [matchdays, setMatchdays] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      const res = await fetch("/api/matchdays");
+      const data = await res.json();
+      setMatchdays(data);
+      setLoading(false);
+    }
+    loadData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Lade Spielplan...</p>
+      </div>
+    );
+  }
 
   const sfNofelsMatches = matchdays.flatMap((matchday) =>
     matchday.matches
       .filter(
-        (match) => match.home === "SF Nofels" || match.away === "SF Nofels"
+        (match: any) => match.home === "SF Nofels" || match.away === "SF Nofels"
       )
-      .map((match) => ({ ...match, matchdayName: matchday.name }))
+      .map((match: any) => ({ ...match, matchdayName: matchday.name }))
   );
-
+  
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}

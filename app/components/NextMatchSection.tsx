@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { CalendarIcon, ClockIcon, MapPinIcon } from "lucide-react";
-import { matchdays } from "@/data/spielplan2025";
+import matchdays from "@/data/spielplan2025.json";  // ✅ import JSON
 import { mannschaften } from "@/data/mannschaften";
 import Headline from "./Headline";
 
@@ -54,7 +54,7 @@ export default function NextMatchSection() {
               height={80}
               className="w-20 h-20"
               alt={nextMatch.home}
-            />{" "}
+            />
             <span className="font-bold mt-3">{nextMatch.home}</span>
           </div>
 
@@ -67,7 +67,7 @@ export default function NextMatchSection() {
               height={80}
               className="w-20 h-20"
               alt={nextMatch.away}
-            />{" "}
+            />
             <span className="font-bold mt-3">{nextMatch.away}</span>
           </div>
         </div>
