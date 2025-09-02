@@ -29,20 +29,17 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
       <body className={`${montserrat.variable} ${alfa.variable} ${font.className}`}>
-        <Navbar />
-        <main className="flex-1">
-          <SessionWrapper>{children}</SessionWrapper>
-        </main>
-        <Footer />
+        <SessionWrapper>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </SessionWrapper>
       </body>
     </html>
   );
 }
+

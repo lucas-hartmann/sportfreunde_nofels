@@ -79,70 +79,83 @@ export default function HobbyligaEditPage() {
 
   return (
     <div className="p-6 mt-20">
-      <h1 className="text-2xl font-bold mb-4">Hobbyliga Edit Scores</h1>
-<form onSubmit={handleSubmit} className="flex flex-col gap-3">
-  <button
-    type="submit"
-    className="bg-blue-600 text-white py-2 px-4 rounded w-36 self-end"
-  >
-    Save Scores
-  </button>
+    <h1 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-800 mb-6">
+      Ergebnis Editor
+    </h1>
 
-  {matchdaysData.map((md) => (
-    <div key={md.id} className="border p-3 rounded-md bg-gray-50">
-      <h2 className="font-semibold mb-2 text-sm">{md.name}</h2>
-      {md.matches.map((match: any, idx: number) => (
-        <div
-          key={idx}
-          className="grid grid-cols-[auto_auto_auto_auto_auto_1fr] items-center gap-2 mb-2 min-h-[40px] sm:min-h-[48px]"
-        >
-          <span className="font-medium text-sm">{match.home}</span>
-          <input
-            type="number"
-            value={match.score?.home ?? ""}
-            onChange={(e) =>
-              handleScoreChange(
-                md.id,
-                idx,
-                "home",
-                e.target.value === "" ? "" : parseInt(e.target.value)
-              )
-            }
-            className="border px-2 py-1.5 text-sm rounded w-14 sm:w-16"
-            min={0}
-          />
-          <span className="text-center text-sm">-</span>
-          <input
-            type="number"
-            value={match.score?.away ?? ""}
-            onChange={(e) =>
-              handleScoreChange(
-                md.id,
-                idx,
-                "away",
-                e.target.value === "" ? "" : parseInt(e.target.value)
-              )
-            }
-            className="border px-2 py-1.5 text-sm rounded w-14 sm:w-16"
-            min={0}
-          />
-          <span className="font-medium text-sm">{match.away}</span>
-          <span className="text-gray-500 text-xs sm:text-sm">
-            ({match.day}, {match.date} {match.time}, {match.location})
-          </span>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-4 max-w-3xl mx-auto mb-28">
+      {matchdaysData.map((md) => (
+        <div key={md.id} className="border border-gray-200 rounded-lg p-4 bg-white shadow-sm">
+          <h2 className="font-semibold mb-3 text-lg text-gray-700">{md.name}</h2>
+
+          <div className="flex flex-col gap-3">
+            {md.matches.map((match: any, idx: number) => (
+              <div
+                key={idx}
+                className="grid grid-cols-[1fr_auto_auto_auto_1fr] items-center gap-2 sm:gap-4 p-2 bg-gray-50 rounded-md"
+              >
+                <span className="font-medium text-sm sm:text-base truncate">{match.home}</span>
+
+                <input
+                  type="number"
+                  value={match.score?.home ?? ""}
+                  onChange={(e) =>
+                    handleScoreChange(
+                      md.id,
+                      idx,
+                      "home",
+                      e.target.value === "" ? "" : parseInt(e.target.value)
+                    )
+                  }
+                  className="border border-gray-300 px-2 py-1.5 sm:py-2 text-sm sm:text-base rounded w-14 sm:w-16 text-center"
+                  min={0}
+                />
+
+                <span className="text-center text-sm sm:text-base">-</span>
+
+                <input
+                  type="number"
+                  value={match.score?.away ?? ""}
+                  onChange={(e) =>
+                    handleScoreChange(
+                      md.id,
+                      idx,
+                      "away",
+                      e.target.value === "" ? "" : parseInt(e.target.value)
+                    )
+                  }
+                  className="border border-gray-300 px-2 py-1.5 sm:py-2 text-sm sm:text-base rounded w-14 sm:w-16 text-center"
+                  min={0}
+                />
+
+                <span className="font-medium text-sm sm:text-base truncate">{match.away}</span>
+
+                <span className="col-span-full text-gray-500 text-xs sm:text-sm mt-1 sm:mt-0">
+                  ({match.day}, {match.date} {match.time}, {match.location})
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       ))}
-    </div>
-  ))}
-</form>
-
 
       {/* Toast */}
       {showToast && (
-        <div className="fixed bottom-4 right-4 bg-secondary px-8 py-4 rounded-lg shadow-lg">
+        <div className="fixed bottom-20 right-4 bg-primary text-white px-6 py-3 rounded-lg shadow-lg z-50">
           ✅ Ergebnisse erfolgreich gespeichert!
         </div>
       )}
+
+      {/* Sticky Save Button */}
+      <div className="fixed bottom-4 right-4 z-50">
+        <button
+          type="submit"
+          className="bg-[#781c12] text-white font-extrabold py-1 rounded-xl text-xl hover:bg-[#a62c1a] transition disabled:opacity-50 py-3 px-8"
+        >
+          Speichern
+        </button>
+      </div>
+    </form>
     </div>
   );
 }

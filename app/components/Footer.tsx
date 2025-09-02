@@ -1,7 +1,8 @@
-import { Github, Heart } from "lucide-react";
+"use client";
+
 import Link from "next/link";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
-import Datenschutz from "../datenschutz/page";
+import HobbyligaLinks from "./HobbyligaLinks";
 
 export default function Footer() {
   return (
@@ -15,7 +16,7 @@ export default function Footer() {
                 src="/logos/sfn_logo.webp"
                 height={60}
                 width={60}
-                alt="Pixelix logo"
+                alt="Sportfreunde Nofels Logo"
               />
               <h3 className="text-3xl font-bold">Sportfreunde Nofels</h3>
             </div>
@@ -141,14 +142,9 @@ export default function Footer() {
                     Spielplan
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href="/auth/signin"
-                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
-                  >
-                    Login
-                  </Link>
-                </li>
+
+                {/* Client-only session-dependent links */}
+                <HobbyligaLinks />
               </ul>
             </div>
           </div>
@@ -173,19 +169,6 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-
-        {/* <div className="w-full flex justify-center">
-          <div className="p-3 text-center flex">
-            Entwickelt von{" "}
-            <Link href="https://ghostbyte.dev">
-              <strong className="font-bold text-white mx-1">Lucas</strong>
-            </Link>{" "}
-            in Zusammenarbeit mit
-            <Link href="https://ghostbyte.dev">
-              <strong className="font-bold text-white ml-1">Ghostbyte</strong>
-            </Link>
-          </div>
-        </div> */}
       </div>
     </footer>
   );
