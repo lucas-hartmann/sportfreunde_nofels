@@ -3,6 +3,7 @@ import Footer from "./components/Footer";
 import { Geist, Montserrat, Alfa_Slab_One } from "next/font/google";
 import { Metadata } from "next";
 import Navbar from "./components/Navbar";
+import SessionWrapper from "./SessionWrapper";
 
 const font = Geist({
   subsets: ["latin"],
@@ -28,18 +29,17 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
       <body className={`${montserrat.variable} ${alfa.variable} ${font.className}`}>
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <SessionWrapper>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </SessionWrapper>
       </body>
     </html>
   );
 }
+

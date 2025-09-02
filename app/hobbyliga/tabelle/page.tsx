@@ -1,7 +1,7 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Header from "../../components/Header";
-import { matchdays } from "@/data/spielplan2025";
 
 type TeamStats = {
   club: string;
@@ -16,11 +16,22 @@ type TeamStats = {
 };
 
 export default function Tabelle() {
+  const [matchdays, setMatchdays] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function loadData() {
+      const res = await fetch("/api/matchdays");
+      const data = await res.json();
+      setMatchdays(data);
+    }
+    loadData();
+  }, []);
+
   // collect all clubs
   const clubs = Array.from(
     new Set(
       matchdays.flatMap((md) =>
-        md.matches.flatMap((m) => [m.home, m.away])
+        md.matches.flatMap((m: any) => [m.home, m.away])
       )
     )
   );
@@ -40,8 +51,7 @@ export default function Tabelle() {
 
   // fill stats based on played matches
   matchdays.forEach((matchday) => {
-    matchday.matches.forEach((match) => {
-      // skip matches without score
+    matchday.matches.forEach((match: any) => {
       if (!match.score || !("home" in match.score && "away" in match.score)) return;
 
       const homeTeam = leagueData.find((t) => t.club === match.home)!;
@@ -49,21 +59,17 @@ export default function Tabelle() {
       const homeGoals = match.score.home;
       const awayGoals = match.score.away;
 
-      // update games played
       homeTeam.spiele += 1;
       awayTeam.spiele += 1;
 
-      // update goals
       homeTeam.tore += homeGoals;
       homeTeam.gegentore += awayGoals;
       awayTeam.tore += awayGoals;
       awayTeam.gegentore += homeGoals;
 
-      // goal difference
       homeTeam.diff = homeTeam.tore - homeTeam.gegentore;
       awayTeam.diff = awayTeam.tore - awayTeam.gegentore;
 
-      // update points and W/D/L
       if (homeGoals > awayGoals) {
         homeTeam.siege += 1;
         homeTeam.punkte += 3;
@@ -86,10 +92,8 @@ export default function Tabelle() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <Header title="TABELLE 2025" image="/headers/tabelle.webp" position="100% 100%" />
 
-      {/* Tabelle */}
       <div className="container mx-auto px-4 py-8">
         <div className="overflow-x-auto bg-white rounded-xl shadow-md">
           <table className="w-full table-fixed text-sm">
@@ -109,10 +113,7 @@ export default function Tabelle() {
             </thead>
             <tbody>
               {leagueData.map((team, index) => (
-                <tr
-                  key={team.club}
-                  className="even:bg-gray-50 border-b last:border-none"
-                >
+                <tr key={team.club} className="even:bg-gray-50 border-b last:border-none">
                   <td className="px-4 py-3 font-semibold">{index + 1}</td>
                   <td className={`px-4 py-3 font-semibold ${team.club === "SF Nofels" ? "text-primary" : ""}`}>
                     {team.club}
