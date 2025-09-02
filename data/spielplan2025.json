@@ -82,7 +82,10 @@
         "time": "20:00",
         "location": "Gisingen",
         "note": "",
-        "score": null
+        "score": {
+          "home": 3,
+          "away": 0
+        }
       }
     ]
   },
@@ -98,7 +101,10 @@
         "time": "19:00",
         "location": "Weiler",
         "note": "",
-        "score": null
+        "score": {
+          "home": 12,
+          "away": 12
+        }
       },
       {
         "home": "FC Übersaxen",

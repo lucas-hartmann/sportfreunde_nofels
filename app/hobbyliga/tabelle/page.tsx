@@ -17,25 +17,15 @@ type TeamStats = {
 
 export default function Tabelle() {
   const [matchdays, setMatchdays] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
       const res = await fetch("/api/matchdays");
       const data = await res.json();
       setMatchdays(data);
-      setLoading(false);
     }
     loadData();
   }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p>Lade Tabelle...</p>
-      </div>
-    );
-  }
 
   // collect all clubs
   const clubs = Array.from(

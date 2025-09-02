@@ -18,27 +18,18 @@ function isPast(matchDate: string, matchTime: string): boolean {
 
 export default function Spielplan() {
   const [activeTab, setActiveTab] = useState("all");
-  const [showPast, setShowPast] = useState(false);
+  const [showPast, setShowPast] = useState(true);
   const [matchdays, setMatchdays] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
       const res = await fetch("/api/matchdays");
       const data = await res.json();
       setMatchdays(data);
-      setLoading(false);
     }
     loadData();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p>Lade Spielplan...</p>
-      </div>
-    );
-  }
 
   const sfNofelsMatches = matchdays.flatMap((matchday) =>
     matchday.matches
@@ -47,7 +38,7 @@ export default function Spielplan() {
       )
       .map((match: any) => ({ ...match, matchdayName: matchday.name }))
   );
-  
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
