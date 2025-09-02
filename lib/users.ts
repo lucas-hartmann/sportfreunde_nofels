@@ -1,30 +1,31 @@
 import bcrypt from "bcrypt";
+import { supabase } from "@/lib/supabaseClient";
 
-export type User = {
-  id: string;
-  name: string;
-  passwordHash: string;
-};
-
-// Load users from env
-export const users: User[] = [
-  {
-    id: "1",
-    name: process.env.USER_1_NAME || "",
-    passwordHash: process.env.USER_1_HASH || "",
-  },
-  {
-    id: "2",
-    name: process.env.USER_2_NAME || "",
-    passwordHash: process.env.USER_2_HASH || "",
-  },
-];
-
-// Validate login
 export async function validateUser(username: string, password: string) {
-  const user = users.find((u) => u.name === username);
-  if (!user) return null;
+  const { data: users, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("username", username);
 
-  // TEMP: always accept password
-  return { id: user.id, name: user.name };
+  if (error) {
+    console.error("Supabase error:", error);
+    return null;
+  }
+
+  if (!users || users.length === 0) {
+    console.log("No user found with username:", username);
+    return null;
+  }
+
+  const user = users[0];
+  console.log("Found user:", user);
+
+  // Check bcrypt password
+  const validPassword = await bcrypt.compare(password, user.password_hash);
+  if (!validPassword) {
+    console.log("Invalid password for user:", username);
+    return null;
+  }
+
+  return { id: user.id, name: user.username };
 }
