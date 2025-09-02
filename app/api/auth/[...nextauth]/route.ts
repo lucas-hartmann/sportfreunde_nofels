@@ -3,7 +3,8 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { validateUser } from "@/lib/users";
 
-export const authOptions: NextAuthOptions = {
+// make authOptions a local constant (no export)
+const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
@@ -27,5 +28,6 @@ export const authOptions: NextAuthOptions = {
   pages: { signIn: "/auth/signin" },
 };
 
+// export only HTTP methods
 const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST, authOptions };
