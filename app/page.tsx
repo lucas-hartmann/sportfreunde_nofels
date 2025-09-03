@@ -27,7 +27,7 @@ export default function Home() {
             className="w-36 h-36 sm:w-40 sm:h-40"
           />
         <h1 className="font-alfa text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white">
-          SPORTFREUNDE{" "}
+          SPORTFREUNDE{" "}<br></br>
           <span className="text-primary drop-shadow-lg">NOFELS</span>
         </h1>
         </div>
