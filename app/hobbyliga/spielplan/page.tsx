@@ -2,17 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Header from "../../components/Header";
+import { supabase } from "@/lib/supabaseClient";
 
 function isPast(matchDate: string, matchTime: string): boolean {
-  const [day, month, year] = matchDate.split(".");
-  const [hour, minute] = matchTime.split(":");
-  const matchDateTime = new Date(
-    Number(year),
-    Number(month) - 1,
-    Number(day),
-    Number(hour),
-    Number(minute)
-  );
+  const matchDateTime = new Date(`${matchDate}T${matchTime}`);
   return matchDateTime < new Date();
 }
 
@@ -23,13 +16,36 @@ export default function Spielplan() {
 
   useEffect(() => {
     async function loadData() {
-      const res = await fetch("/api/matchdays");
-      const data = await res.json();
-      setMatchdays(data);
+      const { data, error } = await supabase
+        .from("matchdays")
+        .select("id, name, matches(*)") // relation to matches table
+        .order("id", { ascending: true });
+
+      if (error) {
+        console.error("Error loading matchdays:", error.message);
+      } else {
+        // Transform Supabase data into your expected format
+        const mapped = data.map((day) => ({
+          id: day.id,
+          name: day.name,
+          matches: day.matches.map((m: any) => ({
+            home: m.home_team,
+            away: m.away_team,
+            day: m.day,
+            date: m.date, // already stored as yyyy-mm-dd
+            time: m.time,
+            location: m.location,
+            score:
+              m.home_score !== null && m.away_score !== null
+                ? { home: m.home_score, away: m.away_score }
+                : null,
+          })),
+        }));
+        setMatchdays(mapped);
+      }
     }
     loadData();
   }, []);
-
 
   const sfNofelsMatches = matchdays.flatMap((matchday) =>
     matchday.matches
@@ -39,48 +55,57 @@ export default function Spielplan() {
       .map((match: any) => ({ ...match, matchdayName: matchday.name }))
   );
 
+  function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <Header title="SPIELPLAN 2025" image="/headers/spielplan.webp" />
 
-    {/* Tabs & Toggle */}
-    <div className="container mx-auto px-4 py-6 space-y-6">
-      <div className="flex flex-wrap justify-between items-center gap-4">
-        <div className="flex flex-wrap gap-4">
-          <button
-            onClick={() => setActiveTab("all")}
-            className={`px-5 py-2 rounded-full font-medium transition ${
-              activeTab === "all"
-                ? "bg-black text-white"
-                : "bg-white text-black border"
-            }`}
-          >
-            Gesamter Spielplan
-          </button>
-          <button
-            onClick={() => setActiveTab("sfn")}
-            className={`px-5 py-2 rounded-full font-medium transition ${
-              activeTab === "sfn"
-                ? "bg-black text-white"
-                : "bg-white text-black border"
-            }`}
-          >
-            Nur SFN Spiele
-          </button>
-        </div>
+      {/* Tabs & Toggle */}
+      <div className="container mx-auto px-4 py-6 space-y-6">
+        <div className="flex flex-wrap justify-between items-center gap-4">
+          <div className="flex flex-wrap gap-4">
+            <button
+              onClick={() => setActiveTab("all")}
+              className={`px-5 py-2 rounded-full font-medium transition ${
+                activeTab === "all"
+                  ? "bg-black text-white"
+                  : "bg-white text-black border"
+              }`}
+            >
+              Gesamter Spielplan
+            </button>
+            <button
+              onClick={() => setActiveTab("sfn")}
+              className={`px-5 py-2 rounded-full font-medium transition ${
+                activeTab === "sfn"
+                  ? "bg-black text-white"
+                  : "bg-white text-black border"
+              }`}
+            >
+              Nur SFN Spiele
+            </button>
+          </div>
 
-        {/* Toggle vergangene Spiele */}
-        <div className="flex-shrink-0">
-          <button
-            onClick={() => setShowPast(!showPast)}
-            className="text-sm font-medium text-blue-600 hover:underline"
-          >
-            {showPast
-              ? "Vergangene Spiele ausblenden"
-              : "Vergangene Spiele anzeigen"}
-          </button>
-        </div>
+          {/* Toggle vergangene Spiele */}
+          <div className="flex-shrink-0">
+            <button
+              onClick={() => setShowPast(!showPast)}
+              className="text-sm font-medium text-blue-600 hover:underline"
+            >
+              {showPast
+                ? "Vergangene Spiele ausblenden"
+                : "Vergangene Spiele anzeigen"}
+            </button>
+          </div>
         </div>
 
         {/* Matches */}
@@ -119,13 +144,15 @@ export default function Spielplan() {
                             {match.home}
                           </td>
                           <td className="px-4 py-3 text-gray-500">
-                            {match.score ? `${match.score.home} : ${match.score.away}` : "-"}
+                            {match.score
+                              ? `${match.score.home} : ${match.score.away}`
+                              : "-"}
                           </td>
                           <td className="px-4 py-3 font-semibold">
                             {match.away}
                           </td>
                           <td className="px-4 py-3">
-                            {match.day}, {match.date}
+                            {match.day}, {formatDate(match.date)}
                           </td>
                           <td className="px-4 py-3">{match.time}</td>
                           <td className="px-4 py-3">{match.location}</td>
@@ -172,7 +199,9 @@ export default function Spielplan() {
                         {match.home}
                       </td>
                       <td className="px-4 py-3 text-gray-500">
-                        {match.score ? `${match.score.home} : ${match.score.away}` : "-"}
+                        {match.score
+                          ? `${match.score.home} : ${match.score.away}`
+                          : "-"}
                       </td>
                       <td
                         className={`px-4 py-3 font-semibold ${
@@ -182,7 +211,7 @@ export default function Spielplan() {
                         {match.away}
                       </td>
                       <td className="px-4 py-3">
-                        {match.day}, {match.date}
+                        {match.day}, {formatDate(match.date)}
                       </td>
                       <td className="px-4 py-3">{match.time}</td>
                       <td className="px-4 py-3">{match.location}</td>

@@ -1,8 +1,9 @@
+// lib/users.ts
 import bcrypt from "bcrypt";
-import { supabase } from "@/lib/supabaseClient";
+import { supabaseServer } from "@/lib/supabaseServerClient";
 
 export async function validateUser(username: string, password: string) {
-  const { data: users, error } = await supabase
+  const { data: users, error } = await supabaseServer
     .from("users")
     .select("*")
     .eq("username", username);
@@ -18,9 +19,7 @@ export async function validateUser(username: string, password: string) {
   }
 
   const user = users[0];
-  console.log("Found user:", user);
 
-  // Check bcrypt password
   const validPassword = await bcrypt.compare(password, user.password_hash);
   if (!validPassword) {
     console.log("Invalid password for user:", username);

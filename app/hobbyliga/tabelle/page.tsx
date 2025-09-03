@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Header from "../../components/Header";
+import { supabase } from "@/lib/supabaseClient";
 
 type TeamStats = {
   club: string;
@@ -15,15 +16,61 @@ type TeamStats = {
   punkte: number;
 };
 
+type Match = {
+  id: number;
+  matchday_id: number;
+  home_team: string;
+  away_team: string;
+  day: string | null;
+  date: string | null;
+  time: string | null;
+  location: string | null;
+  note: string | null;
+  home_score: number | null;
+  away_score: number | null;
+};
+
+type Matchday = {
+  id: number;
+  name: string;
+  matches: Match[];
+};
+
 export default function Tabelle() {
-  const [matchdays, setMatchdays] = useState<any[]>([]);
+  const [matchdays, setMatchdays] = useState<Matchday[]>([]);
 
   useEffect(() => {
     async function loadData() {
-      const res = await fetch("/api/matchdays");
-      const data = await res.json();
-      setMatchdays(data);
+      try {
+        // Define Supabase type for select result
+        type SupabaseMatchday = {
+          id: number;
+          name: string;
+          matches: Match[] | null;
+        };
+
+        const { data, error } = await supabase
+          .from("matchdays")
+          .select(`id, name, matches:matches(*)`);
+
+        if (error) {
+          console.error("Supabase fetch error:", error);
+          return;
+        }
+
+        // Normalize matches to always be an array
+        const normalized: Matchday[] = (data as SupabaseMatchday[] | null)?.map(md => ({
+          id: md.id,
+          name: md.name,
+          matches: md.matches || [],
+        })) || [];
+
+        setMatchdays(normalized);
+      } catch (err) {
+        console.error("Unexpected error loading matchdays:", err);
+      }
     }
+
     loadData();
   }, []);
 
@@ -31,7 +78,7 @@ export default function Tabelle() {
   const clubs = Array.from(
     new Set(
       matchdays.flatMap((md) =>
-        md.matches.flatMap((m: any) => [m.home, m.away])
+        md.matches.flatMap((m: Match) => [m.home_team, m.away_team])
       )
     )
   );
@@ -51,13 +98,13 @@ export default function Tabelle() {
 
   // fill stats based on played matches
   matchdays.forEach((matchday) => {
-    matchday.matches.forEach((match: any) => {
-      if (!match.score || !("home" in match.score && "away" in match.score)) return;
+    matchday.matches.forEach((match: Match) => {
+      if (match.home_score === null || match.away_score === null) return;
 
-      const homeTeam = leagueData.find((t) => t.club === match.home)!;
-      const awayTeam = leagueData.find((t) => t.club === match.away)!;
-      const homeGoals = match.score.home;
-      const awayGoals = match.score.away;
+      const homeTeam = leagueData.find((t) => t.club === match.home_team)!;
+      const awayTeam = leagueData.find((t) => t.club === match.away_team)!;
+      const homeGoals = match.home_score;
+      const awayGoals = match.away_score;
 
       homeTeam.spiele += 1;
       awayTeam.spiele += 1;
@@ -113,7 +160,10 @@ export default function Tabelle() {
             </thead>
             <tbody>
               {leagueData.map((team, index) => (
-                <tr key={team.club} className="even:bg-gray-50 border-b last:border-none">
+                <tr
+                  key={`${team.club}-${index}`}
+                  className="even:bg-gray-50 border-b last:border-none"
+                >
                   <td className="px-4 py-3 font-semibold">{index + 1}</td>
                   <td className={`px-4 py-3 font-semibold ${team.club === "SF Nofels" ? "text-primary" : ""}`}>
                     {team.club}
