@@ -42,7 +42,6 @@ export default function Tabelle() {
   useEffect(() => {
     async function loadData() {
       try {
-        // Define Supabase type for select result
         type SupabaseMatchday = {
           id: number;
           name: string;
@@ -58,12 +57,12 @@ export default function Tabelle() {
           return;
         }
 
-        // Normalize matches to always be an array
-        const normalized: Matchday[] = (data as SupabaseMatchday[] | null)?.map(md => ({
-          id: md.id,
-          name: md.name,
-          matches: md.matches || [],
-        })) || [];
+        const normalized: Matchday[] =
+          (data as SupabaseMatchday[] | null)?.map((md) => ({
+            id: md.id,
+            name: md.name,
+            matches: md.matches || [],
+          })) || [];
 
         setMatchdays(normalized);
       } catch (err) {
@@ -142,48 +141,104 @@ export default function Tabelle() {
       <Header title="TABELLE 2025" image="/headers/tabelle.webp" position="100% 100%" />
 
       <div className="container mx-auto px-4 py-8">
-        <div className="overflow-x-auto bg-white rounded-xl shadow-md">
-          <table className="w-full table-fixed text-sm">
-            <thead className="text-left text-gray-600 border-b">
-              <tr>
-                <th className="px-4 py-3 w-[10%]">Platz</th>
-                <th className="px-4 py-3 w-[30%]">Club</th>
-                <th className="px-4 py-3 w-[10%]">Sp</th>
-                <th className="px-4 py-3 w-[10%]">S</th>
-                <th className="px-4 py-3 w-[10%]">U</th>
-                <th className="px-4 py-3 w-[10%]">N</th>
-                <th className="px-4 py-3 w-[10%]">Tore</th>
-                <th className="px-4 py-3 w-[10%]">Geg</th>
-                <th className="px-4 py-3 w-[10%]">Diff</th>
-                <th className="px-4 py-3 w-[10%]">Pkt</th>
-              </tr>
-            </thead>
-            <tbody>
-              {leagueData.map((team, index) => (
-                <tr
-                  key={`${team.club}-${index}`}
-                  className="even:bg-gray-50 border-b last:border-none"
+      {/* MOBILE: stacked cards (no overlap, tighter spacing) */}
+      <div className="grid gap-3 sm:hidden">
+        {leagueData.map((team, index) => (
+          <div
+            key={`${team.club}-${index}`}
+            className="rounded-xl bg-white shadow p-3"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="text-sm font-semibold shrink-0 w-6 text-center">
+                  {index + 1}
+                </span>
+                <span
+                  className={`text-base font-semibold truncate ${
+                    team.club === "SF Nofels" ? "text-primary" : ""
+                  }`}
+                  title={team.club}
                 >
-                  <td className="px-4 py-3 font-semibold">{index + 1}</td>
-                  <td className={`px-4 py-3 font-semibold ${team.club === "SF Nofels" ? "text-primary" : ""}`}>
-                    {team.club}
-                  </td>
-                  <td className="px-4 py-3">{team.spiele}</td>
-                  <td className="px-4 py-3">{team.siege}</td>
-                  <td className="px-4 py-3">{team.unentschieden}</td>
-                  <td className="px-4 py-3">{team.niederlagen}</td>
-                  <td className="px-4 py-3">{team.tore}</td>
-                  <td className="px-4 py-3">{team.gegentore}</td>
-                  <td className="px-4 py-3">{team.diff}</td>
-                  <td className="px-4 py-3 font-bold">{team.punkte}</td>
+                  {team.club}
+                </span>
+              </div>
+              <div className="text-right">
+                <div className="text-xs text-gray-500 leading-none">Pkt</div>
+                <div className="text-lg font-bold leading-none">{team.punkte}</div>
+              </div>
+            </div>
+
+            {/* Inline stats */}
+            <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-700">
+              <span>Sp: <strong>{team.spiele}</strong></span>
+              <span>S: <strong>{team.siege}</strong></span>
+              <span>U: <strong>{team.unentschieden}</strong></span>
+              <span>N: <strong>{team.niederlagen}</strong></span>
+              <span>Diff: <strong>{team.diff}</strong></span>
+              <span>Tore: <strong>{team.tore}:{team.gegentore}</strong></span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+        {/* DESKTOP/TABLET: wide table */}
+        <div className="hidden sm:block">
+          <div className="overflow-x-auto bg-white rounded-xl shadow-md">
+            {/* avoid table-fixed to let browser size columns; also give a safe min width */}
+            <table className="w-full min-w-[720px] text-sm">
+              <thead className="text-left text-gray-600 border-b">
+                <tr className="whitespace-nowrap">
+                  <th className="px-4 py-3 w-16">Platz</th>
+                  <th className="px-4 py-3">Club</th>
+                  <th className="px-2 py-3 text-center">Sp</th>
+                  <th className="px-2 py-3 text-center">S</th>
+                  <th className="px-2 py-3 text-center">U</th>
+                  <th className="px-2 py-3 text-center">N</th>
+                  <th className="px-2 py-3 text-center">Tore</th>
+                  <th className="px-2 py-3 text-center">Geg</th>
+                  <th className="px-2 py-3 text-center">Diff</th>
+                  <th className="px-2 py-3 text-center">Pkt</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {leagueData.map((team, index) => (
+                  <tr
+                    key={`${team.club}-${index}`}
+                    className="even:bg-gray-50 border-b last:border-none"
+                  >
+                    <td className="px-4 py-3 font-semibold">{index + 1}</td>
+                    <td
+                      className={`px-4 py-3 font-semibold max-w-[280px] truncate ${
+                        team.club === "SF Nofels" ? "text-primary" : ""
+                      }`}
+                      title={team.club}
+                    >
+                      {team.club}
+                    </td>
+                    <td className="px-2 py-3 text-center">{team.spiele}</td>
+                    <td className="px-2 py-3 text-center">{team.siege}</td>
+                    <td className="px-2 py-3 text-center">
+                      {team.unentschieden}
+                    </td>
+                    <td className="px-2 py-3 text-center">
+                      {team.niederlagen}
+                    </td>
+                    <td className="px-2 py-3 text-center">{team.tore}</td>
+                    <td className="px-2 py-3 text-center">{team.gegentore}</td>
+                    <td className="px-2 py-3 text-center">{team.diff}</td>
+                    <td className="px-2 py-3 text-center font-bold">
+                      {team.punkte}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        <p className="mt-6 text-center mb-10 text-gray-500 text-lg transition">
-          Die Sportfreunde Nofels sind dieses Jahr nicht die Veranstalter der Hobbyliga. <br /> Ergebnisse können falsch oder veraltet sein.
+        <p className="mt-6 text-center mb-10 text-gray-500 text-base sm:text-lg">
+          Die Sportfreunde Nofels sind dieses Jahr nicht die Veranstalter der Hobbyliga.
+          <br className="hidden sm:block" /> Ergebnisse können falsch oder veraltet sein.
         </p>
       </div>
     </div>
