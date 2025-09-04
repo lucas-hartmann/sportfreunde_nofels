@@ -65,7 +65,7 @@ export default function Footer() {
                     href="/beachsoccer/2025"
                     className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    Bericht 2025
+                    Galerie 2025
                   </Link>
                 </li>
                 <li>
@@ -73,7 +73,15 @@ export default function Footer() {
                     href="/beachsoccer/2024"
                     className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    Bericht 2024
+                    Galerie 2024
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/beachsoccer/2023"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
+                  >
+                    Galerie 2023
                   </Link>
                 </li>
               </ul>

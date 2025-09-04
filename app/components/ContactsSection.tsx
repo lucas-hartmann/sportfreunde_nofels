@@ -17,7 +17,7 @@ export default function ContactsSection() {
     {
       name: "Martin Malin",
       responsibility: "Obmann",
-      image: "/bsc/images/pic1.jpg",
+      image: "/spieler/messi.webp",
       phone: "+43 664 8256184",
       email: "martin.malin@icloud.com",
     },
@@ -31,14 +31,14 @@ export default function ContactsSection() {
     {
       name: "Emanuel Reiner",
       responsibility: "Kassier",
-      image: "/bsc/images/pic1.jpg",
+      image: "/spieler/messi.webp",
       phone: "+43 664 9710470",
       email: "reiner.e@hotmail.com",
     },
     {
       name: "Simon Strauß",
       responsibility: "Hüslewart",
-      image: "/bsc/images/pic1.jpg",
+      image: "/spieler/messi.webp",
       phone: "+43 677 18044150",
       email: "strauss.simon@hotmail.com",
     },

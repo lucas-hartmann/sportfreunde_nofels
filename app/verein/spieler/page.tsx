@@ -7,23 +7,23 @@ import Header from "@/app/components/Header";
 
 /* Per-player image component with its own fallback state */
 function PlayerImage({ src, alt }: { src?: string; alt: string }) {
-  const defaultSrc = "/spieler/player-placeholder.png";
+  const defaultSrc = "/spieler/messi.webp";
   const [imgSrc, setImgSrc] = useState(src ?? defaultSrc);
 
   return (
     <Image
       src={imgSrc}
       alt={alt}
-      width={120}
-      height={120}
-      className="rounded-full border-2 border-gray-200"
+      width={433}
+      height={577}
+      className="object-cover rounded-lg border-2 border-gray-200 w-30"
       onError={() => {
-        // Next/Image forwards the onError to the underlying <img>, so this should work
         if (imgSrc !== defaultSrc) setImgSrc(defaultSrc);
       }}
     />
   );
 }
+
 
 export default function Spielerliste() {
   return (
@@ -38,17 +38,13 @@ export default function Spielerliste() {
               key={`${player.number}-${player.name}`} // more stable than idx
               className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center relative hover:shadow-xl transition"
             >
-              {/* Nummer oben links */}
-              <span className="absolute top-2 left-2 bg-black text-white text-xs px-2 py-0.5 rounded-full">
-                #{player.number}
-              </span>
 
               {/* Player image — uses player.image or fallback */}
               <PlayerImage src={player.image} alt={player.name} />
 
               {/* Name */}
               <h2 className="mt-4 text-lg font-semibold text-gray-800">
-                {player.name}
+                #{player.number}{" - "}{player.name}
               </h2>
 
               {/* Position */}
