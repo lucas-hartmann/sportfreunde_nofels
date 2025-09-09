@@ -1,6 +1,6 @@
 "use server";
 
-import galleries from "@/data/galleries.json";
+import galleries from "@/public/galleries.json";
 
 export interface AwsImage {
 	thumbUrl: string;
