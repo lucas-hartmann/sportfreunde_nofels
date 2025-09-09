@@ -8,7 +8,7 @@ export default function Beachsoccer() {
     {
       title: "Anmeldung für 2026",
       href: "/beachsoccer/2026",
-      image: "/bsc/background.JPG",
+      image: "/headers/anmeldung.webp",
       icon: CalendarIcon,
       description: "",
       cta: "Zur Anmeldung",
@@ -16,7 +16,7 @@ export default function Beachsoccer() {
     {
       title: "Bericht für 2025",
       href: "/beachsoccer/2025",
-      image: "/bsc/background.JPG",
+      image: "/headers/bsc25.webp",
       icon: NewspaperIcon,
       description: "",
       cta: "Zum Bericht",
@@ -24,7 +24,7 @@ export default function Beachsoccer() {
     {
       title: "Bericht für 2024",
       href: "/beachsoccer/2024",
-      image: "/bsc/background.JPG",
+      image: "/headers/bsc24.webp",
       icon: NewspaperIcon,
       description: "",
       cta: "Zum Bericht",
@@ -33,7 +33,7 @@ export default function Beachsoccer() {
 
   return (
     <span>
-      <Header title="BEACHSOCCER" image="/bsc/background.JPG" />
+      <Header title="BEACHSOCCER" image="/headers/beachsoccer.webp" />
       <main className="container mx-auto px-4 py-30">
         <Headline
           pill="Beachsoccer Übersicht"

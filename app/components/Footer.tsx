@@ -1,6 +1,8 @@
-import { Github, Heart } from "lucide-react";
+"use client";
+
 import Link from "next/link";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+import HobbyligaLinks from "./HobbyligaLinks";
 
 export default function Footer() {
   return (
@@ -14,7 +16,7 @@ export default function Footer() {
                 src="/logos/sfn_logo.webp"
                 height={60}
                 width={60}
-                alt="Pixelix logo"
+                alt="Sportfreunde Nofels Logo"
               />
               <h3 className="text-3xl font-bold">Sportfreunde Nofels</h3>
             </div>
@@ -53,28 +55,33 @@ export default function Footer() {
                 <li>
                   <Link
                     href="/beachsoccer/2026"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Anmeldung 2026
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/beachsoccer/2025"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
-                    Bericht 2025
+                    Galerie 2025
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/beachsoccer/2024"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
-                    Bericht 2024
+                    Galerie 2024
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/beachsoccer/2023"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
+                  >
+                    Galerie 2023
                   </Link>
                 </li>
               </ul>
@@ -85,36 +92,32 @@ export default function Footer() {
                 <li>
                   <Link
                     href="/verein/geschichte"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Geschichte
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/verein/spieler"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Spieler
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/verein/altherren"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Altherren
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/verein/sportplatz"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Sportplatz
                   </Link>
                 </li>
@@ -126,30 +129,30 @@ export default function Footer() {
                 <li>
                   <Link
                     href="/hobbyliga/mannschaften"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Mannschaften
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/hobbyliga/tabelle"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Tabelle
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/hobbyliga/spielplan"
-                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     Spielplan
                   </Link>
                 </li>
+
+                {/* Client-only session-dependent links */}
+                <HobbyligaLinks />
               </ul>
             </div>
           </div>
@@ -162,31 +165,18 @@ export default function Footer() {
           <div className="flex gap-6">
             <Link
               href="/datenschutz"
-              className="text-sm text-white hover:text-gray-400 transition-colors"
+              className="text-sm text-white hover:text-gray-300 transition-colors"
             >
               Datenschutz
             </Link>
             <Link
               href="/impressum"
-              className="text-sm text-white hover:text-gray-400 transition-colors"
+              className="text-sm text-white hover:text-gray-300 transition-colors"
             >
               Impressum
             </Link>
           </div>
         </div>
-
-        {/* <div className="w-full flex justify-center">
-          <div className="p-3 text-center flex">
-            Entwickelt von{" "}
-            <Link href="https://ghostbyte.dev">
-              <strong className="font-bold text-white mx-1">Lucas</strong>
-            </Link>{" "}
-            in Zusammenarbeit mit
-            <Link href="https://ghostbyte.dev">
-              <strong className="font-bold text-white ml-1">Ghostbyte</strong>
-            </Link>
-          </div>
-        </div> */}
       </div>
     </footer>
   );

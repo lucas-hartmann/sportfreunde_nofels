@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function QuoteSection() {
   return (
-    <section className="py-30 bg-gray-200">
+    <section className="py-20 bg-gray-200 flex items-center justify-center">  
       <div className="max-w-4xl mx-auto px-6 md:px-10">
         <blockquote className="text-2xl md:text-3xl font-light text-gray-500 text-center">
           "Bei einem Fußballspiel verkompliziert sich alles durch die Anwesenheit der gegnerischen Kantine."

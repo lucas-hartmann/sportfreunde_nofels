@@ -1,14 +1,14 @@
 import { S3, ListObjectsV2Command } from "@aws-sdk/client-s3";
 import "dotenv/config"; // automatically loads .env
-import path from "path";
-import fs from "fs";
+import * as path from "path";
+import * as fs from "fs";
 
 const s3 = new S3({
 	credentials: {
-		accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-		secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+		accessKeyId: process.env.MY_AWS_ACCESS_KEY_ID!,
+		secretAccessKey: process.env.MY_AWS_SECRET_ACCESS_KEY!,
 	},
-	region: process.env.AWS_REGION,
+	region: process.env.MY_AWS_REGION,
 });
 
 interface AwsImage {
@@ -25,7 +25,7 @@ interface AwsImage {
 
 async function listImages(folder: string): Promise<AwsImage[]> {
 	const command = new ListObjectsV2Command({
-		Bucket: process.env.AWS_BUCKET_NAME!,
+		Bucket: process.env.MY_AWS_BUCKET_NAME!,
 		Prefix: `${folder}/`,
 	});
 
@@ -44,9 +44,9 @@ async function listImages(folder: string): Promise<AwsImage[]> {
 			const thumbKey = `${folder}/thumbs/${filename?.replace(/\.[^/.]+$/, ".avif")}`;
 			const mediumKey = `${folder}/medium/${filename?.replace(/\.[^/.]+$/, ".avif")}`;
 			return {
-				url: `https://${process.env.AWS_CLOUDFRONT_DOMAIN}/${fullKey}`,
-				thumbUrl: `https://${process.env.AWS_CLOUDFRONT_DOMAIN}/${thumbKey}`,
-				mediumUrl: `https://${process.env.AWS_CLOUDFRONT_DOMAIN}/${mediumKey}`,
+				url: `https://${process.env.MY_AWS_CLOUDFRONT_DOMAIN}/${fullKey}`,
+				thumbUrl: `https://${process.env.MY_AWS_CLOUDFRONT_DOMAIN}/${thumbKey}`,
+				mediumUrl: `https://${process.env.MY_AWS_CLOUDFRONT_DOMAIN}/${mediumKey}`,
 				key: filename!,
 				id: index,
 			};
@@ -60,7 +60,7 @@ async function listImages(folder: string): Promise<AwsImage[]> {
 
 async function listFolders(): Promise<string[]> {
 	const command = new ListObjectsV2Command({
-		Bucket: process.env.AWS_BUCKET_NAME!,
+		Bucket: process.env.MY_AWS_BUCKET_NAME!,
 		Delimiter: "/", // returns "folders" in CommonPrefixes
 	});
 
@@ -83,7 +83,7 @@ async function main() {
 		result[folder] = await listImages(folder);
 	}
 
-	const outputPath = path.join(process.cwd(), "public", "galleries.json");
+	const outputPath = path.join(process.cwd(), "data", "galleries.json");
 	fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
 	console.log(`Gallery JSON created at ${outputPath}`);
 

@@ -7,7 +7,7 @@ const Ort: React.FC = () => {
   return (
     <span>
       {/* Header */}
-      <Header title="UNSER STANDORT" image="/bsc/background.JPG" />
+      <Header title="UNSER STANDORT" image="/headers/sportplatz.webp" position="80% 20%"/>
       <div className="max-w-5xl mx-auto px-4 py-12 space-y-12">
         {/* Trainingsplatz */}
         <section className="bg-white rounded-2xl shadow-sm p-6 space-y-4">
@@ -20,7 +20,7 @@ const Ort: React.FC = () => {
             Champions-League-Feeling am Donnerstagabend mit der Kampfmannschaft
             – hier ist immer was los. Platz gibt’s für alle, egal ob
             Hobby-Kicker, Nachwuchstalent oder Alt-Herren-Legende. Der
-            Sportplatz ist ganzjährig geöffnet – auch wenn’s vielleicht manchmal
+            Sportplatz ist ganzjährig geöffnet – auch wenn’s vielleicht
             manchmal besser wär, dem Acker eine Pause zu gönnen. Aber hey, sei's
             drum. Direkt daneben steht unser voll ausgestattetes Clubheim – dort
             wird oft mehr Zeit verbracht als auf dem Feld selbst. Klar, das

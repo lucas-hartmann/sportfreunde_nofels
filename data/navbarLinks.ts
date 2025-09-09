@@ -4,8 +4,9 @@ export const navbarLinks = [
 		href: "/beachsoccer",
 		submenu: [
 			{ title: "Anmeldung 2026", href: "/beachsoccer/2026" },
-			{ title: "2025", href: "/beachsoccer/2025" },
-			{ title: "2024", href: "/beachsoccer/2024" },
+			{ title: "Galerie 2025", href: "/beachsoccer/2025" },
+			{ title: "Galerie 2024", href: "/beachsoccer/2024" },
+			{ title: "Galerie 2023", href: "/beachsoccer/2023" },
 		],
 	},
 	{
@@ -25,6 +26,7 @@ export const navbarLinks = [
 			{ title: "Mannschaften", href: "/hobbyliga/mannschaften" },
 			{ title: "Tabelle", href: "/hobbyliga/tabelle" },
 			{ title: "Spielplan", href: "/hobbyliga/spielplan" },
+			{ title: "Editor", href: "/hobbyliga/edit" },
 		],
 	},
 ];

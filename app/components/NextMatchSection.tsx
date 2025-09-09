@@ -1,48 +1,88 @@
 import Image from "next/image";
 import { CalendarIcon, ClockIcon, MapPinIcon } from "lucide-react";
-import { matchdays } from "@/data/spielplan2025";
 import { mannschaften } from "@/data/mannschaften";
+import { supabaseServer } from "@/lib/supabaseServerClient";
 import Headline from "./Headline";
 
-function getNextMatch() {
-  const now = new Date();
-
-  for (const matchday of matchdays) {
-    for (const match of matchday.matches) {
-      const [day, month, year] = match.date.split(".");
-      const [hours, minutes] = match.time.split(":");
-      const matchDate = new Date(`${year}-${month}-${day}T${hours}:${minutes}`);
-
-      const isNofelsPlaying =
-        match.home === "SF Nofels" || match.away === "SF Nofels";
-
-      if (matchDate > now && isNofelsPlaying) {
-        return { ...match, datetime: matchDate };
-      }
-    }
-  }
-
-  return null;
-}
+type DBMatch = {
+  home_team: string;
+  away_team: string;
+  day: string | null;
+  date: string | null; // ISO date (YYYY-MM-DD)
+  time: string | null; // HH:MM
+  location: string | null;
+};
 
 function getClubLogo(teamName: string): string {
   const club = mannschaften.find((club) => club.name === teamName);
   return club ? club.logo : "/logos/default_logo.webp";
 }
 
-export default function NextMatchSection() {
-  const nextMatch = getNextMatch();
+function formatDate(dateString: string | null): string {
+  if (!dateString) return "";
+  const d = new Date(dateString);
+  if (Number.isNaN(d.getTime())) return dateString;
+  return d.toLocaleDateString("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+}
+
+async function getNextMatchFromSupabase() {
+  const { data, error } = await supabaseServer
+    .from("matches")
+    .select("home_team, away_team, day, date, time, location")
+    .or("home_team.eq.SF Nofels,away_team.eq.SF Nofels");
+
+  if (error || !data) return null;
+
+  const now = new Date();
+
+  const upcoming = (data as DBMatch[])
+    .map((m) => {
+      const isoDate = m.date ?? "";
+      const time = m.time ?? "00:00";
+      const dt = isoDate ? new Date(`${isoDate}T${time}`) : null;
+      return { ...m, dt } as DBMatch & { dt: Date | null };
+    })
+    .filter((m) => m.dt && m.dt > now)
+    .sort((a, b) => a.dt!.getTime() - b.dt!.getTime());
+
+  if (upcoming.length === 0) return null;
+
+  const m = upcoming[0];
+  return {
+    home: m.home_team,
+    away: m.away_team,
+    day: m.day ?? "",
+    date: m.date ?? "",
+    time: m.time ?? "",
+    location: m.location ?? "",
+  } as {
+    home: string;
+    away: string;
+    day: string;
+    date: string;
+    time: string;
+    location: string;
+  };
+}
+
+export default async function NextMatchSection() {
+  const nextMatch = await getNextMatchFromSupabase();
 
   if (!nextMatch) return null;
 
   return (
-    <section className="flex flex-col items-center my-30 px-6 space-y-6 text-center">
+    <section className="flex flex-col items-center my-20 px-6 space-y-6 text-center">
       <Headline
         pill="Nächstes Spiel"
         blackLine="Nächstes Spiel der"
         redLine="Sportfreunde Nofels"
-        description="Unterstütze unsere Mannschaft beim nächsten Heimspiel und erlebe
-        Fußball-Emotion pur."
+        description={
+          "Unterstuetze unsere Mannschaft beim naechsten Spiel und erlebe Fussball-Emotion pur."
+        }
       />
 
       <div className="bg-white w-full max-w-2xl py-10 rounded-xl shadow-2xl px-10 md:px-20 mt-6">
@@ -54,7 +94,7 @@ export default function NextMatchSection() {
               height={80}
               className="w-20 h-20"
               alt={nextMatch.home}
-            />{" "}
+            />
             <span className="font-bold mt-3">{nextMatch.home}</span>
           </div>
 
@@ -67,7 +107,7 @@ export default function NextMatchSection() {
               height={80}
               className="w-20 h-20"
               alt={nextMatch.away}
-            />{" "}
+            />
             <span className="font-bold mt-3">{nextMatch.away}</span>
           </div>
         </div>
@@ -76,13 +116,17 @@ export default function NextMatchSection() {
           <div className="flex space-x-3">
             <CalendarIcon className="text-primary" />
             <span className="font-semibold">
-              {nextMatch.day}, {nextMatch.date}
+              {nextMatch.day}
+              {nextMatch.day ? ", " : ""}
+              {formatDate(nextMatch.date)}
             </span>
           </div>
 
           <div className="flex space-x-3">
             <ClockIcon className="text-primary" />
-            <span className="font-semibold">{nextMatch.time} Uhr</span>
+            <span className="font-semibold">
+              {nextMatch.time ? `${nextMatch.time} Uhr` : ""}
+            </span>
           </div>
 
           <div className="flex space-x-3">
