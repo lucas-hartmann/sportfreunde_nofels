@@ -10,13 +10,6 @@ export interface AwsImage {
 	id: number;
 }
 
-export async function listImages(folder: string): Promise<AwsImage[]> {
-	const allImages = galleries[folder];
-
-	// Filter images by folder if needed
-	const filteredImages = allImages.filter((image) =>
-		image.url.includes(`/${folder}/`),
-	);
-
-	return filteredImages;
+export async function listImages(gallery: string): Promise<AwsImage[]> {
+	return galleries[gallery];
 }
