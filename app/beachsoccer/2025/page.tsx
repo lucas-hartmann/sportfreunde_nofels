@@ -1,6 +1,5 @@
-"use client"; // ✅ Make this a client componentimport React from "react";
+"use client"; 
 import Header from "../../components/Header";
-import { listImages } from "@/lib/images";
 import ImageGallery from "@/app/components/ImageGallery";
 
 export default function Beachsoccer2025() {
