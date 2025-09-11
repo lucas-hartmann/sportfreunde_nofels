@@ -99,16 +99,18 @@ export default function SharedModal({
                 initial="enter"
                 animate="center"
                 exit="exit"
-                className="absolute"
+                className="absolute w-full h-full"
               >
-                <Image
-                  src={currentImage.mediumUrl}
-                  width={navigation ? 1280 : 1920}
-                  height={navigation ? 853 : 1280}
-                  priority
-                  alt="Next.js Conf image"
-                  onLoad={() => setLoaded(true)}
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={currentImage.mediumUrl}
+                    fill
+                    priority
+                    alt="Next.js Conf image"
+                    onLoad={() => setLoaded(true)}
+                    className="object-contain"
+                  />
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
