@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import { AwsImage } from "@/lib/images";
 import downloadPhoto from "@/utils/downloadPhoto";
@@ -61,6 +61,24 @@ export default function SharedModal({
   let filteredImages = images?.filter((img: AwsImage) =>
     range(index - 15, index + 15).includes(img.id)
   );
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "ArrowRight" && index + 1 < images.length) {
+        if (index < images?.length - 1) {
+          changePhotoId(index + 1);
+        }
+      } else if (event.key === "ArrowLeft" && index > 0) {
+        if (index > 0) {
+          changePhotoId(index - 1);
+        }
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [index, images.length, changePhotoId]);
 
   const handlers = useSwipeable({
     onSwipedLeft: () => {
