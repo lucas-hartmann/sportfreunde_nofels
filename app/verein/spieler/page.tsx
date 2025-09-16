@@ -16,7 +16,7 @@ function PlayerImage({ src, alt }: { src?: string; alt: string }) {
       alt={alt}
       width={433}
       height={577}
-      className="object-cover rounded-lg border-2 border-gray-200 w-30"
+      className="object-cover rounded-lg border-2 border-gray-200 w-30 bg-gray-100"
       onError={() => {
         if (imgSrc !== defaultSrc) setImgSrc(defaultSrc);
       }}
