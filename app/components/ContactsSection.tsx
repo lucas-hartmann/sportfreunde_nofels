@@ -69,7 +69,7 @@ export default function ContactsSection() {
                   src={item.image}
                   alt={item.name}
                   fill
-                  className="object-cover rounded-full"
+                  className="object-cover rounded-full bg-gray-100"
                 />
               </div>
             </div>
@@ -85,20 +85,34 @@ export default function ContactsSection() {
                 className="relative flex items-center gap-2.5 mt-6 cursor-pointer group"
                 onClick={() => handleCopy(item.phone, item.phone)}
               >
-                <PhoneIcon className="text-primary" size={24} strokeWidth={2.2} />
-                <span className="text-sm font-bold text-black">{item.phone}</span>
+                <PhoneIcon
+                  className="text-primary"
+                  size={24}
+                  strokeWidth={2.2}
+                />
+                <span className="text-sm font-bold text-black">
+                  {item.phone}
+                </span>
 
                 {/* Tooltip */}
                 <span
                   className={`absolute top-full mt-2 px-2 py-1 text-xs rounded-md shadow-md transition 
-                    ${copied === item.phone ? "bg-green-500 text-white" : "bg-gray-800 text-white"}
+                    ${
+                    copied === item.phone
+                      ? "bg-green-500 text-white"
+                      : "bg-gray-800 text-white"
+                  }
                     opacity-0 group-hover:opacity-100`}
                 >
-                  {copied === item.phone ? "Kopiert!" : "Klicken um zu Kopieren"}
+                  {copied === item.phone
+                    ? "Kopiert!"
+                    : "Klicken um zu Kopieren"}
                   {/* Tooltip arrow */}
                   <span
                     className={`absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45 
-                      ${copied === item.phone ? "bg-green-500" : "bg-gray-800"}`}
+                      ${
+                      copied === item.phone ? "bg-green-500" : "bg-gray-800"
+                    }`}
                   />
                 </span>
               </div>
@@ -108,8 +122,12 @@ export default function ContactsSection() {
                 className="relative flex items-center gap-2.5 mt-6 cursor-pointer group"
                 onClick={() => handleCopy(item.email, item.email)}
               >
-                <MailIcon className="text-primary flex-shrink-0" size={24} strokeWidth={2.2} />
-                
+                <MailIcon
+                  className="text-primary flex-shrink-0"
+                  size={24}
+                  strokeWidth={2.2}
+                />
+
                 {/* Wrap text + tooltip so tooltip doesn't push layout */}
                 <div className="relative flex flex-col items-center">
                   <span className="text-sm font-bold text-black text-center break-normal [overflow-wrap:break-word]">
@@ -119,14 +137,22 @@ export default function ContactsSection() {
                   {/* Tooltip */}
                   <span
                     className={`absolute top-full mt-2 px-2 py-1 text-xs rounded-md shadow-md transition 
-                      ${copied === item.email ? "bg-green-500 text-white" : "bg-gray-800 text-white"}
+                      ${
+                      copied === item.email
+                        ? "bg-green-500 text-white"
+                        : "bg-gray-800 text-white"
+                    }
                       opacity-0 group-hover:opacity-100 whitespace-nowrap`}
                   >
-                    {copied === item.email ? "Kopiert!" : "Klicken um zu Kopieren"}
+                    {copied === item.email
+                      ? "Kopiert!"
+                      : "Klicken um zu Kopieren"}
                     {/* Tooltip arrow */}
                     <span
                       className={`absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45 
-                        ${copied === item.email ? "bg-green-500" : "bg-gray-800"}`}
+                        ${
+                        copied === item.email ? "bg-green-500" : "bg-gray-800"
+                      }`}
                     />
                   </span>
                 </div>
