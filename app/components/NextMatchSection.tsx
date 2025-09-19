@@ -39,7 +39,6 @@ async function getNextMatchFromSupabase() {
 
   // const now = new Date();
   const now = new Date("2025-09-14T09:48:12.702Z");
-  console.log(now)
 
   const upcoming = (data as DBMatch[])
     .map((m) => {
