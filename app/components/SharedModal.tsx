@@ -1,9 +1,10 @@
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import { AwsImage } from "@/lib/images";
 import downloadPhoto from "@/utils/downloadPhoto";
+import { ChevronLeftIcon, ChevronRightIcon, Download, X } from "lucide-react";
 
 export interface SharedModalProps {
   index: number;
@@ -60,6 +61,24 @@ export default function SharedModal({
   let filteredImages = images?.filter((img: AwsImage) =>
     range(index - 15, index + 15).includes(img.id)
   );
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "ArrowRight" && index + 1 < images.length) {
+        if (index < images?.length - 1) {
+          changePhotoId(index + 1);
+        }
+      } else if (event.key === "ArrowLeft" && index > 0) {
+        if (index > 0) {
+          changePhotoId(index - 1);
+        }
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [index, images.length, changePhotoId]);
 
   const handlers = useSwipeable({
     onSwipedLeft: () => {
@@ -99,16 +118,18 @@ export default function SharedModal({
                 initial="enter"
                 animate="center"
                 exit="exit"
-                className="absolute"
+                className="absolute w-full h-full"
               >
-                <Image
-                  src={currentImage.mediumUrl}
-                  width={navigation ? 1280 : 1920}
-                  height={navigation ? 853 : 1280}
-                  priority
-                  alt="Next.js Conf image"
-                  onLoad={() => setLoaded(true)}
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={currentImage.mediumUrl}
+                    fill
+                    priority
+                    alt="Next.js Conf image"
+                    onLoad={() => setLoaded(true)}
+                    className="object-contain"
+                  />
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -121,20 +142,20 @@ export default function SharedModal({
                 <>
                   {index > 0 && (
                     <button
-                      className="absolute left-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
+                      className="cursor-pointer absolute left-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
                       style={{ transform: "translate3d(0, 0, 0)" }}
                       onClick={() => changePhotoId(index - 1)}
                     >
-                      left
+                      <ChevronLeftIcon />
                     </button>
                   )}
                   {index + 1 < images.length && (
                     <button
-                      className="absolute right-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
+                      className="cursor-pointer absolute right-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
                       style={{ transform: "translate3d(0, 0, 0)" }}
                       onClick={() => changePhotoId(index + 1)}
                     >
-                      right
+                      <ChevronRightIcon />
                     </button>
                   )}
                 </>
@@ -147,18 +168,18 @@ export default function SharedModal({
                       currentImage.key,
                     );
                   }}
-                  className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
+                  className="cursor-pointer rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
                   title="Download fullsize version"
                 >
-                  download
+                  <Download />
                 </button>
               </div>
               <div className="absolute top-0 left-0 flex items-center gap-2 p-3 text-white">
                 <button
                   onClick={() => closeModal()}
-                  className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
+                  className="cursor-pointer rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
                 >
-                  <p>close</p>
+                  <X />
                 </button>
               </div>
             </div>

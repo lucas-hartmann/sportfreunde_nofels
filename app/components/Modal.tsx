@@ -28,21 +28,6 @@ export default function Modal({
     setCurIndex(newVal);
   }
 
-  useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "ArrowRight" && index + 1 < images.length) {
-        changePhotoId(curIndex + 1);
-      } else if (event.key === "ArrowLeft" && index > 0) {
-        changePhotoId(curIndex - 1);
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [index, images.length, changePhotoId]);
-
   /*  useKeypress("ArrowRight", () => {
     if (index + 1 < images.length) {
       changePhotoId(index + 1);
