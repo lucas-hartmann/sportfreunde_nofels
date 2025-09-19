@@ -9,12 +9,23 @@ export default function Home() {
     <main>
 
       <section className="h-screen flex relative items-center justify-center">
-        <Image
+        {/* <Image
           className="absolute inset-0 w-full h-full object-cover"
-          src="/bsc/background.JPG"
+          src="/headers/bsc23.webp"
           fill
           alt=""
-        ></Image>
+        ></Image> */}
+        <Image
+        src="/headers/bsc23.webp"           // or a static import: import hero from '@/public/hero.jpg'
+        alt=""
+        fill                      // behaves like a background-cover
+        className="object-cover"
+        priority                  // preloads the image
+        fetchPriority="high"      // hints the browser as well
+        placeholder="blur"        // instant blur-up
+        blurDataURL="data:image/jpeg;base64,..." // optional: Next auto-fills if you static-import
+        sizes="100vw"             // critical for the right size at each breakpoint
+      />
 
         <div className="absolute inset-0 bg-black/40"></div>
 
