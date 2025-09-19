@@ -16,13 +16,17 @@ export default function ClubsPage() {
 
       <main className="min-h-screen bg-neutral-50 py-12 px-6">
         <div className="max-w-6xl mx-auto">
-          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {clubList.map((club) => {
-              const isOpen = openId === club.id;
+          <section className="flex flex-wrap gap-6">
+          {clubList.map((club) => {
+            const isOpen = openId === club.id;
 
-              return (
+            return (
+              <div
+                key={club.id}
+                // width per breakpoint (3 per row on lg, 2 on sm)
+                className="basis-full sm:basis-[calc(50%-0.75rem)] lg:basis-[calc(33.333%-1rem)] grow-0 shrink-0"
+              >
                 <div
-                  key={club.id}
                   role="button"
                   tabIndex={0}
                   onClick={() => setOpenId(isOpen ? null : club.id)}
@@ -56,9 +60,9 @@ export default function ClubsPage() {
                         href={club.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`${club.name} Website öffnen`}
                         onClick={(e) => e.stopPropagation()}
                         className="mt-2 text-sm text-primary-600 hover:underline"
+                        aria-label={`${club.name} Website öffnen`}
                       >
                         Zur Website →
                       </a>
@@ -76,14 +80,14 @@ export default function ClubsPage() {
                     </div>
                   )}
 
-                  {/* Footer */}
                   <div className="border-t border-neutral-100 px-4 py-3 text-xs text-neutral-500 text-center">
                     Karte klicken für Beschreibung
                   </div>
                 </div>
-              );
-            })}
-          </section>
+              </div>
+            );
+          })}
+        </section>
         </div>
       </main>
     </span>
