@@ -29,6 +29,14 @@ export default function Beachsoccer() {
       description: "",
       cta: "Zum Bericht",
     },
+    {
+      title: "Bericht für 2023",
+      href: "/beachsoccer/2023",
+      image: "/headers/bsc23.webp",
+      icon: NewspaperIcon,
+      description: "",
+      cta: "Zum Bericht",
+    },
   ];
 
   return (
