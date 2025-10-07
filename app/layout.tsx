@@ -4,6 +4,7 @@ import { Geist, Montserrat, Alfa_Slab_One } from "next/font/google";
 import { Metadata } from "next";
 import Navbar from "./components/Navbar";
 import SessionWrapper from "./SessionWrapper";
+import PlausibleProvider from "next-plausible";
 
 const font = Geist({
   subsets: ["latin"],
@@ -29,17 +30,29 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html>
-      <body className={`${montserrat.variable} ${alfa.variable} ${font.className}`}>
+      <body
+        className={`${montserrat.variable} ${alfa.variable} ${font.className}`}
+      >
         <SessionWrapper>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <PlausibleProvider
+            domain="sportfreunde-nofels.at"
+            selfHosted
+            trackOutboundLinks
+            hash
+          >
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </PlausibleProvider>
         </SessionWrapper>
       </body>
     </html>
   );
 }
-
