@@ -7,6 +7,11 @@
   --color-white: #ffffff;
 }
 
+:root {
+  --size: clamp(4rem, 1rem + 40vmin, 15rem);
+  --gap: calc(var(--size) / 14);
+}
+
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -49,6 +54,7 @@
   .font-alfa {
     font-family: var(--font-alfa);
   }
+
   .font-montserrat {
     font-family: var(--font-montserrat);
   }
@@ -59,17 +65,75 @@
 }
 
 .vertical-timeline::before {
-  background: #7b1e12 !important; 
+  background: #7b1e12 !important;
   width: 4px !important;
 }
 
 /* Hide scrollbar but allow scroll */
-html, body {
+html,
+body {
   overflow-y: scroll;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  display: none;
+  /* Chrome, Safari */
 }
 
+.marquee {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: var(--gap);
+}
+
+.marquee__content {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: var(--gap);
+  min-width: 100%;
+  animation: scroll 10s linear infinite;
+}
+
+.marquee_element {
+  width: var(--size);
+}
+
+.marquee:hover .marquee__content {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__content {
+    animation-play-state: paused !important;
+  }
+}
+
+.marquee--pos-absolute .marquee__content:last-child {
+  animation-name: scroll-abs;
+}
+
+@keyframes scroll-abs {
+  from {
+    transform: translateX(calc(100% + var(--gap)));
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
