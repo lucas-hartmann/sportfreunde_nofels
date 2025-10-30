@@ -26,7 +26,7 @@ const sponsors: Sponsor[] = [
   },
   {
     name: "AM Physio",
-    image: "/sponsors/amphysio.webp",
+    image: "/sponsors/amphysio_black.webp",
     link: "https://amphysio.at/",
   },
   {
