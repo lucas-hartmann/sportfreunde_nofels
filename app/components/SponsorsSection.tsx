@@ -14,7 +14,7 @@ const sponsors: Sponsor[] = [
   },
   {
     name: "Kapfgarage Lampert & Dolinar OG",
-    image: "/sponsors/kapfgarage.webp",
+    image: "/sponsors/kapfgarage_transparent.webp",
     link:
       "https://findmywerkstatt.at/Werkstatt/Kapfgarage-Lampert-Dolinar/4352",
   },
@@ -36,7 +36,7 @@ const sponsors: Sponsor[] = [
   },
   {
     name: "Gasthaus Sterna Bangs",
-    image: "/sponsors/sternabangs.webp",
+    image: "/sponsors/sternabangs_transparent.webp",
     link: "https://www.gasthaus-stern.at/",
   },
 ];
