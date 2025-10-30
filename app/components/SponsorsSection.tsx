@@ -9,7 +9,7 @@ type Sponsor = {
 const sponsors: Sponsor[] = [
   {
     name: "Schöch's Meathouse GmbH",
-    image: "/sponsors/meathouse.webp",
+    image: "/sponsors/meathouse_blackText.webp",
     link: "https://meathouse.at/",
   },
   {
@@ -31,7 +31,7 @@ const sponsors: Sponsor[] = [
   },
   {
     name: "SuperGau GmbH",
-    image: "/sponsors/supergau.webp",
+    image: "/sponsors/supergau_transparent.webp",
     link: "https://www.supergau.com/",
   },
   {
