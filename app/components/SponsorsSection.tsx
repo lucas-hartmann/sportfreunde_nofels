@@ -57,10 +57,12 @@ export default function SponsorsSection() {
               rel="noopener noreferrer"
               className="marquee_element"
             >
-              <img
+              <Image
                 src={sponsor.image}
                 alt={sponsor.name}
-                className="object-contain w-auto h-24"
+                width={150}
+                height={80}
+                className="object-contain h-24 w-auto"
               />
             </a>
           ))}
