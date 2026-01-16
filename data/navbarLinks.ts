@@ -29,4 +29,5 @@ export const navbarLinks = [
 			{ title: "Editor", href: "/hobbyliga/edit" },
 		],
 	},
+	{ title: "Shop", href: "https://team.jako.com/de-de/team/sportfreundenofels/" },
 ];
