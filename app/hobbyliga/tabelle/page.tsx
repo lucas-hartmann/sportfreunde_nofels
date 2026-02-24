@@ -38,6 +38,7 @@ type Matchday = {
 
 export default function Tabelle() {
   const [matchdays, setMatchdays] = useState<Matchday[]>([]);
+  const [season, setSeason] = useState<number>(2026); // Default to 2026
 
   useEffect(() => {
     async function loadData() {
@@ -50,7 +51,8 @@ export default function Tabelle() {
 
         const { data, error } = await supabase
           .from("matchdays")
-          .select(`id, name, matches:matches(*)`);
+          .select(`id, name, matches:matches(*)`)
+          .eq("season", season); // Only fetch matchdays for the selected season
 
         if (error) {
           console.error("Supabase fetch error:", error);
@@ -71,7 +73,7 @@ export default function Tabelle() {
     }
 
     loadData();
-  }, []);
+  }, [season]); // Re-run this effect whenever the season changes
 
   // collect all clubs
   const clubs = Array.from(
@@ -138,48 +140,68 @@ export default function Tabelle() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header title="TABELLE 2025" image="/headers/tabelle.webp" position="100% 100%" />
+      <Header title={`TABELLE ${season}`} image="/headers/tabelle.webp" position="100% 100%" />
 
       <div className="container mx-auto px-4 py-8">
-      {/* MOBILE: stacked cards (no overlap, tighter spacing) */}
-      <div className="grid gap-3 sm:hidden">
-        {leagueData.map((team, index) => (
-          <div
-            key={`${team.club}-${index}`}
-            className="rounded-xl bg-white shadow p-3"
-          >
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-2 min-w-0">
-                <span className="text-sm font-semibold shrink-0 w-6 text-center">
-                  {index + 1}
-                </span>
-                <span
-                  className={`text-base font-semibold truncate ${
-                    team.club === "SF Nofels" ? "text-primary" : ""
-                  }`}
-                  title={team.club}
-                >
-                  {team.club}
-                </span>
-              </div>
-              <div className="text-right">
-                <div className="text-xs text-gray-500 leading-none">Pkt</div>
-                <div className="text-lg font-bold leading-none">{team.punkte}</div>
-              </div>
-            </div>
-
-            {/* Inline stats */}
-            <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-700">
-              <span>Sp: <strong>{team.spiele}</strong></span>
-              <span>S: <strong>{team.siege}</strong></span>
-              <span>U: <strong>{team.unentschieden}</strong></span>
-              <span>N: <strong>{team.niederlagen}</strong></span>
-              <span>Diff: <strong>{team.diff}</strong></span>
-              <span>Tore: <strong>{team.tore}:{team.gegentore}</strong></span>
+        
+        {/* Season Toggle Dropdown */}
+        <div className="flex justify-start mb-6">
+          <div className="relative inline-block w-48">
+            <select
+              value={season}
+              onChange={(e) => setSeason(Number(e.target.value))}
+              className="appearance-none w-full bg-white border border-gray-300 text-gray-700 px-5 py-2.5 rounded-full font-normal shadow-sm transition focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-sm sm:text-base cursor-pointer"
+            >
+              <option value={2026}>Saison 2026</option>
+              <option value={2025}>Saison 2025</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+              </svg>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+
+        {/* MOBILE: stacked cards (no overlap, tighter spacing) */}
+        <div className="grid gap-3 sm:hidden">
+          {leagueData.map((team, index) => (
+            <div
+              key={`${team.club}-${index}`}
+              className="rounded-xl bg-white shadow p-3"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="text-sm font-semibold shrink-0 w-6 text-center">
+                    {index + 1}
+                  </span>
+                  <span
+                    className={`text-base font-semibold truncate ${
+                      team.club === "SF Nofels" ? "text-primary" : ""
+                    }`}
+                    title={team.club}
+                  >
+                    {team.club}
+                  </span>
+                </div>
+                <div className="text-right">
+                  <div className="text-xs text-gray-500 leading-none">Pkt</div>
+                  <div className="text-lg font-bold leading-none">{team.punkte}</div>
+                </div>
+              </div>
+
+              {/* Inline stats */}
+              <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-700">
+                <span>Sp: <strong>{team.spiele}</strong></span>
+                <span>S: <strong>{team.siege}</strong></span>
+                <span>U: <strong>{team.unentschieden}</strong></span>
+                <span>N: <strong>{team.niederlagen}</strong></span>
+                <span>Diff: <strong>{team.diff}</strong></span>
+                <span>Tore: <strong>{team.tore}:{team.gegentore}</strong></span>
+              </div>
+            </div>
+          ))}
+        </div>
 
         {/* DESKTOP/TABLET: wide table */}
         <div className="hidden sm:block">

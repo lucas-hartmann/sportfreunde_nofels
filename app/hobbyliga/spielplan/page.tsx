@@ -21,6 +21,7 @@ export default function Spielplan() {
       const { data, error } = await supabase
         .from("matchdays")
         .select("id, name, matches(*)")
+        .eq("season", 2026)   //Season filter, damit nicht alle Saisons geladen werden
         .order("id", { ascending: true });
 
       if (error) {
@@ -291,17 +292,18 @@ export default function Spielplan() {
                   </h2>
 
                   <div className="overflow-x-auto bg-white rounded-xl shadow-md">
-                    <table className="min-w-[720px] w-full table-auto text-sm">
-                      <thead className="text-left text-gray-600 border-b">
-                        <tr className="whitespace-nowrap">
-                          <th className="px-4 py-3">Heim</th>
-                          <th className="px-4 py-3">Ergebnis</th>
-                          <th className="px-4 py-3">Gast</th>
-                          <th className="px-4 py-3">Datum</th>
-                          <th className="px-4 py-3">Uhrzeit</th>
-                          <th className="px-4 py-3">Ort</th>
-                        </tr>
-                      </thead>
+                  <table className="min-w-[720px] w-full table-fixed text-sm">
+                    <thead className="text-left text-gray-600 border-b">
+                      <tr className="whitespace-nowrap">
+                        {/* Add strict percentage widths that add up to 100% */}
+                        <th className="px-4 py-3 w-[25%]">Heim</th>
+                        <th className="px-4 py-3 w-[10%]">Ergebnis</th>
+                        <th className="px-4 py-3 w-[25%]">Gast</th>
+                        <th className="px-4 py-3 w-[15%]">Datum</th>
+                        <th className="px-4 py-3 w-[10%]">Uhrzeit</th>
+                        <th className="px-4 py-3 w-[15%]">Ort</th>
+                      </tr>
+                    </thead>
                       <tbody>
                         {filtered.map((m: any, idx: number) => (
                           <tr
