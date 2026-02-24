@@ -9,12 +9,12 @@ type Sponsor = {
 const sponsors: Sponsor[] = [
   {
     name: "Schöch's Meathouse GmbH",
-    image: "/sponsors/meathouse.webp",
+    image: "/sponsors/meathouse_blackText.webp",
     link: "https://meathouse.at/",
   },
   {
     name: "Kapfgarage Lampert & Dolinar OG",
-    image: "/sponsors/kapfgarage.webp",
+    image: "/sponsors/kapfgarage_transparent.webp",
     link:
       "https://findmywerkstatt.at/Werkstatt/Kapfgarage-Lampert-Dolinar/4352",
   },
@@ -26,17 +26,17 @@ const sponsors: Sponsor[] = [
   },
   {
     name: "AM Physio",
-    image: "/sponsors/amphysio.webp",
+    image: "/sponsors/amphysio_black.webp",
     link: "https://amphysio.at/",
   },
   {
     name: "SuperGau GmbH",
-    image: "/sponsors/supergau.webp",
+    image: "/sponsors/supergau_transparent.webp",
     link: "https://www.supergau.com/",
   },
   {
     name: "Gasthaus Sterna Bangs",
-    image: "/sponsors/sternabangs.webp",
+    image: "/sponsors/sternabangs_transparent.webp",
     link: "https://www.gasthaus-stern.at/",
   },
 ];
@@ -57,10 +57,12 @@ export default function SponsorsSection() {
               rel="noopener noreferrer"
               className="marquee_element"
             >
-              <img
+              <Image
                 src={sponsor.image}
                 alt={sponsor.name}
-                className="object-contain w-auto h-24"
+                width={150}
+                height={80}
+                className="object-contain h-24 w-auto"
               />
             </a>
           ))}

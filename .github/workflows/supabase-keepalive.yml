@@ -1,0 +1,26 @@
+name: Supabase Keepalive
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"   # alle 12 Stunden (UTC)
+  workflow_dispatch:          # manueller Start-Button im GitHub UI
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping REST endpoint
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          set -e
+          # Hinweis: GitHub Actions-Zeit ist UTC. Wähle dein Intervall entsprechend.
+          curl -sS "${SUPABASE_URL}/rest/v1/keepalive?select=id&limit=1" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
+            -H "Accept-Profile: public" \
+            -H "Accept: application/json" \
+            -f > /dev/null
+          echo "Supabase keepalive pinged successfully."

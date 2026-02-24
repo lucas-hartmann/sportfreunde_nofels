@@ -3,6 +3,7 @@ import QuoteSection from "./components/QuoteSection";
 import NextMatchSection from "./components/NextMatchSection";
 import SponsorsSection from "./components/SponsorsSection";
 import ContactsSection from "./components/ContactsSection";
+import ShopSection from "./components/ShopSection";
 
 export default function Home() {
   return (
@@ -45,6 +46,8 @@ export default function Home() {
       </section>
 
       <NextMatchSection />
+
+      <ShopSection />
 
       <QuoteSection />
 
