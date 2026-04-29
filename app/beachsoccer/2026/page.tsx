@@ -43,9 +43,9 @@ const BeachsoccerCup = () => {
       {/* Info + Video Section */}
       <section className="max-w-6xl mx-auto py-16 px-6 grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <h2 className="section-heading">Veranstaltungsdetails</h2>
+          <h2 className="section-heading no-underline">Veranstaltungsdetails</h2>
           <p className="text-lg mb-4">
-            <strong>Datum:</strong> 12. Juli 2025
+            <strong>Datum:</strong> 18. Juli 2026
             <br />
             <strong>Ort:</strong> Volksschule Nofels, Schmittengässele 28 – 6800
             Feldkirch
@@ -81,7 +81,7 @@ const BeachsoccerCup = () => {
 
       {/* Gallery Section */}
       <section className="bg-gray-200 mx-auto py-16 px-6">
-        <h2 className="section-heading text-center md:text-left md:ml-12">
+        <h2 className="section-heading no-underline text-center md:text-left md:ml-12">
           Galerie
         </h2>
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
@@ -99,7 +99,7 @@ const BeachsoccerCup = () => {
 
       {/* Highlight Section */}
       <section className="bg-white mx-auto py-16 px-6">
-        <h2 className="section-heading text-center md:text-left md:ml-12 mb-8">
+        <h2 className="section-heading no-underline text-center md:text-left md:ml-12 mb-8">
             Highlights
         </h2>
         <HighlightSection/>
@@ -107,7 +107,7 @@ const BeachsoccerCup = () => {
 
       {/* Sign-Up Form */}
       <section id="anmeldung" className="bg-gray-200 mx-auto py-16 px-6"> 
-        <h2 className="section-heading text-center md:text-left md:ml-12 mb-8">
+        <h2 className="section-heading no-underline text-center md:text-left md:ml-12 mb-8">
           Anmeldung
         </h2>
         <SignUpForm />
