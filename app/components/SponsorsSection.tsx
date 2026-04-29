@@ -44,9 +44,6 @@ const sponsors: Sponsor[] = [
 export default function SponsorsSection() {
   return (
     <section className="mt-20 bg-gray-200 py-10">
-      <h2 className="text-center font-bold text-4xl mb-16">
-        Unsere Sponsoren
-      </h2>
       <div className="marquee mb-10">
         <ul className="marquee__content">
           {sponsors.map((sponsor, idx) => (
