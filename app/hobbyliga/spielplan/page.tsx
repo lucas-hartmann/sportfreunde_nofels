@@ -57,7 +57,7 @@ export default function Spielplan() {
     () =>
       matchdays.flatMap((md) =>
         md.matches
-          .filter((m: any) => m.home === "SF Nofels" || m.away === "SF Nofels")
+          .filter((m: any) => m.home === "Sportfreunde Nofels" || m.away === "Sportfreunde Nofels")
           .map((m: any) => ({ ...m, matchdayName: md.name }))
       ),
     [matchdays]
@@ -312,7 +312,7 @@ export default function Spielplan() {
                           >
                             <td
                               className={`px-4 py-3 font-semibold max-w-[280px] truncate ${
-                                m.home === "SF Nofels" ? "text-primary" : ""
+                                m.home === "Sportfreunde Nofels" ? "text-primary" : ""
                               }`}
                               title={m.home}
                             >
@@ -323,7 +323,7 @@ export default function Spielplan() {
                             </td>
                             <td
                               className={`px-4 py-3 font-semibold max-w-[280px] truncate ${
-                                m.away === "SF Nofels" ? "text-primary" : ""
+                                m.away === "Sportfreunde Nofels" ? "text-primary" : ""
                               }`}
                               title={m.away}
                             >
@@ -371,7 +371,7 @@ export default function Spielplan() {
                         </td>
                         <td
                           className={`px-4 py-3 font-semibold max-w-[240px] truncate ${
-                            m.home === "SF Nofels" ? "text-primary" : ""
+                            m.home === "Sportfreunde Nofels" ? "text-primary" : ""
                           }`}
                           title={m.home}
                         >
@@ -382,7 +382,7 @@ export default function Spielplan() {
                         </td>
                         <td
                           className={`px-4 py-3 font-semibold max-w-[240px] truncate ${
-                            m.away === "SF Nofels" ? "text-primary" : ""
+                            m.away === "Sportfreunde Nofels" ? "text-primary" : ""
                           }`}
                           title={m.away}
                         >
