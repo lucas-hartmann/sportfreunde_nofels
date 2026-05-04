@@ -146,7 +146,7 @@ export default function Spielplan() {
                               <div className="flex items-center gap-2 text-sm">
                                 <span
                                   className={`font-semibold truncate max-w-[40vw] ${
-                                    m.home === "SF Nofels" ? "text-primary" : ""
+                                    m.home === "Sportfreunde Nofels" ? "text-primary" : ""
                                   }`}
                                   title={m.home}
                                 >
@@ -155,7 +155,7 @@ export default function Spielplan() {
                                 <span className="text-gray-400 shrink-0">vs</span>
                                 <span
                                   className={`font-semibold truncate max-w-[40vw] ${
-                                    m.away === "SF Nofels" ? "text-primary" : ""
+                                    m.away === "Sportfreunde Nofels" ? "text-primary" : ""
                                   }`}
                                   title={m.away}
                                 >
@@ -224,7 +224,7 @@ export default function Spielplan() {
                           <div className="flex items-center gap-2 text-sm">
                             <span
                               className={`font-semibold truncate max-w-[40vw] ${
-                                m.home === "SF Nofels" ? "text-primary" : ""
+                                m.home === "Sportfreunde Nofels" ? "text-primary" : ""
                               }`}
                               title={m.home}
                             >
@@ -233,7 +233,7 @@ export default function Spielplan() {
                             <span className="text-gray-400 shrink-0">vs</span>
                             <span
                               className={`font-semibold truncate max-w-[40vw] ${
-                                m.away === "SF Nofels" ? "text-primary" : ""
+                                m.away === "Sportfreunde Nofels" ? "text-primary" : ""
                               }`}
                               title={m.away}
                             >
