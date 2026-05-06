@@ -43,7 +43,7 @@ const sponsors: Sponsor[] = [
 
 export default function SponsorsSection() {
   return (
-    <section className="mt-20 bg-gray-200 py-10">
+    <section className="mt-20 py-10 pt-20">
       <div className="marquee mb-10">
         <ul className="marquee__content">
           {sponsors.map((sponsor, idx) => (

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import { supabase } from "@/lib/supabaseClient";
 
+// --- TYPES ---
 type TeamStats = {
   club: string;
   spiele: number;
@@ -17,250 +18,166 @@ type TeamStats = {
 };
 
 type Match = {
-  id: number;
-  matchday_id: number;
   home_team: string;
   away_team: string;
-  day: string | null;
-  date: string | null;
-  time: string | null;
-  location: string | null;
-  note: string | null;
   home_score: number | null;
   away_score: number | null;
 };
 
-type Matchday = {
-  id: number;
-  name: string;
-  matches: Match[];
+type APITeamStanding = {
+  team_name: string;
+  played: number;
+  won: number;
+  drawn: number;
+  lost: number;
+  goals_for: number;
+  goals_against: number;
+  goal_difference: number;
+  points: number;
 };
 
 export default function Tabelle() {
-  const [matchdays, setMatchdays] = useState<Matchday[]>([]);
-  const [season, setSeason] = useState<number>(2026); // Default to 2026
+  const [season, setSeason] = useState<number>(2026);
+  const [leagueData, setLeagueData] = useState<TeamStats[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
+      setIsLoading(true);
       try {
-        type SupabaseMatchday = {
-          id: number;
-          name: string;
-          matches: Match[] | null;
-        };
+        if (season === 2026) {
+          const res = await fetch("https://fpiylhqnexlnlxketmzk.supabase.co/functions/v1/public-api/standings");
+          const json = await res.json();
+          const mapped: TeamStats[] = json.standings.map((t: APITeamStanding) => ({
+            club: t.team_name,
+            spiele: t.played,
+            siege: t.won,
+            unentschieden: t.drawn,
+            niederlagen: t.lost,
+            tore: t.goals_for,
+            gegentore: t.goals_against,
+            diff: t.goal_difference,
+            punkte: t.points,
+          }));
+          setLeagueData(mapped);
+        } else {
+          const { data, error } = await supabase
+            .from("matchdays")
+            .select(`matches:matches(home_team, away_team, home_score, away_score)`)
+            .eq("season", season);
 
-        const { data, error } = await supabase
-          .from("matchdays")
-          .select(`id, name, matches:matches(*)`)
-          .eq("season", season); // Only fetch matchdays for the selected season
-
-        if (error) {
-          console.error("Supabase fetch error:", error);
-          return;
+          if (error) throw error;
+          const matches: Match[] = data?.flatMap(d => d.matches as Match[]) || [];
+          setLeagueData(calculateStatsFromMatches(matches));
         }
-
-        const normalized: Matchday[] =
-          (data as SupabaseMatchday[] | null)?.map((md) => ({
-            id: md.id,
-            name: md.name,
-            matches: md.matches || [],
-          })) || [];
-
-        setMatchdays(normalized);
       } catch (err) {
-        console.error("Unexpected error loading matchdays:", err);
+        console.error("Error:", err);
+      } finally {
+        setIsLoading(false);
       }
     }
-
     loadData();
-  }, [season]); // Re-run this effect whenever the season changes
+  }, [season]);
 
-  // collect all clubs
-  const clubs = Array.from(
-    new Set(
-      matchdays.flatMap((md) =>
-        md.matches.flatMap((m: Match) => [m.home_team, m.away_team])
-      )
-    )
-  );
+  function calculateStatsFromMatches(matches: Match[]): TeamStats[] {
+    const clubs = Array.from(new Set(matches.flatMap(m => [m.home_team, m.away_team])));
+    const results: Record<string, TeamStats> = {};
+    clubs.forEach(c => results[c] = { club: c, spiele: 0, siege: 0, unentschieden: 0, niederlagen: 0, tore: 0, gegentore: 0, diff: 0, punkte: 0 });
 
-  // initialize stats
-  const leagueData: TeamStats[] = clubs.map((club) => ({
-    club,
-    spiele: 0,
-    siege: 0,
-    unentschieden: 0,
-    niederlagen: 0,
-    tore: 0,
-    gegentore: 0,
-    diff: 0,
-    punkte: 0,
-  }));
-
-  // fill stats based on played matches
-  matchdays.forEach((matchday) => {
-    matchday.matches.forEach((match: Match) => {
-      if (match.home_score === null || match.away_score === null) return;
-
-      const homeTeam = leagueData.find((t) => t.club === match.home_team)!;
-      const awayTeam = leagueData.find((t) => t.club === match.away_team)!;
-      const homeGoals = match.home_score;
-      const awayGoals = match.away_score;
-
-      homeTeam.spiele += 1;
-      awayTeam.spiele += 1;
-
-      homeTeam.tore += homeGoals;
-      homeTeam.gegentore += awayGoals;
-      awayTeam.tore += awayGoals;
-      awayTeam.gegentore += homeGoals;
-
-      homeTeam.diff = homeTeam.tore - homeTeam.gegentore;
-      awayTeam.diff = awayTeam.tore - awayTeam.gegentore;
-
-      if (homeGoals > awayGoals) {
-        homeTeam.siege += 1;
-        homeTeam.punkte += 3;
-        awayTeam.niederlagen += 1;
-      } else if (homeGoals < awayGoals) {
-        awayTeam.siege += 1;
-        awayTeam.punkte += 3;
-        homeTeam.niederlagen += 1;
-      } else {
-        homeTeam.unentschieden += 1;
-        awayTeam.unentschieden += 1;
-        homeTeam.punkte += 1;
-        awayTeam.punkte += 1;
-      }
+    matches.forEach(m => {
+      if (m.home_score === null || m.away_score === null) return;
+      const h = results[m.home_team], a = results[m.away_team];
+      h.spiele++; a.spiele++;
+      h.tore += m.home_score; h.gegentore += m.away_score;
+      a.tore += m.away_score; a.gegentore += m.home_score;
+      if (m.home_score > m.away_score) { h.siege++; h.punkte += 3; a.niederlagen++; }
+      else if (m.home_score < m.away_score) { a.siege++; a.punkte += 3; h.niederlagen++; }
+      else { h.unentschieden++; a.unentschieden++; h.punkte += 1; a.punkte += 1; }
+      h.diff = h.tore - h.gegentore; a.diff = a.tore - a.gegentore;
     });
-  });
-
-  // sort by points, then goal difference
-  leagueData.sort((a, b) => b.punkte - a.punkte || b.diff - a.diff);
+    return Object.values(results).sort((a, b) => b.punkte - a.punkte || b.diff - a.diff);
+  }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <Header title={`TABELLE ${season}`} image="/headers/tabelle.webp" position="100% 100%" />
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-10 max-w-5xl">
         
-        {/* Season Toggle Dropdown */}
-        <div className="flex justify-start mb-6">
-          <div className="relative inline-block w-48">
-            <select
-              value={season}
-              onChange={(e) => setSeason(Number(e.target.value))}
-              className="appearance-none w-full bg-white border border-gray-300 text-gray-700 px-5 py-2.5 rounded-full font-normal shadow-sm transition focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-sm sm:text-base cursor-pointer"
-            >
-              <option value={2026}>Saison 2026</option>
-              <option value={2025}>Saison 2025</option>
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
-              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-              </svg>
-            </div>
+        {/* Dezentere Buttons */}
+        <div className="flex justify-center mb-10">
+          <div className="inline-flex bg-gray-100 p-1 rounded-lg">
+            {[2026, 2025].map((y) => (
+              <button
+                key={y}
+                onClick={() => setSeason(y)}
+                className={`px-5 py-1.5 rounded-md text-xs font-bold transition-all ${
+                  season === y 
+                  ? "bg-white text-gray-900 shadow-sm" 
+                  : "text-gray-500 hover:text-gray-700"
+                }`}
+              >
+                {y}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* MOBILE: stacked cards (no overlap, tighter spacing) */}
-        <div className="grid gap-3 sm:hidden">
-          {leagueData.map((team, index) => (
-            <div
-              key={`${team.club}-${index}`}
-              className="rounded-xl bg-white shadow p-3"
-            >
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 min-w-0">
-                  <span className="text-sm font-semibold shrink-0 w-6 text-center">
-                    {index + 1}
-                  </span>
-                  <span
-                    className={`text-base font-semibold truncate ${
-                      team.club === "SF Nofels" ? "text-primary" : ""
-                    }`}
-                    title={team.club}
-                  >
-                    {team.club}
-                  </span>
-                </div>
-                <div className="text-right">
-                  <div className="text-xs text-gray-500 leading-none">Pkt</div>
-                  <div className="text-lg font-bold leading-none">{team.punkte}</div>
-                </div>
-              </div>
-
-              {/* Inline stats */}
-              <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-700">
-                <span>Sp: <strong>{team.spiele}</strong></span>
-                <span>S: <strong>{team.siege}</strong></span>
-                <span>U: <strong>{team.unentschieden}</strong></span>
-                <span>N: <strong>{team.niederlagen}</strong></span>
-                <span>Diff: <strong>{team.diff}</strong></span>
-                <span>Tore: <strong>{team.tore}:{team.gegentore}</strong></span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* DESKTOP/TABLET: wide table */}
-        <div className="hidden sm:block">
-          <div className="overflow-x-auto bg-white rounded-xl shadow-md">
-            {/* avoid table-fixed to let browser size columns; also give a safe min width */}
-            <table className="w-full min-w-[720px] text-sm">
-              <thead className="text-left text-gray-600 border-b">
-                <tr className="whitespace-nowrap">
-                  <th className="px-4 py-3 w-16">Platz</th>
-                  <th className="px-4 py-3">Club</th>
-                  <th className="px-2 py-3 text-center">Sp</th>
-                  <th className="px-2 py-3 text-center">S</th>
-                  <th className="px-2 py-3 text-center">U</th>
-                  <th className="px-2 py-3 text-center">N</th>
-                  <th className="px-2 py-3 text-center">Tore</th>
-                  <th className="px-2 py-3 text-center">Geg</th>
-                  <th className="px-2 py-3 text-center">Diff</th>
-                  <th className="px-2 py-3 text-center">Pkt</th>
-                </tr>
-              </thead>
-              <tbody>
-                {leagueData.map((team, index) => (
-                  <tr
-                    key={`${team.club}-${index}`}
-                    className="even:bg-gray-50 border-b last:border-none"
-                  >
-                    <td className="px-4 py-3 font-semibold">{index + 1}</td>
-                    <td
-                      className={`px-4 py-3 font-semibold max-w-[280px] truncate ${
-                        team.club === "SF Nofels" ? "text-primary" : ""
-                      }`}
-                      title={team.club}
-                    >
-                      {team.club}
-                    </td>
-                    <td className="px-2 py-3 text-center">{team.spiele}</td>
-                    <td className="px-2 py-3 text-center">{team.siege}</td>
-                    <td className="px-2 py-3 text-center">
-                      {team.unentschieden}
-                    </td>
-                    <td className="px-2 py-3 text-center">
-                      {team.niederlagen}
-                    </td>
-                    <td className="px-2 py-3 text-center">{team.tore}</td>
-                    <td className="px-2 py-3 text-center">{team.gegentore}</td>
-                    <td className="px-2 py-3 text-center">{team.diff}</td>
-                    <td className="px-2 py-3 text-center font-bold">
-                      {team.punkte}
-                    </td>
+        {isLoading ? (
+          <div className="py-20 text-center text-gray-400 text-sm animate-pulse">Lade Tabelle...</div>
+        ) : (
+          <div className="border border-gray-100 rounded-lg overflow-hidden shadow-sm">
+            {/* Scroll-Container für Mobile */}
+            <div className="overflow-x-auto scrollbar-hide">
+              <table className="w-full text-left border-collapse min-w-[550px] sm:min-w-full">
+                <thead className="bg-gray-50 border-b border-gray-100">
+                  <tr>
+                    <th className="pl-5 py-3 text-[10px] font-bold text-gray-400 uppercase w-10">#</th>
+                    <th className="px-4 py-3 text-[10px] font-bold text-gray-400 uppercase sticky left-0 bg-gray-50">Club</th>
+                    <th className="px-3 py-3 text-[10px] font-bold text-gray-400 uppercase text-center">Sp</th>
+                    <th className="px-3 py-3 text-[10px] font-bold text-gray-400 uppercase text-center hidden sm:table-cell">S</th>
+                    <th className="px-3 py-3 text-[10px] font-bold text-gray-400 uppercase text-center hidden sm:table-cell">U</th>
+                    <th className="px-3 py-3 text-[10px] font-bold text-gray-400 uppercase text-center hidden sm:table-cell">N</th>
+                    <th className="px-3 py-3 text-[10px] font-bold text-gray-400 uppercase text-center">Tore</th>
+                    <th className="px-3 py-3 text-[10px] font-bold text-gray-400 uppercase text-center">Diff</th>
+                    <th className="pr-5 py-3 text-[10px] font-bold text-gray-400 uppercase text-center">Pkt</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  {leagueData.map((team, index) => {
+                    const isNofels = team.club === "SF Nofels" || team.club === "Sportfreunde Nofels";
+                    return (
+                      <tr key={team.club} className="hover:bg-gray-50/50 transition-colors">
+                        <td className="pl-5 py-3.5 text-xs text-gray-400 font-medium">{index + 1}</td>
+                        <td className={`px-4 py-3.5 text-sm font-semibold sticky left-0 bg-white group-hover:bg-gray-50 transition-colors ${
+                          isNofels ? "text-primary" : "text-gray-700"
+                        }`}>
+                          {team.club}
+                        </td>
+                        <td className="px-3 py-3.5 text-center text-xs text-gray-500">{team.spiele}</td>
+                        <td className="px-3 py-3.5 text-center text-xs text-gray-500 hidden sm:table-cell">{team.siege}</td>
+                        <td className="px-3 py-3.5 text-center text-xs text-gray-500 hidden sm:table-cell">{team.unentschieden}</td>
+                        <td className="px-3 py-3.5 text-center text-xs text-gray-500 hidden sm:table-cell">{team.niederlagen}</td>
+                        <td className="px-3 py-3.5 text-center text-xs text-gray-500 font-mono">{team.tore}:{team.gegentore}</td>
+                        <td className={`px-3 py-3.5 text-center text-xs font-medium ${
+                          team.diff > 0 ? "text-green-600" : team.diff < 0 ? "text-red-400" : "text-gray-300"
+                        }`}>
+                          {team.diff > 0 ? `+${team.diff}` : team.diff}
+                        </td>
+                        <td className={`pr-5 py-3.5 text-center text-sm font-bold ${isNofels ? "text-primary" : "text-gray-900"}`}>
+                          {team.punkte}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        )}
 
-        <p className="mt-6 text-center mb-10 text-gray-500 text-base sm:text-lg">
-          Die Sportfreunde Nofels sind dieses Jahr nicht die Veranstalter der Hobbyliga.
-          <br className="hidden sm:block" /> Ergebnisse können falsch oder veraltet sein.
+        <p className="mt-10 text-center text-gray-400 text-[11px] leading-relaxed max-w-xs mx-auto">
+          Die Sportfreunde Nofels sind dieses Jahr nicht Veranstalter der Hobbyliga. Ergebnisse ohne Gewähr.
         </p>
       </div>
     </div>

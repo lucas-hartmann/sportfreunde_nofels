@@ -22,11 +22,11 @@ export default function ContactsSection() {
       email: "martin.malin@icloud.com",
     },
     {
-      name: "Mathias Mätzler",
+      name: "Elias Schatzmann",
       responsibility: "Sportlicher Leiter",
-      image: "/spieler/mathias_maetzler.webp",
-      phone: "+43 699 12908389",
-      email: "mathias.maetzler@schachermayer.at",
+      image: "/spieler/elias_schatzmann.webp",
+      phone: "-",
+      email: "sl@sportfreunde-nofels.at",
     },
     {
       name: "Emanuel Reiner",

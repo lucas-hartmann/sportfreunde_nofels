@@ -39,6 +39,14 @@ export default function Hobbyliga() {
       description: "Alle teilnehmenden Teams der Hobbyliga",
       cta: "Zu den Mannschaften",
     },
+    {
+      title: "Torschützen",
+      href: "/hobbyliga/torschuetzen",
+      image: "/headers/mannschaften.webp",
+      icon: UsersIcon,
+      description: "Die besten 10 Torschützen der Saison auf einen Blick",
+      cta: "Zu den Torschützen",
+    },
   ];
 
   return (
