@@ -26,6 +26,7 @@ export const navbarLinks = [
 			{ title: "Mannschaften", href: "/hobbyliga/mannschaften" },
 			{ title: "Tabelle", href: "/hobbyliga/tabelle" },
 			{ title: "Spielplan", href: "/hobbyliga/spielplan" },
+			{ title: "Torschützen", href: "/hobbyliga/torschuetzen" },
 			{ title: "Editor", href: "/hobbyliga/edit" },
 		],
 	},

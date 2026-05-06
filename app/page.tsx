@@ -51,9 +51,6 @@ export default function Home() {
 
       <QuoteSection />
 
-      <h2 className="text-center font-bold text-4xl mt-20">
-        Unsere Kontakte
-      </h2>
       <ContactsSection />
 
       <SponsorsSection />

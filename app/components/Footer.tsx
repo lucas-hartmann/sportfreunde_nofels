@@ -150,6 +150,14 @@ export default function Footer() {
                     Spielplan
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/hobbyliga/torschuetzen"
+                    className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
+                  >
+                    Torschützen
+                  </Link>
+                </li>
 
                 {/* Client-only session-dependent links */}
                 <HobbyligaLinks />
