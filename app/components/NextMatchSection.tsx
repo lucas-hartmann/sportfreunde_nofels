@@ -51,7 +51,10 @@ export default async function NextMatchSection() {
 
   if (!nextMatch) return null;
 
-  const matchDate = new Date(nextMatch.match_date);
+  const dateFromApi = new Date(nextMatch.match_date);
+  const matchDate = new Date(dateFromApi.getTime() + 2 * 60 * 60 * 1000); // Zeit um 2 Stunden korrigieren (UTC+2) - API liefert falsche Zeit
+
+  //const matchDate = new Date(nextMatch.match_date);
   
   const formattedDate = matchDate.toLocaleDateString("de-DE", {
     day: "2-digit",
