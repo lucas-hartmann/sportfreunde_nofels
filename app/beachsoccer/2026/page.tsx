@@ -57,7 +57,7 @@ const BeachsoccerCup = () => {
           </p>
 
           <a
-            href="/bsc/A4_Turnierausschreibung_2025.pdf"
+            href="/bsc/A4_Turnierausschreibung_2026.pdf"
             download
             className="inline-flex items-center gap-2 bg-[#781c12] text-white px-6 py-3 rounded-lg shadow-sm hover:bg-[#a62c1a] transition"
           >
