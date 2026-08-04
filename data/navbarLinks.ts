@@ -3,7 +3,7 @@ export const navbarLinks = [
 		title: "Beachsoccer Cup",
 		href: "/beachsoccer",
 		submenu: [
-			{ title: "Anmeldung 2026", href: "/beachsoccer/2026" },
+			{ title: "Galerie 2026", href: "/beachsoccer/2026" },
 			{ title: "Galerie 2025", href: "/beachsoccer/2025" },
 			{ title: "Galerie 2024", href: "/beachsoccer/2024" },
 			{ title: "Galerie 2023", href: "/beachsoccer/2023" },

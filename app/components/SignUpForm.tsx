@@ -86,8 +86,8 @@ export default function SignUpForm() {
         </p>
         <button
           type="submit"
-          // disabled={true} //Delete comment to deactivate
-          disabled={loading}
+          disabled={true} //Delete comment to deactivate
+          //disabled={loading}
           className="w-full bg-[#781c12] text-white font-extrabold py-4 rounded-xl text-xl hover:bg-[#a62c1a] transition disabled:opacity-50"
         >
           {loading ? "Senden..." : "Jetzt anmelden"}

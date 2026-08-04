@@ -57,7 +57,7 @@ export default function Footer() {
                     href="/beachsoccer/2026"
                     className="text-gray-300 hover:text-white transition-colors flex items-center gap-2 group"
                   >
-                    Anmeldung 2026
+                    Galerie 2026
                   </Link>
                 </li>
                 <li>

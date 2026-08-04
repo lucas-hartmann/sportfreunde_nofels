@@ -5,13 +5,21 @@ import Headline from "../components/Headline";
 
 export default function Beachsoccer() {
   const navItems: NavCard[] = [
-    {
+    /*{
       title: "Anmeldung für 2026",
       href: "/beachsoccer/2026",
       image: "/headers/anmeldung.webp",
       icon: CalendarIcon,
       description: "",
       cta: "Zur Anmeldung",
+    },*/
+    {
+      title: "Bericht für 2026",
+      href: "/beachsoccer/2026",
+      image: "/headers/bsc26.webp",
+      icon: NewspaperIcon,
+      description: "",
+      cta: "Zum Bericht",
     },
     {
       title: "Bericht für 2025",
